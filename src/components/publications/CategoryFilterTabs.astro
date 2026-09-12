@@ -1,0 +1,43 @@
+---
+import { getLangFromUrl, useTranslations, localizedPath } from '../../i18n/utils';
+import { publicationCategories } from '../../content.config';
+import { publicationCategoryLabels } from '../../data/siteConfig';
+
+interface Props {
+  active: string;
+}
+
+const { active } = Astro.props;
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const tabs = [
+  { slug: 'all', label: t('publications.all') },
+  ...publicationCategories.map((slug) => ({ slug, label: publicationCategoryLabels[slug][lang] })),
+];
+---
+
+<nav class="filter-tabs" aria-label={t('publications.eyebrow')}>
+  {tabs.map((tab) => (
+    <a
+      href={localizedPath(tab.slug === 'all' ? '/publications/' : `/publications/${tab.slug}/`, lang)}
+      class:list={['filter-tab', tab.slug === active && 'filter-tab--active']}
+      aria-current={tab.slug === active ? 'page' : undefined}
+    >
+      {tab.label}
+    </a>
+  ))}
+</nav>
+
+<style>
+  .filter-tabs { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 40px; }
+  .filter-tab {
+    display: inline-block; text-decoration: none; font-size: 13.5px; font-weight: 600;
+    padding: 9px 18px; border-radius: 999px; border: 1px solid var(--color-border);
+    color: var(--color-text-muted); white-space: nowrap;
+    transition: background .15s ease, color .15s ease, border-color .15s ease;
+  }
+  .filter-tab:hover { border-color: var(--sage); color: var(--color-text-strong); }
+  .filter-tab--active { background: var(--navy); border-color: var(--navy); color: oklch(97% 0.005 85); }
+  .filter-tab--active:hover { color: oklch(97% 0.005 85); }
+</style>

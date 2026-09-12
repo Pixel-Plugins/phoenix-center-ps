@@ -1,0 +1,82 @@
+---
+import { getLangFromUrl, pickLocalized, localizedPath } from '../../i18n/utils';
+import { hero } from '../../data/homepage';
+import Button from '../ui/Button.astro';
+import StatStrip from './StatStrip.astro';
+
+const lang = getLangFromUrl(Astro.url);
+const eyebrow = pickLocalized(hero.eyebrow, lang)?.value;
+const title = pickLocalized(hero.title, lang)?.value;
+const body = pickLocalized(hero.body, lang)?.value;
+const cta1 = pickLocalized(hero.cta1, lang)?.value;
+const cta2 = pickLocalized(hero.cta2, lang)?.value;
+---
+
+<section class="hero">
+  <div class="hero__media">
+    <img
+      src="https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=1600&q=80"
+      alt="Phoenix Center field research team"
+      loading="eager"
+    />
+    <div class="hero__scrim"></div>
+    <div class="hero__inner">
+      <div class="hero__copy" data-reveal>
+        <p class="pill"><span class="pill__dot"></span><span>{eyebrow}</span></p>
+        <h1>{title}</h1>
+        <p class="hero__body">{body}</p>
+        <div class="hero__cta">
+          <Button href={localizedPath('/publications/', lang)} variant="sage">{cta1}</Button>
+          <Button href={localizedPath('/contact/', lang)} variant="ghost">{cta2}</Button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="stats-wrap">
+    <StatStrip />
+  </div>
+</section>
+
+<style>
+  .hero { position: relative; padding-bottom: 56px; }
+  .hero__media { position: relative; height: 760px; overflow: hidden; }
+  .hero__media > img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero__scrim {
+    position: absolute; inset: 0;
+    background: linear-gradient(100deg,
+      oklch(15% 0.04 250 / .88) 0%,
+      oklch(15% 0.04 250 / .55) 48%,
+      oklch(15% 0.04 250 / .15) 100%);
+  }
+  .hero__inner {
+    position: absolute; inset: 0; display: flex; align-items: center;
+    padding: 0 var(--gutter) 90px;
+  }
+  .hero__copy { max-width: 620px; }
+  .hero__copy h1 { font-size: 48px; line-height: 1.14; font-weight: 700; margin: 0 0 22px; color: oklch(99% 0.005 85); }
+  .hero__body { font-size: 17px; line-height: 1.6; color: oklch(90% 0.01 85); max-width: 540px; margin: 0 0 32px; }
+  .hero__cta { display: flex; gap: 16px; flex-wrap: wrap; }
+
+  .pill {
+    display: inline-flex; align-items: center; gap: 8px; margin: 0 0 22px;
+    background: var(--sage); color: var(--sage-ink);
+    padding: 8px 16px; border-radius: 999px;
+    font-size: 13px; font-weight: 700; letter-spacing: .02em;
+  }
+  .pill__dot { width: 7px; height: 7px; border-radius: 50%; background: var(--sage-ink); flex-shrink: 0; }
+
+  .stats-wrap { position: relative; max-width: 1160px; margin: -60px auto 0; padding: 0 var(--gutter); }
+
+  @media (max-width: 860px) {
+    .hero__media { height: auto; min-height: 620px; }
+    .hero__media > img { position: absolute; inset: 0; }
+    .hero__inner { position: static; padding: 72px var(--gutter) 110px; min-height: 620px; }
+    .hero__copy h1 { font-size: 34px; }
+  }
+  @media (max-width: 560px) {
+    .hero__copy h1 { font-size: 29px; }
+    .pill { font-size: 12px; }
+    .stats-wrap { margin-top: -40px; }
+  }
+</style>

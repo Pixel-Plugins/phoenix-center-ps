@@ -1,0 +1,61 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/sections/PageHero.astro';
+import Section from '../../components/ui/Section.astro';
+import ServiceCard from '../../components/ui/ServiceCard.astro';
+import { getLangFromUrl, pickLocalized, localizedPath } from '../../i18n/utils';
+import { servicesListing } from '../../data/services';
+import { serviceLinks } from '../../data/nav';
+
+const lang = getLangFromUrl(Astro.url);
+---
+
+<BaseLayout title={pickLocalized(servicesListing.title, lang)?.value ?? 'Services'}>
+  <PageHero
+    eyebrow={pickLocalized(servicesListing.eyebrow, lang)?.value}
+    title={pickLocalized(servicesListing.title, lang)?.value ?? ''}
+    subtitle={pickLocalized(servicesListing.intro, lang)?.value}
+  />
+
+  <Section variant="tight">
+    <div class="services-grid" data-reveal-stagger>
+      {serviceLinks.map((s) => (
+        <ServiceCard
+          href={localizedPath(s.href, lang)}
+          title={s.title[lang]}
+          description={s.blurb[lang]}
+        />
+      ))}
+    </div>
+  </Section>
+
+  <Section variant="tint" headStyle="stack" title={pickLocalized(servicesListing.whyChoose.title, lang)?.value}>
+    <div class="why-grid" data-reveal-stagger>
+      {servicesListing.whyChoose.items.map((item) => (
+        <div class="why-card">
+          <h3>{pickLocalized(item.title, lang)?.value}</h3>
+          <p>{pickLocalized(item.desc, lang)?.value}</p>
+        </div>
+      ))}
+    </div>
+  </Section>
+</BaseLayout>
+
+<style>
+  .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .why-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+  .why-card {
+    background: var(--color-surface); border: 1px solid var(--color-border);
+    border-radius: var(--r-lg); padding: 28px;
+  }
+  .why-card h3 { font-size: 17px; font-weight: 700; color: var(--color-text-strong); margin: 0 0 10px; }
+  .why-card p { font-size: 14px; line-height: 1.6; color: var(--color-text-muted); margin: 0; }
+
+  @media (max-width: 1100px) {
+    .services-grid { grid-template-columns: 1fr; }
+    .why-grid { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 560px) {
+    .why-grid { grid-template-columns: 1fr; }
+  }
+</style>

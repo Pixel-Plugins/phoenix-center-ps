@@ -1,0 +1,131 @@
+---
+import LanguageSwitcher from './LanguageSwitcher.astro';
+import { getLangFromUrl, useTranslations, localizedPath } from '../../i18n/utils';
+import { navLinks } from '../../data/nav';
+import { brand } from '../../data/siteConfig';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<header class="site-header">
+  <a class="brand" href={localizedPath('/', lang)}>
+    <img class="brand__mark" src={brand.logoDark.src} alt={t('brand.name')} />
+  </a>
+
+  <button class="nav-toggle" type="button" aria-label="Menu" aria-expanded="false" data-nav-toggle>
+    <span></span><span></span><span></span>
+  </button>
+
+  <nav class="site-nav" data-site-nav>
+    {navLinks.map((link) => (
+      <a href={localizedPath(link.href, lang)}>{t(link.labelKey)}</a>
+    ))}
+  </nav>
+
+  <div class="header-actions">
+    <LanguageSwitcher />
+    <a class="btn btn--gold" href={localizedPath('/contact/', lang)}>{t('header.cta')}</a>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: oklch(98% 0.01 85 / 0.92);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--color-border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    padding: 14px var(--gutter);
+  }
+  .brand { display: flex; align-items: center; flex-shrink: 0; text-decoration: none; }
+  .brand__mark { height: 40px; width: auto; object-fit: contain; }
+
+  .site-nav { display: flex; align-items: center; gap: 32px; }
+  .site-nav a { text-decoration: none; font-size: 15px; font-weight: 500; color: oklch(30% 0.02 75); }
+  .site-nav a:hover { color: var(--eyebrow); }
+
+  .header-actions { display: flex; align-items: center; gap: 14px; }
+
+  .btn {
+    display: inline-block;
+    text-decoration: none;
+    font-weight: 700;
+    font-family: inherit;
+    border: 1.5px solid transparent;
+    border-radius: var(--r-sm);
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background .18s ease, border-color .18s ease;
+  }
+  .btn--gold {
+    background: var(--gold);
+    color: oklch(20% 0.03 75);
+    padding: 10px 20px;
+    font-size: 14px;
+  }
+  .btn--gold:hover { background: var(--gold-hover); color: oklch(20% 0.03 75); }
+
+  .nav-toggle { display: none; }
+
+  @media (max-width: 860px) {
+    .nav-toggle {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      width: 44px;
+      height: 44px;
+      border: 1px solid var(--color-border);
+      border-radius: var(--r-sm);
+      background: transparent;
+      cursor: pointer;
+      padding: 0 10px;
+    }
+    .nav-toggle span { display: block; height: 2px; background: var(--color-text); border-radius: 2px; }
+    .site-header { flex-wrap: wrap; }
+    .site-nav {
+      order: 3;
+      width: 100%;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height .25s ease;
+    }
+    .site-nav.is-open { max-height: 360px; }
+    .site-nav a { padding: 14px 0; width: 100%; border-bottom: 1px solid var(--color-border); }
+  }
+
+  @media (max-width: 560px) {
+    .header-actions .btn--gold { display: none; }
+  }
+</style>
+
+<script>
+  function initHeaderNav() {
+    const toggle = document.querySelector<HTMLButtonElement>('[data-nav-toggle]');
+    const nav = document.querySelector<HTMLElement>('[data-site-nav]');
+    if (!toggle || !nav) return;
+
+    toggle.addEventListener('click', () => {
+      const open = nav.classList.toggle('is-open');
+      toggle.setAttribute('aria-expanded', String(open));
+    });
+    nav.addEventListener('click', (e) => {
+      if ((e.target as HTMLElement).tagName === 'A') {
+        nav.classList.remove('is-open');
+        toggle.setAttribute('aria-expanded', 'false');
+      }
+    });
+  }
+
+  initHeaderNav();
+  document.addEventListener('astro:page-load', initHeaderNav);
+</script>

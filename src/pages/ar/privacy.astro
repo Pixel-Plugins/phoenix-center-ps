@@ -1,0 +1,108 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/sections/PageHero.astro';
+import Section from '../../components/ui/Section.astro';
+import { getLangFromUrl } from '../../i18n/utils';
+import { siteConfig } from '../../data/siteConfig';
+
+const lang = getLangFromUrl(Astro.url);
+
+const copy = {
+  en: {
+    title: 'Privacy Policy',
+    eyebrow: 'Legal',
+    intro: 'Phoenix Center is committed to protecting the privacy of everyone who visits this website or takes part in our research.',
+    sections: [
+      {
+        heading: 'Information We Collect',
+        body: 'We may collect basic information you provide directly to us — such as your name, email address, and any details submitted through our contact form or newsletter signup — as well as information collected as part of our field research and surveys, always in accordance with informed consent.',
+      },
+      {
+        heading: 'How We Use Information',
+        body: 'Information collected is used only for the purpose it was provided: responding to inquiries, sending publications you subscribed to, and conducting and reporting on our research. We do not use personal information for unrelated purposes.',
+      },
+      {
+        heading: 'No Sale or Trade of Data',
+        body: 'We do not sell, trade, or rent personal information to third parties. Aggregated, anonymized research data may be shared with partners and donors as part of our published findings.',
+      },
+      {
+        heading: 'Security',
+        body: 'We take reasonable technical and organizational measures to protect the information we hold against unauthorized access, alteration, or disclosure.',
+      },
+      {
+        heading: 'Your Rights',
+        body: 'You may request access to, correction of, or deletion of personal information we hold about you by contacting us using the details below.',
+      },
+      {
+        heading: 'Cookies',
+        body: 'This website may use minimal, non-intrusive cookies necessary for basic functionality. We do not use cookies for advertising or third-party tracking.',
+      },
+      {
+        heading: 'Changes to This Policy',
+        body: 'This policy may be updated from time to time. Continued use of this website after changes are posted constitutes acceptance of the updated policy.',
+      },
+    ],
+    contact: 'Questions about this policy can be directed to',
+  },
+  ar: {
+    title: 'سياسة الخصوصية',
+    eyebrow: 'قانوني',
+    intro: 'يلتزم مركز فينيكس بحماية خصوصية كل من يزور هذا الموقع أو يشارك في أبحاثنا.',
+    sections: [
+      {
+        heading: 'المعلومات التي نجمعها',
+        body: 'قد نجمع معلومات أساسية تقدمها لنا مباشرة — مثل اسمك وبريدك الإلكتروني وأي تفاصيل تُقدَّم عبر نموذج التواصل أو الاشتراك في النشرة البريدية — بالإضافة إلى معلومات تُجمع كجزء من أبحاثنا الميدانية ومسوحاتنا، دائماً وفق الموافقة المستنيرة.',
+      },
+      {
+        heading: 'كيف نستخدم المعلومات',
+        body: 'تُستخدم المعلومات المجمعة فقط للغرض الذي قُدمت من أجله: الرد على الاستفسارات، وإرسال الإصدارات التي اشتركت بها، وإجراء أبحاثنا والتقرير عنها. لا نستخدم المعلومات الشخصية لأغراض غير ذات صلة.',
+      },
+      {
+        heading: 'عدم بيع أو تبادل البيانات',
+        body: 'لا نبيع أو نتاجر أو نؤجر المعلومات الشخصية لأطراف ثالثة. قد تُشارَك بيانات بحثية مجمّعة ومجهولة المصدر مع الشركاء والجهات المانحة كجزء من نتائجنا المنشورة.',
+      },
+      {
+        heading: 'الأمان',
+        body: 'نتخذ إجراءات تقنية وتنظيمية معقولة لحماية المعلومات التي نحتفظ بها من الوصول أو التعديل أو الإفصاح غير المصرح به.',
+      },
+      {
+        heading: 'حقوقك',
+        body: 'يمكنك طلب الوصول إلى المعلومات الشخصية التي نحتفظ بها عنك أو تصحيحها أو حذفها من خلال التواصل معنا عبر البيانات أدناه.',
+      },
+      {
+        heading: 'ملفات تعريف الارتباط',
+        body: 'قد يستخدم هذا الموقع ملفات تعريف ارتباط بسيطة وغير تطفلية ضرورية للوظائف الأساسية. لا نستخدم ملفات تعريف الارتباط لأغراض إعلانية أو للتتبع من أطراف ثالثة.',
+      },
+      {
+        heading: 'التغييرات على هذه السياسة',
+        body: 'قد يتم تحديث هذه السياسة من وقت لآخر. استمرار استخدام هذا الموقع بعد نشر التغييرات يعني قبول السياسة المحدثة.',
+      },
+    ],
+    contact: 'يمكن توجيه الأسئلة حول هذه السياسة إلى',
+  },
+}[lang];
+---
+
+<BaseLayout title={copy.title}>
+  <PageHero eyebrow={copy.eyebrow} title={copy.title} subtitle={copy.intro} />
+
+  <Section variant="tight">
+    <div class="legal-body" data-reveal-stagger>
+      {copy.sections.map((s) => (
+        <section>
+          <h2>{s.heading}</h2>
+          <p>{s.body}</p>
+        </section>
+      ))}
+      <p class="legal-contact">{copy.contact} <a href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a>.</p>
+    </div>
+  </Section>
+</BaseLayout>
+
+<style>
+  .legal-body { max-width: 760px; margin: 0 auto; display: flex; flex-direction: column; gap: 32px; }
+  .legal-body h2 { font-size: 20px; font-weight: 700; color: var(--color-text-strong); margin: 0 0 10px; }
+  .legal-body p { font-size: 15px; line-height: 1.75; color: var(--color-text-muted); margin: 0; }
+  .legal-contact { font-size: 15px; color: var(--color-text); }
+  .legal-contact a { color: var(--eyebrow); }
+</style>

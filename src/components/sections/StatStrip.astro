@@ -1,0 +1,34 @@
+---
+import { getLangFromUrl, pickLocalized } from '../../i18n/utils';
+import { stats } from '../../data/homepage';
+
+const lang = getLangFromUrl(Astro.url);
+const formatTarget = (n: number) => n.toLocaleString(lang === 'ar' ? 'ar' : 'en-US');
+---
+
+<div class="stats" id="stats" data-reveal-stagger>
+  {stats.items.map((s) => (
+    <div class="stat">
+      <div class="stat__value" data-target={s.target} data-suffix={s.suffix}>{formatTarget(s.target)}{s.suffix}</div>
+      <div class="stat__label">{pickLocalized(s.label, lang)?.value}</div>
+    </div>
+  ))}
+</div>
+
+<style>
+  .stats {
+    background: var(--color-surface-inverse); border-radius: var(--r-lg); box-shadow: var(--shadow-card);
+    padding: 36px 40px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px;
+  }
+  .stat { text-align: center; border-inline-end: 1px solid oklch(35% 0.03 250); }
+  .stat:last-child { border-inline-end: 0; }
+  .stat__value { font-family: var(--font-head); font-size: 38px; font-weight: 700; color: var(--sage); line-height: 1; }
+  .stat__label { font-size: 13px; color: var(--ink-on-navy); margin-top: 10px; line-height: 1.4; }
+
+  @media (max-width: 860px) {
+    .stats { grid-template-columns: repeat(2, 1fr); padding: 28px 24px; gap: 28px 16px; }
+    .stat:nth-child(odd) { border-inline-end: 1px solid oklch(35% 0.03 250); }
+    .stat:nth-child(even) { border-inline-end: 0; }
+    .stat__value { font-size: 30px; }
+  }
+</style>

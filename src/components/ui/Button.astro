@@ -1,0 +1,44 @@
+---
+type Variant = 'gold' | 'sage' | 'navy' | 'ghost';
+
+interface Props {
+  href: string;
+  variant?: Variant;
+  class?: string;
+}
+
+const { href, variant = 'sage', class: className } = Astro.props;
+---
+
+<a href={href} class:list={['btn', `btn--${variant}`, className]}>
+  <slot />
+</a>
+
+<style>
+  .btn {
+    display: inline-block;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 15px;
+    padding: 15px 28px;
+    border-radius: var(--r-sm);
+    border: 1.5px solid transparent;
+    cursor: pointer;
+    font-family: inherit;
+    white-space: nowrap;
+    transition: background .18s ease, border-color .18s ease, transform .18s ease;
+  }
+  .btn:hover { transform: translateY(-1px); }
+  .btn--gold { background: var(--gold); color: oklch(20% 0.03 75); padding: 10px 20px; font-size: 14px; }
+  .btn--gold:hover { background: var(--gold-hover); color: oklch(20% 0.03 75); }
+  .btn--sage { background: var(--sage); color: var(--sage-ink); }
+  .btn--sage:hover { background: var(--sage-hover); color: var(--sage-ink); }
+  .btn--navy { background: var(--navy); color: var(--ink-invert); padding: 13px 22px; font-size: 14px; }
+  .btn--ghost {
+    background: oklch(99% 0.005 85 / 0.12);
+    color: oklch(99% 0.005 85);
+    border-color: oklch(99% 0.005 85 / 0.4);
+    backdrop-filter: blur(6px);
+  }
+  .btn--ghost:hover { background: oklch(99% 0.005 85 / 0.22); color: oklch(99% 0.005 85); }
+</style>

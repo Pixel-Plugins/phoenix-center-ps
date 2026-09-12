@@ -1,0 +1,27 @@
+---
+interface Props {
+  step: number;
+  title: string;
+  description: string;
+}
+
+const { step, title, description } = Astro.props;
+---
+
+<div class="process-step">
+  <div class="process-step__num">{String(step).padStart(2, '0')}</div>
+  <div>
+    <h3>{title}</h3>
+    <p>{description}</p>
+  </div>
+</div>
+
+<style>
+  .process-step { display: flex; gap: 20px; align-items: flex-start; }
+  .process-step__num {
+    font-family: var(--font-head); font-size: 22px; font-weight: 700;
+    color: var(--sage); flex-shrink: 0; width: 48px;
+  }
+  .process-step h3 { font-size: 17px; font-weight: 700; color: var(--color-text-strong); margin: 0 0 6px; }
+  .process-step p { font-size: 14.5px; line-height: 1.6; color: var(--color-text-muted); margin: 0; }
+</style>

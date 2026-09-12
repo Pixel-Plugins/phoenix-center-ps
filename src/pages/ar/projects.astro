@@ -1,0 +1,40 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/sections/PageHero.astro';
+import Section from '../../components/ui/Section.astro';
+import ProjectCard from '../../components/ui/ProjectCard.astro';
+import { getLangFromUrl } from '../../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const projects = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order);
+
+const copy = {
+  en: {
+    title: 'Projects',
+    eyebrow: 'Our Work',
+    subtitle: 'Partnership-driven initiatives delivering research, civic engagement, and field data across Gaza and the West Bank.',
+  },
+  ar: {
+    title: 'المشاريع',
+    eyebrow: 'أعمالنا',
+    subtitle: 'مبادرات قائمة على الشراكة تقدم الأبحاث والمشاركة المدنية والبيانات الميدانية في غزة والضفة الغربية.',
+  },
+}[lang];
+---
+
+<BaseLayout title={copy.title}>
+  <PageHero eyebrow={copy.eyebrow} title={copy.title} subtitle={copy.subtitle} />
+
+  <Section variant="tight">
+    <div class="projects-list">
+      {projects.map((project, i) => (
+        <ProjectCard project={project} reverse={i % 2 === 1} />
+      ))}
+    </div>
+  </Section>
+</BaseLayout>
+
+<style>
+  .projects-list { display: flex; flex-direction: column; gap: 72px; }
+</style>

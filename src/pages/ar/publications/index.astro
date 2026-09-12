@@ -1,0 +1,42 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import PageHero from '../../../components/sections/PageHero.astro';
+import Section from '../../../components/ui/Section.astro';
+import CategoryFilterTabs from '../../../components/publications/CategoryFilterTabs.astro';
+import PublicationGrid from '../../../components/publications/PublicationGrid.astro';
+import { publicationsPageSize } from '../../../data/siteConfig';
+import { getLangFromUrl, useTranslations, localizedPath } from '../../../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const all = (await getCollection('publications')).sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+const firstPage = all.slice(0, publicationsPageSize);
+const hasMore = all.length > publicationsPageSize;
+
+const copy = {
+  en: { eyebrow: 'Publications', title: 'Publications' },
+  ar: { eyebrow: 'الإصدارات', title: 'الإصدارات' },
+}[lang];
+---
+
+<BaseLayout title={copy.title}>
+  <PageHero eyebrow={copy.eyebrow} title={copy.title} />
+
+  <Section variant="tight">
+    <CategoryFilterTabs active="all" />
+    <PublicationGrid entries={firstPage} />
+    {hasMore && (
+      <nav class="pagination">
+        <a href={localizedPath('/publications/all/2/', lang)}>{t('pagination.next')}</a>
+      </nav>
+    )}
+  </Section>
+</BaseLayout>
+
+<style>
+  .pagination { display: flex; justify-content: center; margin-top: 56px; }
+  .pagination a { font-size: 14px; font-weight: 700; text-decoration: none; color: var(--color-text-strong); }
+  .pagination a:hover { color: var(--eyebrow); }
+</style>

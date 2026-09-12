@@ -1,0 +1,37 @@
+# Confirm display permission for each of these before launch (flagged in
+# the original Claude Design handoff). Add new partners as new entries.
+- id: insights-palestine
+  name:
+    en: Insights Palestine
+    ar: إنسايتس فلسطين
+  logo: ../../assets/partners/partner-insights.png
+  dark: false
+  order: 1
+- id: arab-center-washington
+  name:
+    en: Arab Center Washington DC
+    ar: المركز العربي واشنطن
+  logo: ../../assets/partners/partner-acw.webp
+  dark: false
+  order: 2
+- id: arab-center-doha
+  name:
+    en: Arab Center for Research & Policy Studies (Doha)
+    ar: المركز العربي للأبحاث ودراسة السياسات (الدوحة)
+  logo: ../../assets/partners/partner-doha.png
+  dark: true
+  order: 3
+- id: united-nations
+  name:
+    en: United Nations
+    ar: الأمم المتحدة
+  logo: ../../assets/partners/partner-un.svg
+  dark: false
+  order: 4
+- id: unrwa
+  name:
+    en: UNRWA
+    ar: الأونروا
+  logo: ../../assets/partners/partner-unrwa.png
+  dark: true
+  order: 5

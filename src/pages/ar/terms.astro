@@ -1,0 +1,113 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/sections/PageHero.astro';
+import Section from '../../components/ui/Section.astro';
+import { getLangFromUrl } from '../../i18n/utils';
+import { siteConfig } from '../../data/siteConfig';
+
+const lang = getLangFromUrl(Astro.url);
+
+const copy = {
+  en: {
+    title: 'Terms of Service',
+    eyebrow: 'Legal',
+    intro: 'These terms govern your use of the Phoenix Center website and the research, publications, and services it presents.',
+    sections: [
+      {
+        heading: 'Acceptance of Terms',
+        body: 'By accessing or using this website, you agree to these terms. If you do not agree, please do not use the site.',
+      },
+      {
+        heading: 'Use of Publications & Content',
+        body: 'Research papers, case assessments, and other publications on this site may be read, downloaded, and cited for personal, academic, journalistic, and non-commercial purposes, with clear attribution to Phoenix Center. Reproduction, redistribution, or commercial use of our publications in whole or in part requires prior written permission.',
+      },
+      {
+        heading: 'Intellectual Property',
+        body: 'The Phoenix Center name, logo, and the design and content of this website — excluding publicly licensed or third-party material clearly credited as such — are the property of Phoenix Center.',
+      },
+      {
+        heading: 'Accuracy of Information',
+        body: 'Our research reflects the best available data and methodology at the time of publication. Given the fast-moving political, economic, and social conditions we study, findings may become outdated and should not be treated as a substitute for independent verification in time-sensitive or high-stakes contexts.',
+      },
+      {
+        heading: 'External Links',
+        body: 'This site may link to third-party websites, including partner and donor organizations. Phoenix Center is not responsible for the content, accuracy, or practices of external sites.',
+      },
+      {
+        heading: 'Limitation of Liability',
+        body: 'Phoenix Center makes reasonable efforts to ensure this website functions correctly and its content is accurate, but provides the site and its content without warranties of any kind, and is not liable for damages arising from its use.',
+      },
+      {
+        heading: 'Changes to These Terms',
+        body: 'These terms may be updated from time to time to reflect changes in our work or applicable law. Continued use of the website after an update constitutes acceptance of the revised terms.',
+      },
+      {
+        heading: 'Contact',
+        body: 'Questions about these terms can be directed to the address below.',
+      },
+    ],
+  },
+  ar: {
+    title: 'شروط الخدمة',
+    eyebrow: 'قانوني',
+    intro: 'تحكم هذه الشروط استخدامك لموقع مركز فينيكس والأبحاث والإصدارات والخدمات التي يقدمها.',
+    sections: [
+      {
+        heading: 'قبول الشروط',
+        body: 'بدخولك إلى هذا الموقع أو استخدامه، فإنك توافق على هذه الشروط. إذا كنت لا توافق عليها، يرجى عدم استخدام الموقع.',
+      },
+      {
+        heading: 'استخدام الإصدارات والمحتوى',
+        body: 'يمكن قراءة الأوراق البحثية وتقييمات الحالة وسائر الإصدارات المنشورة على هذا الموقع وتحميلها والاستشهاد بها للأغراض الشخصية والأكاديمية والصحفية وغير التجارية، مع الإشارة الواضحة إلى مركز فينيكس كمصدر. يتطلب إعادة إنتاج إصداراتنا أو إعادة توزيعها أو استخدامها تجارياً، كلياً أو جزئياً، إذناً كتابياً مسبقاً.',
+      },
+      {
+        heading: 'الملكية الفكرية',
+        body: 'اسم مركز فينيكس وشعاره، وتصميم هذا الموقع ومحتواه — باستثناء المواد المرخصة علناً أو مواد الأطراف الثالثة المنسوبة بوضوح إليها — هي ملك لمركز فينيكس.',
+      },
+      {
+        heading: 'دقة المعلومات',
+        body: 'تعكس أبحاثنا أفضل البيانات والمنهجيات المتاحة وقت النشر. ونظراً للتغير السريع في الظروف السياسية والاقتصادية والاجتماعية التي ندرسها، فقد تصبح النتائج غير محدّثة، ولا ينبغي اعتبارها بديلاً عن التحقق المستقل في السياقات الحساسة زمنياً أو ذات المخاطر العالية.',
+      },
+      {
+        heading: 'الروابط الخارجية',
+        body: 'قد يتضمن هذا الموقع روابط لمواقع أطراف ثالثة، بما في ذلك مؤسسات شريكة وجهات مانحة. لا يتحمل مركز فينيكس مسؤولية محتوى أو دقة أو ممارسات المواقع الخارجية.',
+      },
+      {
+        heading: 'حدود المسؤولية',
+        body: 'يبذل مركز فينيكس جهوداً معقولة لضمان عمل هذا الموقع بشكل صحيح ودقة محتواه، لكنه يقدم الموقع ومحتواه دون أي ضمانات، ولا يتحمل المسؤولية عن أي أضرار ناشئة عن استخدامه.',
+      },
+      {
+        heading: 'التعديلات على هذه الشروط',
+        body: 'قد يتم تحديث هذه الشروط من وقت لآخر لتعكس تغييرات في عملنا أو في القوانين المعمول بها. استمرار استخدام الموقع بعد أي تحديث يعني قبول الشروط المعدَّلة.',
+      },
+      {
+        heading: 'التواصل',
+        body: 'يمكن توجيه الأسئلة حول هذه الشروط إلى العنوان أدناه.',
+      },
+    ],
+  },
+}[lang];
+---
+
+<BaseLayout title={copy.title}>
+  <PageHero eyebrow={copy.eyebrow} title={copy.title} subtitle={copy.intro} />
+
+  <Section variant="tight">
+    <div class="legal-body" data-reveal-stagger>
+      {copy.sections.map((s) => (
+        <section>
+          <h2>{s.heading}</h2>
+          <p>{s.body}</p>
+        </section>
+      ))}
+      <p class="legal-contact">{siteConfig.email}</p>
+    </div>
+  </Section>
+</BaseLayout>
+
+<style>
+  .legal-body { max-width: 760px; margin: 0 auto; display: flex; flex-direction: column; gap: 32px; }
+  .legal-body h2 { font-size: 20px; font-weight: 700; color: var(--color-text-strong); margin: 0 0 10px; }
+  .legal-body p { font-size: 15px; line-height: 1.75; color: var(--color-text-muted); margin: 0; }
+  .legal-contact { font-size: 15px; color: var(--color-text); }
+</style>
