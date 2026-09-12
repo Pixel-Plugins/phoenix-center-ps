@@ -16,9 +16,17 @@ import { getLangFromUrl, useTranslations, localizedPath } from '../../i18n/utils
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
-const allPublications = (await getCollection('publications')).sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
-const books = allPublications.filter((p) => p.data.category === 'research-field-studies').slice(0, 4);
-const papers = allPublications.filter((p) => p.data.category !== 'research-field-studies').slice(0, 4);
+const allPublications = await getCollection('publications');
+// Featured items (featured: true in frontmatter) are pinned first regardless
+// of date; everything else fills remaining slots by most recent. To swap
+// what shows here, just set `featured: true` on the publications you want —
+// no code changes needed.
+const byFeaturedThenDate = (a: (typeof allPublications)[number], b: (typeof allPublications)[number]) => {
+  if (a.data.featured !== b.data.featured) return a.data.featured ? -1 : 1;
+  return b.data.date.getTime() - a.data.date.getTime();
+};
+const books = allPublications.filter((p) => p.data.category === 'research-field-studies').sort(byFeaturedThenDate).slice(0, 4);
+const papers = allPublications.filter((p) => p.data.category !== 'research-field-studies').sort(byFeaturedThenDate).slice(0, 4);
 ---
 
 <BaseLayout title={lang === 'ar' ? 'الرئيسية' : 'Home'}>
