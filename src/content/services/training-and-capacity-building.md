@@ -47,7 +47,5 @@ processSteps:
     description:
       en: Refresher cycles and ongoing technical support continue well past the initial program.
       ar: تستمر دورات التنشيط والدعم الفني المستمر لما بعد البرنامج الأولي.
-examplePublicationSlugs:
-  - palestinian-women-wartime
-  - palestinian-christian-community
+examplePublicationSlugs: []
 ---

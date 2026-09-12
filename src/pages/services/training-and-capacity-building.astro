@@ -1,19 +1,18 @@
 ---
-import { getEntry, getEntries } from 'astro:content';
+import { getEntry } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageHero from '../../components/sections/PageHero.astro';
 import Section from '../../components/ui/Section.astro';
 import ProcessStep from '../../components/ui/ProcessStep.astro';
 import PublicationGrid from '../../components/publications/PublicationGrid.astro';
 import { getLangFromUrl, pickLocalized } from '../../i18n/utils';
+import { getRelatedPublications } from '../../lib/relatedPublications';
 
 const lang = getLangFromUrl(Astro.url);
 const service = await getEntry('services', 'training-and-capacity-building');
 if (!service) throw new Error('Missing services/training-and-capacity-building.md');
 
-const examples = service.data.examplePublicationSlugs.length
-  ? await getEntries(service.data.examplePublicationSlugs.map((id) => ({ collection: 'publications' as const, id })))
-  : [];
+const examples = await getRelatedPublications(service);
 ---
 
 <BaseLayout title={pickLocalized(service.data.heroStatement, lang)?.value ?? 'Training & Capacity Building'}>

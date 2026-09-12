@@ -1,7 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import Announcement from '../components/layout/Announcement.astro';
 import Hero from '../components/sections/Hero.astro';
 import PillarsGrid from '../components/sections/PillarsGrid.astro';
 import ApproachChecklist from '../components/sections/ApproachChecklist.astro';
@@ -29,8 +28,7 @@ const books = allPublications.filter((p) => p.data.category === 'research-field-
 const papers = allPublications.filter((p) => p.data.category !== 'research-field-studies').sort(byFeaturedThenDate).slice(0, 4);
 ---
 
-<BaseLayout title={lang === 'ar' ? 'الرئيسية' : 'Home'}>
-  <Announcement />
+<BaseLayout title={lang === 'ar' ? 'الرئيسية' : 'Home'} showAnnouncement>
   <Hero />
   <PillarsGrid />
   <ApproachChecklist />
