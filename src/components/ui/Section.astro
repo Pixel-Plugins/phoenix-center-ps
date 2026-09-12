@@ -1,0 +1,63 @@
+---
+interface Props {
+  id?: string;
+  eyebrow?: string;
+  title?: string;
+  subtitle?: string;
+  variant?: 'default' | 'tint' | 'navy' | 'tight';
+  headStyle?: 'default' | 'stack' | 'center';
+  eyebrowVariant?: 'default' | 'sage' | 'onsage';
+}
+
+const { id, eyebrow, title, subtitle, variant = 'default', headStyle = 'default', eyebrowVariant = 'default' } = Astro.props;
+---
+
+<section id={id} class:list={['section', variant !== 'default' && `section--${variant}`]} data-reveal-group>
+  {(eyebrow || title || subtitle) && (
+    <header class:list={['section-head', headStyle !== 'default' && `section-head--${headStyle}`]}>
+      <div>
+        {eyebrow && <p class:list={['eyebrow', eyebrowVariant !== 'default' && `eyebrow--${eyebrowVariant}`]}>{eyebrow}</p>}
+        {title && <h2>{title}</h2>}
+        {subtitle && <p class="section-sub">{subtitle}</p>}
+      </div>
+      <slot name="head-action" />
+    </header>
+  )}
+  <slot />
+</section>
+
+<style>
+  .section { padding: 96px var(--gutter); max-width: var(--max); margin: 0 auto; }
+  .section--tight { padding-top: 40px; }
+  .section--tint { background: var(--color-surface-alt); max-width: none; }
+  .section--tint > * { max-width: var(--max); margin: 0 auto; }
+  .section--navy { background: var(--color-surface-inverse); max-width: none; }
+  .section--navy > * { max-width: 1200px; margin: 0 auto; }
+
+  .section-head {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 24px;
+    flex-wrap: wrap;
+    margin-bottom: 44px;
+  }
+  .section-head h2 { font-size: 34px; font-weight: 700; color: var(--color-text-strong); }
+  .section-head--stack { display: block; max-width: 680px; margin-bottom: 48px; }
+  .section-head--stack h2 { font-size: 36px; margin-bottom: 16px; }
+  .section-head--center { display: block; text-align: center; max-width: 640px; margin: 0 auto 48px; }
+  .section--navy .section-head h2 { color: oklch(97% 0.005 85); }
+
+  .eyebrow {
+    font-size: 13px; font-weight: 700; letter-spacing: .08em;
+    text-transform: uppercase; color: var(--eyebrow); margin: 0 0 12px;
+  }
+  .eyebrow--sage { color: var(--sage); }
+  .eyebrow--onsage { color: var(--sage-ink); }
+  .section-sub { font-size: 16px; color: var(--color-text-muted); line-height: 1.6; margin: 0; }
+
+  @media (max-width: 860px) {
+    .section { padding: 64px var(--gutter); }
+    .section-head h2, .section-head--stack h2 { font-size: 27px; }
+  }
+</style>

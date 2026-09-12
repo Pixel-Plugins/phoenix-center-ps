@@ -1,0 +1,74 @@
+---
+import { getLangFromUrl, pickLocalized } from '../../i18n/utils';
+import { approach, enumeratorStat } from '../../data/homepage';
+import Section from '../ui/Section.astro';
+
+const lang = getLangFromUrl(Astro.url);
+
+const TICK =
+  '<svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6.5L4.8 9L10 3" stroke="#204630" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+---
+
+<Section id="approach" variant="tint">
+  <div class="approach__grid">
+    <div class="approach__copy" data-reveal>
+      <p class="eyebrow">{pickLocalized(approach.eyebrow, lang)?.value}</p>
+      <h2>{pickLocalized(approach.title, lang)?.value}</h2>
+      <p class="section-sub">{pickLocalized(approach.body, lang)?.value}</p>
+      <ul class="checklist">
+        {approach.items.map((item) => (
+          <li>
+            <span class="tick" set:html={TICK} />
+            <span>{pickLocalized(item, lang)?.value}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+    <div class="approach__media" data-reveal>
+      <figure class="approach__photo">
+        <img
+          src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=800&q=80"
+          alt="Enumerator conducting a household survey"
+        />
+      </figure>
+      <div class="approach__badge">
+        <strong>{enumeratorStat.value}</strong>
+        <span>{pickLocalized(approach.badgeLabel, lang)?.value}</span>
+      </div>
+    </div>
+  </div>
+</Section>
+
+<style>
+  .approach__grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 56px; align-items: center; }
+  .approach__copy h2 { font-size: 34px; font-weight: 700; color: var(--color-text-strong); margin-bottom: 18px; }
+  .approach__copy .section-sub { margin-bottom: 28px; }
+  .eyebrow { font-size: 13px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--eyebrow); margin: 0 0 12px; }
+
+  .checklist { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 16px 24px; }
+  .checklist li { display: flex; align-items: flex-start; gap: 12px; font-size: 14.5px; line-height: 1.5; color: oklch(28% 0.02 75); }
+  .tick {
+    flex-shrink: 0; width: 22px; height: 22px; border-radius: 50%; background: var(--sage);
+    display: flex; align-items: center; justify-content: center; margin-top: 2px;
+  }
+
+  .approach__media { position: relative; padding-top: 28px; padding-inline-end: 28px; }
+  .approach__photo { margin: 0; border-radius: var(--r-xl); overflow: hidden; aspect-ratio: 4/5; border: 1px solid oklch(84% 0.01 80); }
+  .approach__photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .approach__badge {
+    position: absolute; top: 0; inset-inline-end: 0; max-width: 200px;
+    background: var(--color-surface-inverse); color: oklch(96% 0.01 85);
+    border-radius: 16px; padding: 20px 24px; box-shadow: var(--shadow-badge);
+  }
+  .approach__badge strong { display: block; font-family: var(--font-head); font-size: 30px; font-weight: 700; color: var(--sage); }
+  .approach__badge span { font-size: 12.5px; color: var(--ink-on-navy); margin-top: 4px; display: block; }
+
+  @media (max-width: 1100px) {
+    .approach__grid { grid-template-columns: 1fr; }
+    .approach__media { padding-inline-end: 0; max-width: 460px; }
+  }
+  @media (max-width: 860px) {
+    .approach__copy h2 { font-size: 27px; }
+    .checklist { grid-template-columns: 1fr; }
+  }
+</style>

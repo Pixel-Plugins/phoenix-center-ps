@@ -1,0 +1,87 @@
+/* =========================================================
+   Design tokens. Raw palette ported from the approved
+   Claude Design mockup (claude-design-content/styles.css).
+   Semantic tokens map roles -> raw palette so a future
+   rebrand only edits the two blocks below, never a component.
+   ========================================================= */
+
+:root {
+  /* ---- raw palette (provisional brand — replace when real branding arrives) ---- */
+  --paper:        oklch(98% 0.01 85);
+  --paper-tint:   oklch(96% 0.012 80);
+  --paper-card:   oklch(99% 0.005 85);
+
+  /* Sampled directly from the real Phoenix logo assets (src/assets/brand) */
+  --navy:         #0a2a4a;
+  --navy-raised:  #0d355e;
+  --navy-tile:    #0e3b67;
+  --navy-rule:    #0f4172;
+  --navy-chip:    #0f3e6e;
+
+  --sage:         #a5c8b0;
+  --sage-hover:   #93bda2;
+  --sage-ink:     #204630;
+  --sage-ink-dk:  #143221;
+
+  --gold:         #eeb943;
+  --gold-hover:   #ecb02c;
+
+  --ink:          oklch(23% 0.02 75);
+  --ink-strong:   oklch(20% 0.02 75);
+  --ink-muted:    oklch(45% 0.02 75);
+  --ink-soft:     oklch(55% 0.02 75);
+  --ink-invert:   oklch(98% 0.01 85);
+  --ink-on-navy:  oklch(82% 0.01 80);
+
+  --eyebrow:      oklch(55% 0.15 70);
+  --tag:          oklch(45% 0.1 155);
+  --icon-tint:    oklch(92% 0.03 155);
+  --icon-stroke:  oklch(35% 0.08 155);
+
+  --border:       oklch(90% 0.01 80);
+  --border-soft:  oklch(88% 0.01 80);
+
+  /* ---- type ---- */
+  --font-head: 'Source Serif 4', Georgia, serif;
+  --font-body: 'Public Sans', system-ui, sans-serif;
+  --font-ar:   'Cairo', system-ui, sans-serif;
+
+  /* ---- rhythm ---- */
+  --gutter: 48px;
+  --max:    1280px;
+  --r-sm: 8px;
+  --r-md: 14px;
+  --r-lg: 18px;
+  --r-xl: 20px;
+
+  --shadow-card:  0 24px 60px -20px oklch(15% 0.04 250 / 0.4);
+  --shadow-badge: 0 20px 44px -16px oklch(15% 0.04 250 / 0.4);
+  --shadow-photo: 0 12px 28px -10px oklch(20% 0.02 75 / 0.25);
+
+  /* ---- semantic tokens (components reference these, not the raw palette above) ---- */
+  --color-brand-primary:   var(--navy);
+  --color-brand-secondary: var(--sage);
+  --color-brand-accent:    var(--gold);
+
+  --color-surface:         var(--paper);
+  --color-surface-alt:     var(--paper-tint);
+  --color-surface-card:    var(--paper-card);
+  --color-surface-inverse: var(--navy);
+  --color-surface-raised-on-inverse: var(--navy-raised);
+
+  --color-text:            var(--ink);
+  --color-text-strong:     var(--ink-strong);
+  --color-text-muted:      var(--ink-muted);
+  --color-text-soft:       var(--ink-soft);
+  --color-text-on-inverse: var(--ink-invert);
+  --color-text-on-inverse-muted: var(--ink-on-navy);
+
+  --color-border:          var(--border);
+  --color-border-soft:     var(--border-soft);
+}
+
+/* Arabic / RTL swaps both heading + body to Cairo */
+html[dir='rtl'] {
+  --font-head: var(--font-ar);
+  --font-body: var(--font-ar);
+}

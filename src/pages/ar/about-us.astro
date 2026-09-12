@@ -1,0 +1,82 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/sections/PageHero.astro';
+import Section from '../../components/ui/Section.astro';
+import { getLangFromUrl, pickLocalized } from '../../i18n/utils';
+// TeamGrid exists (src/components/sections/TeamGrid.astro) but isn't
+// rendered below yet — only one real team bio (Khaled Alyazji) exists so far.
+import { about } from '../../data/about';
+
+const lang = getLangFromUrl(Astro.url);
+---
+
+<BaseLayout title={pickLocalized(about.title, lang)?.value ?? 'About Us'}>
+  <PageHero
+    eyebrow={pickLocalized(about.eyebrow, lang)?.value}
+    title={pickLocalized(about.title, lang)?.value ?? ''}
+    subtitle={pickLocalized(about.intro, lang)?.value}
+  />
+
+  <section class="section quotes">
+    <div class="quotes__grid" data-reveal-stagger>
+      <div class="quote-block">
+        <p class="quote-block__label">{pickLocalized(about.message.label, lang)?.value}</p>
+        <p class="quote-block__text">“{pickLocalized(about.message.quote, lang)?.value}”</p>
+      </div>
+      <div class="quote-block quote-block--raised">
+        <p class="quote-block__label">{pickLocalized(about.vision.label, lang)?.value}</p>
+        <p class="quote-block__text">“{pickLocalized(about.vision.quote, lang)?.value}”</p>
+      </div>
+      <div class="quote-block">
+        <p class="quote-block__label">{pickLocalized(about.mission.label, lang)?.value}</p>
+        <p class="quote-block__text">“{pickLocalized(about.mission.quote, lang)?.value}”</p>
+      </div>
+    </div>
+  </section>
+
+  <Section
+    variant="tint"
+    headStyle="stack"
+    eyebrow={pickLocalized(about.values.label, lang)?.value}
+    title={pickLocalized(about.values.title, lang)?.value}
+  >
+    <div class="values__grid" data-reveal-stagger>
+      {about.values.items.map((v) => (
+        <div class="value-card">
+          <h3>{pickLocalized(v.title, lang)?.value}</h3>
+          <p>{pickLocalized(v.desc, lang)?.value}</p>
+        </div>
+      ))}
+    </div>
+  </Section>
+</BaseLayout>
+
+<style>
+  .quotes { padding-top: 80px; }
+  .quotes__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+  .quote-block {
+    background: var(--color-surface-alt); border: 1px solid var(--color-border);
+    border-radius: var(--r-lg); padding: 32px;
+  }
+  .quote-block--raised { background: var(--color-surface-inverse); border-color: transparent; }
+  .quote-block--raised .quote-block__label { color: var(--sage); }
+  .quote-block--raised .quote-block__text { color: oklch(92% 0.01 85); }
+  .quote-block__label {
+    font-size: 12.5px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+    color: var(--eyebrow); margin: 0 0 14px;
+  }
+  .quote-block__text { font-size: 16.5px; line-height: 1.7; color: var(--color-text-strong); margin: 0; font-style: italic; }
+
+  .values__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+  .value-card {
+    background: var(--color-surface); border: 1px solid var(--color-border);
+    border-radius: var(--r-lg); padding: 30px;
+  }
+  .value-card h3 { font-size: 19px; font-weight: 700; color: var(--color-text-strong); margin: 0 0 10px; }
+  .value-card p { font-size: 14.5px; line-height: 1.6; color: var(--color-text-muted); margin: 0; }
+
+  @media (max-width: 1100px) {
+    .quotes__grid, .values__grid { grid-template-columns: 1fr; }
+    .quote-block--raised { order: -1; }
+  }
+</style>

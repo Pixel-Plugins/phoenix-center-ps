@@ -1,0 +1,86 @@
+---
+import { getLangFromUrl, pickLocalized } from '../../i18n/utils';
+import { pillars } from '../../data/homepage';
+import Section from '../ui/Section.astro';
+
+const lang = getLangFromUrl(Astro.url);
+const [feature, ...rest] = pillars.items;
+
+const ICONS: Record<string, string> = {
+  search:
+    '<svg width="28" height="28" viewBox="0 0 26 26" fill="none"><circle cx="10" cy="10" r="7" stroke="#204630" stroke-width="2"/><line x1="18" y1="18" x2="24" y2="24" stroke="#204630" stroke-width="2" stroke-linecap="round"/></svg>',
+  bars:
+    '<svg width="24" height="24" viewBox="0 0 26 26" fill="none"><rect x="6" y="14" width="3" height="7" fill="oklch(35% 0.08 155)"/><rect x="11.5" y="9" width="3" height="12" fill="oklch(35% 0.08 155)"/><rect x="17" y="4" width="3" height="17" fill="oklch(35% 0.08 155)"/></svg>',
+  people:
+    '<svg width="24" height="24" viewBox="0 0 26 26" fill="none"><circle cx="10" cy="9" r="4" stroke="oklch(35% 0.08 155)" stroke-width="2"/><path d="M3 22c0-5 4-8 7-8s7 3 7 8" stroke="oklch(35% 0.08 155)" stroke-width="2" fill="none"/></svg>',
+};
+---
+
+<Section
+  id="services"
+  variant="tight"
+  headStyle="stack"
+  eyebrow={pickLocalized(pillars.eyebrow, lang)?.value}
+  title={pickLocalized(pillars.title, lang)?.value}
+  subtitle={pickLocalized(pillars.subtitle, lang)?.value}
+>
+  <div class="services__grid">
+    <article class="pillar pillar--feature" data-reveal>
+      <div class="pillar__icon" set:html={ICONS[feature.icon]} />
+      <h3>{pickLocalized(feature.title, lang)?.value}</h3>
+      <p>{pickLocalized(feature.desc, lang)?.value}</p>
+      {feature.tags && (
+        <div class="pillar__tags">
+          {pickLocalized(feature.tags, lang)?.value.map((tag) => <span>{tag}</span>)}
+        </div>
+      )}
+    </article>
+
+    <div class="pillar__stack" data-reveal-stagger>
+      {rest.map((p) => (
+        <article class="pillar">
+          <div class="pillar__icon pillar__icon--small" set:html={ICONS[p.icon]} />
+          <h3>{pickLocalized(p.title, lang)?.value}</h3>
+          <p>{pickLocalized(p.desc, lang)?.value}</p>
+        </article>
+      ))}
+    </div>
+  </div>
+</Section>
+
+<style>
+  .services__grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 28px; }
+  .pillar__stack { display: flex; flex-direction: column; gap: 28px; }
+
+  .pillar--feature {
+    background: var(--color-surface-inverse); border-radius: var(--r-xl); padding: 44px;
+    display: flex; flex-direction: column; gap: 20px; color: oklch(96% 0.01 85);
+  }
+  .pillar--feature h3 { font-size: 26px; font-weight: 700; }
+  .pillar--feature p { font-size: 16px; line-height: 1.65; color: var(--ink-on-navy); margin: 0; max-width: 460px; }
+  .pillar__icon {
+    width: 56px; height: 56px; border-radius: var(--r-md); background: var(--sage);
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .pillar__tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
+  .pillar__tags span {
+    font-size: 12px; font-weight: 600; background: var(--navy-chip);
+    padding: 6px 13px; border-radius: 999px; color: oklch(92% 0.01 85);
+  }
+
+  .pillar {
+    background: var(--color-surface-alt); border: 1px solid oklch(91% 0.01 80);
+    border-radius: var(--r-lg); padding: 30px;
+    display: flex; flex-direction: column; gap: 14px; flex: 1;
+  }
+  .pillar h3 { font-size: 20px; font-weight: 700; color: var(--color-text-strong); }
+  .pillar p { font-size: 14.5px; line-height: 1.6; color: var(--color-text-muted); margin: 0; }
+  .pillar__icon--small { width: 46px; height: 46px; border-radius: 12px; background: var(--icon-tint); }
+
+  @media (max-width: 1100px) {
+    .services__grid { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 860px) {
+    .pillar--feature { padding: 32px; }
+  }
+</style>

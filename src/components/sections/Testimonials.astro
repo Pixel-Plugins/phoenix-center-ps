@@ -1,0 +1,48 @@
+---
+import { getLangFromUrl, pickLocalized } from '../../i18n/utils';
+import { testimonials } from '../../data/homepage';
+import Section from '../ui/Section.astro';
+
+const lang = getLangFromUrl(Astro.url);
+
+const QUOTE =
+  '<svg width="32" height="24" viewBox="0 0 32 24" fill="none"><path d="M0 24V13.6C0 6 4.8 1 12.4 0L13.6 3.2C8.8 4.4 6.4 7.2 6.4 11.2H12.4V24H0ZM18.4 24V13.6C18.4 6 23.2 1 30.8 0L32 3.2C27.2 4.4 24.8 7.2 24.8 11.2H30.8V24H18.4Z" fill="#a5c8b0"/></svg>';
+---
+
+<Section
+  variant="navy"
+  headStyle="center"
+  eyebrowVariant="sage"
+  eyebrow={pickLocalized(testimonials.eyebrow, lang)?.value}
+  title={pickLocalized(testimonials.title, lang)?.value}
+>
+  <div class="quote-grid" data-reveal-stagger>
+    {testimonials.items.map((t) => (
+      <div class="quote-card">
+        <div set:html={QUOTE} />
+        <p>{pickLocalized(t.quote, lang)?.value}</p>
+        <div>
+          <div class="quote-card__name">{t.name}</div>
+          <div class="quote-card__org">{pickLocalized(t.org, lang)?.value}</div>
+        </div>
+      </div>
+    ))}
+  </div>
+</Section>
+
+<style>
+  .quote-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 28px; }
+  .quote-card {
+    background: var(--color-surface-raised-on-inverse); border-radius: 16px; padding: 36px;
+    display: flex; flex-direction: column; gap: 20px;
+  }
+  .quote-card:nth-child(even) { margin-top: 32px; }
+  .quote-card p { font-size: 17px; line-height: 1.6; color: oklch(90% 0.01 85); margin: 0; font-style: italic; }
+  .quote-card__name { font-weight: 700; font-size: 15px; color: oklch(97% 0.005 85); }
+  .quote-card__org { font-size: 13.5px; color: oklch(72% 0.01 80); }
+
+  @media (max-width: 860px) {
+    .quote-grid { grid-template-columns: 1fr; }
+    .quote-card:nth-child(even) { margin-top: 0; }
+  }
+</style>

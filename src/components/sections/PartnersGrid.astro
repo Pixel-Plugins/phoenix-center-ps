@@ -1,0 +1,46 @@
+---
+import { getCollection } from 'astro:content';
+import { Image } from 'astro:assets';
+import { getLangFromUrl, pickLocalized, useTranslations } from '../../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const partners = (await getCollection('partners')).sort((a, b) => a.data.order - b.data.order);
+---
+
+<section class="partners section section--tint">
+  <p class="partners__label">{t('partners.eyebrow')}</p>
+  <div class="partners__grid" data-reveal-stagger>
+    {partners.map((p) => (
+      <div class:list={['partner-tile', p.data.dark && 'partner-tile--dark']}>
+        <Image src={p.data.logo} alt={pickLocalized(p.data.name, lang)?.value ?? ''} width={240} loading="eager" />
+      </div>
+    ))}
+  </div>
+</section>
+
+<style>
+  .partners { padding-top: 72px; padding-bottom: 72px; max-width: none; }
+  .partners__label {
+    text-align: center; font-size: 13px; font-weight: 700; letter-spacing: .08em;
+    text-transform: uppercase; color: var(--ink-soft); margin: 0 0 32px;
+  }
+  .partners__grid {
+    display: grid; grid-template-columns: repeat(5, 1fr); gap: 20px;
+    max-width: 1200px; margin: 0 auto;
+  }
+  .partner-tile {
+    aspect-ratio: 3/2; border: 1px solid var(--border-soft); border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    background: var(--color-surface-card); padding: 18px;
+  }
+  .partner-tile--dark { background: var(--navy-tile); }
+  .partner-tile :global(img) { max-width: 100%; max-height: 100%; object-fit: contain; }
+
+  @media (max-width: 1100px) {
+    .partners__grid { grid-template-columns: repeat(3, 1fr); }
+  }
+  @media (max-width: 560px) {
+    .partners__grid { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>

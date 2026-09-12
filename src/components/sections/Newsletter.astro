@@ -1,0 +1,56 @@
+---
+import { getLangFromUrl, pickLocalized } from '../../i18n/utils';
+import { newsletter } from '../../data/homepage';
+
+const lang = getLangFromUrl(Astro.url);
+---
+
+<section class="newsletter">
+  <div class="newsletter__inner" data-reveal>
+    <p class="eyebrow">{pickLocalized(newsletter.eyebrow, lang)?.value}</p>
+    <h2>{pickLocalized(newsletter.title, lang)?.value}</h2>
+    <p>{pickLocalized(newsletter.body, lang)?.value}</p>
+    <form class="newsletter__form" data-newsletter-form>
+      <label class="sr-only" for="nl-email">{pickLocalized(newsletter.placeholder, lang)?.value}</label>
+      <input id="nl-email" type="email" name="email" required placeholder={pickLocalized(newsletter.placeholder, lang)?.value} />
+      <button class="btn btn--navy" type="submit">{pickLocalized(newsletter.button, lang)?.value}</button>
+    </form>
+    <p class="newsletter__note" data-newsletter-note role="status" data-success={pickLocalized(newsletter.success, lang)?.value}></p>
+  </div>
+</section>
+
+<style>
+  .newsletter { background: var(--sage); max-width: none; padding: 72px var(--gutter); }
+  .newsletter__inner { max-width: 700px; margin: 0 auto; text-align: center; }
+  .newsletter .eyebrow { font-size: 13px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--sage-ink); margin: 0 0 12px; }
+  .newsletter h2 { font-size: 30px; font-weight: 700; margin: 0 0 14px; color: var(--sage-ink-dk); }
+  .newsletter p { font-size: 15.5px; color: var(--sage-ink); margin: 0 0 28px; line-height: 1.6; }
+  .newsletter__form { display: flex; gap: 12px; max-width: 440px; margin: 0 auto; }
+  .newsletter__form input {
+    flex: 1; padding: 13px 16px; border-radius: var(--r-sm);
+    border: 1px solid var(--sage-ink); background: var(--color-surface-card);
+    color: var(--sage-ink); font: 400 14px/1.4 var(--font-body);
+  }
+  .btn--navy { background: var(--navy); color: var(--ink-invert); padding: 13px 22px; font-size: 14px; border: 0; border-radius: var(--r-sm); font-weight: 700; cursor: pointer; font-family: inherit; }
+  .newsletter__note { font-size: 13.5px; min-height: 20px; margin: 14px 0 0; color: var(--sage-ink-dk); }
+
+  @media (max-width: 560px) {
+    .newsletter__form { flex-direction: column; }
+  }
+</style>
+
+<script>
+  function initNewsletter() {
+    const form = document.querySelector<HTMLFormElement>('[data-newsletter-form]');
+    const note = document.querySelector<HTMLElement>('[data-newsletter-note]');
+    if (!form || !note) return;
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      // TODO: wire to a real mailing-list provider before launch.
+      note.textContent = note.dataset.success ?? '';
+      form.reset();
+    });
+  }
+  initNewsletter();
+  document.addEventListener('astro:page-load', initNewsletter);
+</script>

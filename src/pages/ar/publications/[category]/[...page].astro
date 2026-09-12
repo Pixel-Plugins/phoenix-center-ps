@@ -1,0 +1,55 @@
+---
+import type { GetStaticPaths } from 'astro';
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import PageHero from '../../../../components/sections/PageHero.astro';
+import Section from '../../../../components/ui/Section.astro';
+import CategoryFilterTabs from '../../../../components/publications/CategoryFilterTabs.astro';
+import PublicationGrid from '../../../../components/publications/PublicationGrid.astro';
+import Pagination from '../../../../components/publications/Pagination.astro';
+import { publicationCategories } from '../../../../content.config';
+import { publicationCategoryLabels, publicationsPageSize } from '../../../../data/siteConfig';
+import { getLangFromUrl } from '../../../../i18n/utils';
+
+export const getStaticPaths = (async ({ paginate }) => {
+  const all = (await getCollection('publications')).sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+  const categorySlugs = ['all', ...publicationCategories];
+
+  return categorySlugs.flatMap((category) => {
+    const entries = category === 'all' ? all : all.filter((p) => p.data.category === category);
+    return paginate(entries, { pageSize: publicationsPageSize, params: { category } });
+  });
+}) satisfies GetStaticPaths;
+
+const { category } = Astro.params;
+const { page } = Astro.props;
+const lang = getLangFromUrl(Astro.url);
+
+const copy = {
+  en: { eyebrow: 'Publications', title: 'Publications' },
+  ar: { eyebrow: 'الإصدارات', title: 'الإصدارات' },
+}[lang];
+
+const heroSubtitle =
+  category === 'all'
+    ? undefined
+    : publicationCategoryLabels[category as string]?.[lang];
+---
+
+<BaseLayout title={copy.title}>
+  <PageHero eyebrow={copy.eyebrow} title={copy.title} subtitle={heroSubtitle} />
+
+  <Section variant="tight">
+    <CategoryFilterTabs active={category as string} />
+    {page.data.length > 0 ? (
+      <PublicationGrid entries={page.data} />
+    ) : (
+      <p class="empty">{lang === 'ar' ? 'لا توجد إصدارات في هذا التصنيف بعد.' : 'No publications in this category yet.'}</p>
+    )}
+    <Pagination page={page} />
+  </Section>
+</BaseLayout>
+
+<style>
+  .empty { color: var(--color-text-muted); font-size: 15px; padding: 40px 0; text-align: center; }
+</style>

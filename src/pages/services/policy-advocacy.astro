@@ -1,0 +1,42 @@
+---
+import { getEntry, getEntries } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/sections/PageHero.astro';
+import Section from '../../components/ui/Section.astro';
+import ProcessStep from '../../components/ui/ProcessStep.astro';
+import PublicationGrid from '../../components/publications/PublicationGrid.astro';
+import { getLangFromUrl, pickLocalized } from '../../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const service = await getEntry('services', 'policy-advocacy');
+if (!service) throw new Error('Missing services/policy-advocacy.md');
+
+const examples = service.data.examplePublicationSlugs.length
+  ? await getEntries(service.data.examplePublicationSlugs.map((id) => ({ collection: 'publications' as const, id })))
+  : [];
+---
+
+<BaseLayout title={pickLocalized(service.data.heroStatement, lang)?.value ?? 'Policy Advocacy'}>
+  <PageHero title={pickLocalized(service.data.heroStatement, lang)?.value ?? ''} subtitle={pickLocalized(service.data.intro, lang)?.value} />
+
+  <Section variant="tight">
+    <div class="steps" data-reveal-stagger>
+      {service.data.processSteps.map((step) => (
+        <ProcessStep step={step.step} title={pickLocalized(step.title, lang)?.value ?? ''} description={pickLocalized(step.description, lang)?.value ?? ''} />
+      ))}
+    </div>
+  </Section>
+
+  {examples.length > 0 && (
+    <Section variant="tint" title={lang === 'ar' ? 'أمثلة ذات صلة' : 'Related Publications'}>
+      <PublicationGrid entries={examples} />
+    </Section>
+  )}
+</BaseLayout>
+
+<style>
+  .steps { display: grid; grid-template-columns: 1fr 1fr; gap: 36px 48px; }
+  @media (max-width: 860px) {
+    .steps { grid-template-columns: 1fr; }
+  }
+</style>
