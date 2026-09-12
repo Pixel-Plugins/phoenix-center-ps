@@ -40,7 +40,7 @@ function neighborTitle(neighbor: typeof prev) {
   <article>
     <div class="pub-hero">
       <div class="pub-hero__media">
-        <Image src={entry.data.coverImage} alt="" width={1600} height={900} />
+        <Image src={entry.data.coverImage} alt="" width={1200} />
       </div>
       <div class="pub-hero__inner" data-reveal>
         {categoryLabel && <span class="pub-hero__tag">{categoryLabel.value}</span>}
@@ -79,8 +79,11 @@ function neighborTitle(neighbor: typeof prev) {
 
 <style>
   .pub-hero { position: relative; }
-  .pub-hero__media { height: 420px; overflow: hidden; }
-  .pub-hero__media :global(img) { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .pub-hero__media {
+    height: 420px; overflow: hidden; background: var(--color-surface-alt);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .pub-hero__media :global(img) { width: 100%; height: 100%; object-fit: contain; display: block; }
   .pub-hero__inner {
     background: var(--color-surface-inverse); padding: 32px var(--gutter) 40px;
   }
