@@ -1,63 +1,155 @@
 ---
 import { Image } from 'astro:assets';
 import type { CollectionEntry } from 'astro:content';
-import { getLangFromUrl, pickLocalized } from '../../i18n/utils';
+import { getLangFromUrl, pickLocalized, localizedPath } from '../../i18n/utils';
+import { projectActivitiesHeading } from '../../data/siteConfig';
 
 interface Props {
   project: CollectionEntry<'projects'>;
-  reverse?: boolean;
+  num: number;
 }
 
-const { project, reverse = false } = Astro.props;
+const { project, num } = Astro.props;
 const lang = getLangFromUrl(Astro.url);
-const { title, partnerOrFunder, description, activities, pdf, image } = project.data;
+const { title, partnerOrFunder, description, activities, pdf, ctaUrl, ctaLabel, logo, logoDark, plateTitle, plateSub } = project.data;
+
+const partnerLabel = pickLocalized(partnerOrFunder, lang)?.value;
+const listHeading = pickLocalized(projectActivitiesHeading, lang)?.value;
+const numLabel = String(num).padStart(2, '0');
+// Long, paragraph-style activities (vs. short bullet phrases) look uneven
+// split across two columns — stack them in one column instead.
+const hasLongActivities = activities.some((a) => (pickLocalized(a, lang)?.value?.length ?? 0) > 90);
 ---
 
-<article class:list={['project-card', reverse && 'project-card--reverse']} data-reveal>
-  <div class="project-card__media">
-    <Image src={image} alt="" width={800} height={500} />
-  </div>
-  <div class="project-card__body">
-    <p class="project-card__partner">{pickLocalized(partnerOrFunder, lang)?.value}</p>
-    <h3>{pickLocalized(title, lang)?.value}</h3>
-    <p class="project-card__desc">{pickLocalized(description, lang)?.value}</p>
-    {activities.length > 0 && (
-      <ul class="project-card__activities">
-        {activities.map((a) => <li>{pickLocalized(a, lang)?.value}</li>)}
-      </ul>
+<article class="proj-card" data-reveal>
+  <div class="proj-card__aside">
+    {logo ? (
+      <div class:list={['plate', 'plate--logo', logoDark && 'plate--logo-dark']}>
+        <span class="plate__num" aria-hidden="true">{numLabel}</span>
+        <Image class="plate__logo" src={logo} alt={partnerLabel ?? ''} width={280} />
+      </div>
+    ) : (
+      <div class="plate plate--type">
+        <span class="plate__num" aria-hidden="true">{numLabel}</span>
+        <div>
+          <h3 class="plate__title">{pickLocalized(plateTitle, lang)?.value}</h3>
+          <p class="plate__sub">{pickLocalized(plateSub, lang)?.value}</p>
+        </div>
+      </div>
     )}
-    {pdf && (
-      <a class="link-underline" href={pdf} target="_blank" rel="noopener noreferrer">
-        {lang === 'ar' ? 'تحميل PDF ←' : 'Download PDF →'}
-      </a>
+
+    <dl class="proj-meta">
+      <div class="proj-meta__row">
+        <dt>{lang === 'ar' ? 'الشريك' : 'Partner'}</dt>
+        <dd>{partnerLabel}</dd>
+      </div>
+    </dl>
+  </div>
+
+  <div class="proj-card__body">
+    <h2 class="proj-card__title">{pickLocalized(title, lang)?.value}</h2>
+    <p class="proj-card__desc">{pickLocalized(description, lang)?.value}</p>
+
+    {activities.length > 0 && (
+      <>
+        <p class="proj-card__listhead">{listHeading}</p>
+        <ul class:list={['checklist', hasLongActivities && 'checklist--single']}>
+          {activities.map((a) => (
+            <li>
+              <span class="checklist__tick" aria-hidden="true">
+                <svg width="9" height="9" viewBox="0 0 10 10" fill="none"><path d="M1.6 5.2 3.8 7.4 8.4 2.8" stroke="oklch(40% 0.1 155)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </span>
+              <span>{pickLocalized(a, lang)?.value}</span>
+            </li>
+          ))}
+        </ul>
+      </>
+    )}
+
+    {(pdf || ctaUrl) && (
+      <div class="proj-card__actions">
+        {pdf && (
+          <a class="btn-navy" href={pdf} target="_blank" rel="noopener noreferrer">
+            <span>{lang === 'ar' ? 'تحميل التقرير' : 'Download report'}</span>
+            <svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h9M8.5 4 12.5 8l-4 4" stroke="#a5c8b0" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        )}
+        {ctaUrl && (
+          <a class="btn-navy" href={localizedPath(ctaUrl, lang)}>
+            <span>{pickLocalized(ctaLabel, lang)?.value}</span>
+            <svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h9M8.5 4 12.5 8l-4 4" stroke="#a5c8b0" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        )}
+      </div>
     )}
   </div>
 </article>
 
 <style>
-  .project-card {
-    display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center;
+  .proj-card {
+    display: grid; grid-template-columns: 280px 1fr; gap: 36px;
+    background: var(--color-surface); border: 1px solid var(--color-border);
+    border-radius: var(--r-xl); padding: 32px; align-items: start;
   }
-  .project-card--reverse .project-card__media { order: 2; }
-  .project-card__media { border-radius: var(--r-xl); overflow: hidden; border: 1px solid var(--color-border); }
-  .project-card__media :global(img) { width: 100%; height: 100%; object-fit: cover; display: block; }
-  .project-card__partner {
-    font-size: 12.5px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
-    color: var(--eyebrow); margin: 0 0 10px;
+  .proj-card__aside { position: sticky; top: 100px; }
+
+  .plate {
+    position: relative; overflow: hidden; aspect-ratio: 4 / 3; border-radius: var(--r-md);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 14px; padding: 26px; margin-bottom: 16px;
   }
-  .project-card__body h3 { font-size: 26px; font-weight: 700; color: var(--color-text-strong); margin: 0 0 14px; }
-  .project-card__desc { font-size: 15.5px; line-height: 1.7; color: var(--color-text-muted); margin: 0 0 18px; }
-  .project-card__activities { list-style: none; margin: 0 0 20px; padding: 0; display: flex; flex-direction: column; gap: 10px; }
-  .project-card__activities li {
-    font-size: 14.5px; color: var(--color-text); padding-inline-start: 20px; position: relative;
+  .plate__num {
+    position: absolute; top: 14px; inset-inline-start: 16px;
+    font-family: var(--font-head); font-size: 40px; font-weight: 700; line-height: 1;
   }
-  .project-card__activities li::before {
-    content: ''; position: absolute; inset-inline-start: 0; top: 8px;
-    width: 8px; height: 8px; border-radius: 50%; background: var(--sage);
+  .plate--logo { background: var(--color-surface-alt); border: 1px solid var(--color-border); }
+  .plate--logo .plate__num { color: oklch(88% 0.012 80); }
+  .plate--logo :global(.plate__logo) { width: 78%; height: 74px; object-fit: contain; }
+  /* Some real partner logos are light/white-on-transparent, made for a dark
+     ground (same `dark` flag as partners.yaml) — swap the plate itself to
+     the same navy-tile used behind white logos on the homepage grid. */
+  .plate--logo-dark { background: var(--navy-tile); border-color: var(--navy-tile); }
+  .plate--logo-dark .plate__num { color: oklch(32% 0.05 250); }
+  .plate--type { background: var(--color-surface-inverse); border: 1px solid var(--color-surface-inverse); }
+  .plate--type .plate__num { color: oklch(32% 0.05 250); }
+  .plate__title { margin: 0; font-family: var(--font-head); font-size: 20px; font-weight: 700; line-height: 1.25; color: oklch(97% 0.01 85); text-align: center; }
+  .plate__sub { margin: 8px 0 0; font-size: 12.5px; color: var(--ink-on-navy); text-align: center; }
+
+  .proj-meta { margin: 0; display: flex; flex-direction: column; gap: 10px; }
+  .proj-meta__row { display: flex; justify-content: space-between; gap: 12px; font-size: 13px; padding-bottom: 10px; border-bottom: 1px solid var(--color-border); }
+  .proj-meta__row:last-child { border-bottom: 0; padding-bottom: 0; }
+  .proj-meta dt { margin: 0; color: var(--color-text-soft); }
+  .proj-meta dd { margin: 0; font-weight: 600; color: var(--color-text-strong); text-align: end; }
+
+  .proj-card__title { font-family: var(--font-head); font-size: 27px; line-height: 1.25; font-weight: 700; margin: 0 0 16px; color: var(--color-text-strong); }
+  .proj-card__desc { font-size: 15.5px; line-height: 1.7; color: var(--color-text-muted); margin: 0 0 24px; }
+
+  .proj-card__listhead { font-size: 11.5px; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; color: var(--eyebrow); margin: 0 0 14px; }
+  .checklist { list-style: none; margin: 0 0 26px; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 10px 22px; }
+  .checklist--single { grid-template-columns: 1fr; }
+  .checklist li { display: flex; gap: 11px; font-size: 14.5px; line-height: 1.6; color: var(--color-text); }
+  .checklist__tick { flex-shrink: 0; width: 17px; height: 17px; border-radius: 50%; background: var(--icon-tint); margin-top: 3px; display: flex; align-items: center; justify-content: center; }
+
+  .proj-card__actions { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; padding-top: 22px; border-top: 1px solid var(--color-border); }
+  .btn-navy {
+    display: inline-flex; align-items: center; gap: 9px; background: var(--navy); color: oklch(97% 0.01 85);
+    padding: 12px 20px; border-radius: var(--r-sm); font-weight: 700; font-size: 14px; text-decoration: none;
+  }
+  .btn-navy:hover { background: var(--navy-raised); color: oklch(97% 0.01 85); }
+
+  @media (max-width: 1100px) {
+    .proj-card { grid-template-columns: 240px 1fr; gap: 28px; }
   }
 
   @media (max-width: 860px) {
-    .project-card, .project-card--reverse { grid-template-columns: 1fr; }
-    .project-card--reverse .project-card__media { order: 0; }
+    .proj-card { grid-template-columns: 1fr; gap: 24px; padding: 26px; }
+    .proj-card__aside { position: static; max-width: 320px; }
+    .proj-card__title { font-size: 23px; }
+  }
+
+  @media (max-width: 560px) {
+    .proj-card__aside { max-width: none; }
+    .checklist { grid-template-columns: 1fr; }
+    .proj-card__actions .btn-navy { width: 100%; justify-content: center; }
   }
 </style>
