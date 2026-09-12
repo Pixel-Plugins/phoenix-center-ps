@@ -5,10 +5,10 @@ import Hero from '../../components/sections/Hero.astro';
 import PillarsGrid from '../../components/sections/PillarsGrid.astro';
 import ApproachChecklist from '../../components/sections/ApproachChecklist.astro';
 import PartnersGrid from '../../components/sections/PartnersGrid.astro';
-import Newsletter from '../../components/sections/Newsletter.astro';
 import Section from '../../components/ui/Section.astro';
 // Testimonials and TeamGrid components exist (src/components/sections/) but
 // aren't rendered below yet — no real client quotes or team bios exist.
+// Same for Newsletter — no email provider is wired up yet (see notes.md).
 import PublicationGrid from '../../components/publications/PublicationGrid.astro';
 import { getLangFromUrl, useTranslations, localizedPath } from '../../i18n/utils';
 
@@ -52,5 +52,4 @@ const papers = allPublications.filter((p) => p.data.category !== 'research-field
   </Section>
 
   <PartnersGrid />
-  <Newsletter />
 </BaseLayout>

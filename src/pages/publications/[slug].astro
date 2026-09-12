@@ -4,8 +4,12 @@ import { getCollection, render } from 'astro:content';
 import { Image } from 'astro:assets';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Section from '../../components/ui/Section.astro';
+import Button from '../../components/ui/Button.astro';
+import PublicationGrid from '../../components/publications/PublicationGrid.astro';
 import { getLangFromUrl, pickLocalized, localizedPath, useTranslations } from '../../i18n/utils';
 import { publicationCategoryLabels } from '../../data/siteConfig';
+import { renderTranslatedBody } from '../../lib/renderTranslatedBody';
+import { extractByline } from '../../lib/extractByline';
 
 export const getStaticPaths = (async () => {
   const entries = await getCollection('publications');
@@ -18,6 +22,7 @@ const t = useTranslations(lang);
 const { Content } = await render(entry);
 
 const title = pickLocalized(entry.data.title, lang);
+const excerpt = pickLocalized(entry.data.excerpt, lang);
 const categoryLabel = pickLocalized(publicationCategoryLabels[entry.data.category], lang);
 const dateLabel = entry.data.date.toLocaleDateString(lang === 'ar' ? 'ar' : 'en-US', {
   year: 'numeric',
@@ -30,6 +35,14 @@ const currentIndex = all.findIndex((p) => p.id === entry.id);
 const prev = currentIndex < all.length - 1 ? all[currentIndex + 1] : null;
 const next = currentIndex > 0 ? all[currentIndex - 1] : null;
 
+const related = all.filter((p) => p.id !== entry.id && p.data.category === entry.data.category).slice(0, 3);
+
+const translatedBodyHtml = entry.data.bodyEn ? renderTranslatedBody(entry.data.bodyEn) : null;
+const isDisplayingTranslation = lang === 'en' && !!translatedBodyHtml;
+const nativeIsArabic = !!entry.data.title.ar;
+const contentLanguageLabel = isDisplayingTranslation || !nativeIsArabic ? t('publications.langEn') : t('publications.langAr');
+const byline = extractByline(isDisplayingTranslation ? entry.data.bodyEn : entry.body);
+
 function neighborTitle(neighbor: typeof prev) {
   if (!neighbor) return null;
   return pickLocalized(neighbor.data.title, lang);
@@ -38,82 +51,292 @@ function neighborTitle(neighbor: typeof prev) {
 
 <BaseLayout title={title?.value ?? 'Publication'}>
   <article>
-    <div class="pub-hero">
-      <div class="pub-hero__media">
-        <Image src={entry.data.coverImage} alt="" width={1200} />
-      </div>
-      <div class="pub-hero__inner" data-reveal>
-        {categoryLabel && <span class="pub-hero__tag">{categoryLabel.value}</span>}
-        {title && <h1 lang={title.lang} dir={title.dir}>{title.value}</h1>}
-        <span class="pub-hero__date">{dateLabel}</span>
-      </div>
-    </div>
+    <section class="pub-hero">
+      <div class="pub-hero__glow" aria-hidden="true"></div>
+      <div class="pub-hero__inner">
+        <nav class="crumbs" aria-label="Breadcrumb">
+          <a href={localizedPath('/', lang)}>{t('publications.breadcrumbHome')}</a>
+          <span aria-hidden="true">/</span>
+          <a href={localizedPath('/publications/', lang)}>{t('publications.eyebrow')}</a>
+          <span aria-hidden="true">/</span>
+          <span class="crumbs__current">{categoryLabel?.value}</span>
+        </nav>
 
-    <Section variant="tight">
-      <div class="pub-body">
-        <Content />
-        {entry.data.pdf && (
-          <a class="btn-download" href={entry.data.pdf} target="_blank" rel="noopener noreferrer">
-            {t('publications.download')}
-          </a>
-        )}
+        <div class="pub-hero__grid">
+          <div class="pub-hero__cover-col" data-reveal>
+            <figure class="pub-cover">
+              <Image class="pub-cover__backdrop" src={entry.data.coverImage} alt="" width={300} aria-hidden="true" />
+              <Image class="pub-cover__image" src={entry.data.coverImage} alt="" width={640} />
+              <span class="pub-cover__spine" aria-hidden="true"></span>
+            </figure>
+            {entry.data.pdf && (
+              <Button href={entry.data.pdf} variant="sage" class="pub-hero__dl">
+                <svg width="18" height="18" viewBox="0 0 22 22" fill="none" aria-hidden="true"><path d="M11 3v11" stroke="#204630" stroke-width="2" stroke-linecap="round"/><path d="M6.5 10 11 14.5 15.5 10" stroke="#204630" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 18.2h14" stroke="#204630" stroke-width="2" stroke-linecap="round"/></svg>
+                <span>{t('publications.download')}</span>
+              </Button>
+            )}
+          </div>
+
+          <div class="pub-hero__copy" data-reveal>
+            <p class="pill"><span class="pill__dot" aria-hidden="true"></span>{categoryLabel?.value}</p>
+            <h1 lang={title?.lang} dir={title?.dir}>{title?.value}</h1>
+            {excerpt && <p class="pub-standfirst" lang={excerpt.lang} dir={excerpt.dir}>{excerpt.value}</p>}
+
+            <dl class="fact-rail">
+              {byline && (
+                <div class="fact-rail__item">
+                  <dt>{t('publications.metaAuthor')}</dt>
+                  <dd>{byline}</dd>
+                </div>
+              )}
+              <div class="fact-rail__item">
+                <dt>{t('publications.metaPublished')}</dt>
+                <dd>{dateLabel}</dd>
+              </div>
+            </dl>
+
+            <div class="pub-share">
+              <span class="pub-share__label">{t('publications.share')}</span>
+              <div class="share-row" data-share-row>
+                <a href="#" data-share="facebook" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor" width="14" height="14"><path d="M22 12a10 10 0 1 0-11.6 9.9v-7H7.9V12h2.5V9.8c0-2.5 1.5-3.9 3.8-3.9 1.1 0 2.2.2 2.2.2v2.5h-1.3c-1.2 0-1.6.8-1.6 1.6V12h2.8l-.4 2.9h-2.4v7A10 10 0 0 0 22 12Z"/></svg></a>
+                <a href="#" data-share="x" aria-label="X"><svg viewBox="0 0 24 24" fill="currentColor" width="14" height="14"><path d="M22 5.9c-.7.3-1.5.6-2.3.7a4 4 0 0 0 1.8-2.2c-.8.5-1.6.8-2.6 1a4 4 0 0 0-6.9 3.7A11.5 11.5 0 0 1 3.7 4.6a4 4 0 0 0 1.3 5.4c-.7 0-1.3-.2-1.9-.5v.1a4 4 0 0 0 3.3 4 4 4 0 0 1-1.8.1 4 4 0 0 0 3.8 2.8A8.1 8.1 0 0 1 2 18.4a11.4 11.4 0 0 0 6.3 1.9c7.5 0 11.7-6.4 11.7-11.9v-.5c.8-.6 1.5-1.3 2-2Z"/></svg></a>
+                <a href="#" data-share="linkedin" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor" width="14" height="14"><path d="M4.98 3.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5ZM3 9.75h4v10.75H3V9.75Zm6.5 0h3.83v1.47h.06c.53-.95 1.83-1.72 3.36-1.72 3 0 3.75 1.83 3.75 4.7v6.3h-4v-5.59c0-1.33-.24-2.5-1.72-2.5-1.4 0-1.78 1.04-1.78 2.42v5.67h-3.5V9.75Z"/></svg></a>
+                <button type="button" data-share="copy" aria-label={t('publications.copyLink')}><svg viewBox="0 0 20 20" fill="none" width="14" height="14"><path d="M8.2 11.8a3 3 0 0 0 4.3 0l2.6-2.6a3 3 0 0 0-4.3-4.3l-.9.9" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><path d="M11.8 8.2a3 3 0 0 0-4.3 0l-2.6 2.6a3 3 0 0 0 4.3 4.3l.9-.9" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></button>
+              </div>
+              <span class="pub-share__note" data-share-note data-copied-label={t('publications.linkCopied')} role="status"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="pub-layout">
+      <div class="pub-layout__main">
+        <div class="pub-body" data-reveal>
+          {translatedBodyHtml ? <Fragment set:html={translatedBodyHtml} /> : <Content />}
+        </div>
+
+        <nav class="pub-neighbors">
+          {prev ? (
+            <a href={localizedPath(`/publications/${prev.id}/`, lang)} class="pub-neighbor">
+              <span class="pub-neighbor__label">{t('publications.prev')}</span>
+              <span lang={neighborTitle(prev)?.lang} dir={neighborTitle(prev)?.dir}>{neighborTitle(prev)?.value}</span>
+            </a>
+          ) : <span />}
+          {next ? (
+            <a href={localizedPath(`/publications/${next.id}/`, lang)} class="pub-neighbor pub-neighbor--end">
+              <span class="pub-neighbor__label">{t('publications.next')}</span>
+              <span lang={neighborTitle(next)?.lang} dir={neighborTitle(next)?.dir}>{neighborTitle(next)?.value}</span>
+            </a>
+          ) : <span />}
+        </nav>
       </div>
 
-      <nav class="pub-neighbors">
-        {prev ? (
-          <a href={localizedPath(`/publications/${prev.id}/`, lang)} class="pub-neighbor">
-            <span class="pub-neighbor__label">{t('publications.prev')}</span>
-            <span lang={neighborTitle(prev)?.lang} dir={neighborTitle(prev)?.dir}>{neighborTitle(prev)?.value}</span>
-          </a>
-        ) : <span />}
-        {next ? (
-          <a href={localizedPath(`/publications/${next.id}/`, lang)} class="pub-neighbor pub-neighbor--end">
-            <span class="pub-neighbor__label">{t('publications.next')}</span>
-            <span lang={neighborTitle(next)?.lang} dir={neighborTitle(next)?.dir}>{neighborTitle(next)?.value}</span>
-          </a>
-        ) : <span />}
-      </nav>
-    </Section>
+      <aside class="pub-layout__side">
+        <div class="side-card">
+          <p class="micro-label">{t('publications.details')}</p>
+          <dl class="meta-list">
+            <div class="meta-list__row">
+              <dt>{t('publications.metaCategory')}</dt>
+              <dd>{categoryLabel?.value}</dd>
+            </div>
+            <div class="meta-list__row">
+              <dt>{t('publications.metaPublished')}</dt>
+              <dd>{dateLabel}</dd>
+            </div>
+            <div class="meta-list__row">
+              <dt>{t('publications.metaLanguage')}</dt>
+              <dd>{contentLanguageLabel}</dd>
+            </div>
+            {byline && (
+              <div class="meta-list__row">
+                <dt>{t('publications.metaAuthor')}</dt>
+                <dd>{byline}</dd>
+              </div>
+            )}
+          </dl>
+        </div>
+      </aside>
+    </section>
+
+    {related.length > 0 && (
+      <Section variant="tint" title={t('publications.related')}>
+        <PublicationGrid entries={related} />
+      </Section>
+    )}
   </article>
 </BaseLayout>
 
+<script>
+  function initShareRow() {
+    document.querySelectorAll<HTMLElement>('[data-share-row]').forEach((row) => {
+      const note = row.parentElement?.querySelector<HTMLElement>('[data-share-note]');
+      row.querySelectorAll<HTMLElement>('[data-share]').forEach((el) => {
+        el.addEventListener('click', (e) => {
+          const kind = el.dataset.share;
+          const url = location.href;
+          const text = document.title;
+          if (kind === 'copy') {
+            e.preventDefault();
+            navigator.clipboard?.writeText(url).then(() => {
+              if (note) {
+                note.textContent = note.dataset.copiedLabel ?? 'Link copied';
+                setTimeout(() => { note.textContent = ''; }, 2500);
+              }
+            });
+            return;
+          }
+          e.preventDefault();
+          const intents: Record<string, string> = {
+            facebook: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`,
+            x: `https://twitter.com/intent/tweet?url=${encodeURIComponent(url)}&text=${encodeURIComponent(text)}`,
+            linkedin: `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`,
+          };
+          const target = kind ? intents[kind] : null;
+          if (target) window.open(target, '_blank', 'noopener,noreferrer,width=600,height=500');
+        });
+      });
+    });
+  }
+
+  initShareRow();
+  document.addEventListener('astro:page-load', initShareRow);
+</script>
+
 <style>
-  .pub-hero { position: relative; }
-  .pub-hero__media {
-    height: 420px; overflow: hidden; background: var(--color-surface-alt);
-    display: flex; align-items: center; justify-content: center;
+  /* ---------- hero ---------- */
+  .pub-hero { position: relative; overflow: hidden; background: var(--color-surface-inverse); padding: 40px var(--gutter) 56px; }
+  .pub-hero__glow {
+    position: absolute; top: -120px; inset-inline-start: -80px; width: 520px; height: 520px;
+    border-radius: 50%; background: radial-gradient(circle, oklch(70% 0.06 155 / .18) 0%, transparent 68%);
+    pointer-events: none;
   }
-  .pub-hero__media :global(img) { width: 100%; height: 100%; object-fit: contain; display: block; }
-  .pub-hero__inner {
-    background: var(--color-surface-inverse); padding: 32px var(--gutter) 40px;
-  }
-  .pub-hero__tag {
-    display: inline-block; font-size: 12.5px; font-weight: 700; text-transform: uppercase;
-    letter-spacing: .05em; color: var(--sage); margin-bottom: 14px;
-  }
-  .pub-hero__inner h1 { font-size: 30px; line-height: 1.35; color: oklch(98% 0.005 85); max-width: 860px; margin: 0 0 14px; }
-  .pub-hero__inner h1[dir='rtl'] { text-align: right; }
-  .pub-hero__date { font-size: 13.5px; color: var(--ink-on-navy); }
+  .pub-hero__inner { position: relative; max-width: 1180px; margin: 0 auto; }
 
-  .pub-body { max-width: 760px; margin: 0 auto; font-size: 16px; line-height: 1.8; color: var(--color-text); }
-  .pub-body :global(p) { margin: 0 0 20px; }
-  .btn-download {
-    display: inline-block; margin-top: 12px; background: var(--sage); color: var(--sage-ink);
-    padding: 13px 26px; border-radius: var(--r-sm); text-decoration: none; font-weight: 700; font-size: 14.5px;
-  }
-  .btn-download:hover { background: var(--sage-hover); color: var(--sage-ink); }
+  .crumbs { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; font-size: 13px; color: var(--ink-on-navy); margin: 0 0 36px; }
+  .crumbs a { color: oklch(78% 0.02 250); text-decoration: none; }
+  .crumbs a:hover { color: var(--sage); }
+  .crumbs span[aria-hidden] { opacity: .5; }
+  .crumbs__current { color: oklch(62% 0.02 250); }
 
-  .pub-neighbors {
-    max-width: 760px; margin: 56px auto 0; padding-top: 28px; border-top: 1px solid var(--color-border);
-    display: flex; justify-content: space-between; gap: 24px;
+  .pub-hero__grid { display: grid; grid-template-columns: 320px 1fr; gap: 48px; align-items: start; }
+
+  .pub-cover {
+    margin: 0 0 16px; position: relative; aspect-ratio: 1 / 1; border-radius: var(--r-lg);
+    overflow: hidden; background: var(--color-surface-alt);
+    box-shadow: var(--shadow-card), 0 0 0 1px oklch(34% 0.03 250);
   }
-  .pub-neighbor { text-decoration: none; color: var(--color-text-strong); max-width: 320px; }
-  .pub-neighbor--end { text-align: end; margin-inline-start: auto; }
-  .pub-neighbor:hover { color: var(--eyebrow); }
-  .pub-neighbor__label { display: block; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; color: var(--color-text-soft); margin-bottom: 6px; }
+  .pub-cover :global(img) { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+  .pub-cover__backdrop { object-fit: cover; transform: scale(1.2); filter: blur(20px) saturate(0.85); opacity: 0.5; }
+  .pub-cover__image { object-fit: contain; }
+  .pub-cover__spine {
+    position: absolute; top: 0; bottom: 0; inset-inline-start: 0; width: 14px;
+    background: linear-gradient(90deg, oklch(15% 0.03 250 / .28), transparent);
+  }
+  [dir='rtl'] .pub-cover__spine { background: linear-gradient(270deg, oklch(15% 0.03 250 / .28), transparent); }
+
+  :global(.btn.pub-hero__dl) { display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; padding: 13px 20px; font-size: 15px; }
+
+  .pill {
+    display: inline-flex; align-items: center; gap: 8px; margin: 0 0 20px;
+    font-size: 12.5px; font-weight: 700; text-transform: uppercase; letter-spacing: .05em;
+    color: var(--sage);
+  }
+  .pill__dot { width: 6px; height: 6px; border-radius: 50%; background: var(--sage); }
+
+  .pub-hero__copy h1 {
+    font-size: 38px; line-height: 1.4; font-weight: 700; margin: 0 0 24px; color: oklch(99% 0.005 85);
+  }
+  .pub-hero__copy h1[dir='rtl'] { text-align: right; }
+  .pub-hero__copy h1[dir='ltr'] { text-align: left; }
+
+  .pub-standfirst {
+    font-size: 17px; line-height: 1.8; color: oklch(84% 0.02 250); margin: 0 0 28px; max-width: 620px;
+    border-inline-start: 3px solid var(--sage); padding-inline-start: 18px;
+  }
+  .pub-standfirst[dir='rtl'] { text-align: right; }
+
+  .fact-rail {
+    margin: 0 0 24px; display: flex; flex-wrap: wrap; gap: 28px;
+    padding: 20px 0; border-block: 1px solid oklch(32% 0.04 250);
+  }
+  .fact-rail__item dt { margin: 0 0 6px; font-size: 11.5px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: oklch(66% 0.02 250); }
+  .fact-rail__item dd { margin: 0; font-size: 15px; font-weight: 600; color: oklch(95% 0.01 85); }
+
+  .pub-share { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+  .pub-share__label { font-size: 12px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: oklch(68% 0.02 250); }
+  .share-row { display: flex; gap: 10px; }
+  .share-row a, .share-row button {
+    width: 34px; height: 34px; border-radius: var(--r-sm); border: 1px solid oklch(36% 0.03 250);
+    background: transparent; display: flex; align-items: center; justify-content: center;
+    color: oklch(86% 0.01 80); text-decoration: none; cursor: pointer; padding: 0;
+  }
+  .share-row a:hover, .share-row button:hover { border-color: var(--sage); color: var(--sage); }
+  .pub-share__note { font-size: 12.5px; color: var(--sage); min-height: 16px; }
+
+  /* ---------- body + sidebar ---------- */
+  .pub-layout { max-width: 1180px; margin: 0 auto; padding: 56px var(--gutter) 40px; display: grid; grid-template-columns: 1.35fr .65fr; gap: 48px; align-items: start; }
+
+  .pub-body { font-size: 17px; line-height: 1.85; color: var(--color-text); }
+  .pub-body :global(p) { margin: 0 0 22px; }
+  .pub-body :global(p:has(> strong:only-child)) {
+    font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em;
+    color: var(--eyebrow); margin: 40px 0 16px;
+  }
+  .pub-body :global(p:has(> strong:only-child):first-child) { margin-top: 0; }
+  .pub-body :global(p:has(> em:only-child)) {
+    font-size: 14.5px; font-style: italic; color: var(--color-text-soft);
+    border-top: 1px solid var(--color-border); padding-top: 20px; margin-top: 36px;
+  }
+  .pub-body :global(ul), .pub-body :global(ol) { margin: 0 0 22px; padding-inline-start: 22px; }
+  .pub-body :global(li) { margin-bottom: 10px; }
+  .pub-body :global(li)::marker { color: var(--sage-hover); }
+  .pub-body :global(strong) { color: var(--color-text-strong); }
+
+  .pub-neighbors { margin: 48px 0 0; display: flex; gap: 20px; }
+  .pub-neighbor {
+    flex: 1; text-decoration: none; color: inherit; min-width: 0;
+    border: 1px solid var(--color-border); border-radius: var(--r-md); padding: 18px 20px;
+    transition: border-color .18s ease, transform .18s ease;
+  }
+  .pub-neighbor:hover { border-color: var(--sage); color: inherit; transform: translateY(-3px); }
+  .pub-neighbor--end { text-align: end; }
+  .pub-neighbor__label { display: block; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; color: var(--color-text-soft); margin-bottom: 8px; }
+  .pub-neighbor span:last-child {
+    display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+    font-size: 14.5px; font-weight: 600; color: var(--color-text-strong); line-height: 1.5;
+  }
+
+  .pub-layout__side { position: sticky; top: 100px; }
+  .side-card { background: var(--color-surface-alt); border: 1px solid var(--color-border); border-radius: var(--r-lg); padding: 26px; }
+  .micro-label { font-size: 11.5px; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; color: var(--eyebrow); margin: 0 0 16px; }
+  .meta-list { margin: 0; display: flex; flex-direction: column; gap: 14px; }
+  .meta-list__row { display: flex; justify-content: space-between; gap: 14px; font-size: 14px; padding-bottom: 14px; border-bottom: 1px solid var(--color-border); }
+  .meta-list__row:last-child { border-bottom: 0; padding-bottom: 0; }
+  .meta-list dt { color: var(--color-text-soft); flex-shrink: 0; margin: 0; }
+  .meta-list dd { margin: 0; font-weight: 600; color: var(--color-text-strong); text-align: end; }
+
+  @media (max-width: 1100px) {
+    .pub-hero__grid { grid-template-columns: 260px 1fr; gap: 36px; }
+    .pub-hero__copy h1 { font-size: 32px; }
+    .pub-layout { grid-template-columns: 1fr; }
+    .pub-layout__side { position: static; }
+  }
 
   @media (max-width: 860px) {
-    .pub-hero__media { height: 260px; }
-    .pub-hero__inner h1 { font-size: 24px; }
+    .pub-hero__grid { grid-template-columns: 1fr; gap: 28px; }
+    .pub-hero__cover-col { max-width: 340px; margin-inline: auto; }
+    .pub-hero__copy h1 { font-size: 27px; }
+    .pub-layout { padding-top: 40px; }
+  }
+
+  @media (max-width: 560px) {
+    .pub-hero { padding: 20px var(--gutter) 36px; }
+    .crumbs { margin-bottom: 20px; font-size: 11.5px; gap: 7px; }
+    .pub-hero__copy h1 { font-size: 24px; line-height: 1.5; }
+    .pub-standfirst { font-size: 15px; padding-inline-start: 14px; }
+    .fact-rail { gap: 16px; padding: 16px 0; }
+    .pub-neighbors { flex-direction: column; }
+    .pub-neighbor--end { text-align: start; }
   }
 </style>

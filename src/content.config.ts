@@ -31,6 +31,12 @@ const publications = defineCollection({
         coverImage: image(),
         pdf: z.string().optional(),
         excerpt: bilingual().optional(),
+        // AI-translated English body for a publication whose Markdown body
+        // (the default/native content) is Arabic — same lightweight bold
+        // and italic paragraph conventions as the native body (see the
+        // pub-body styles in [slug].astro, which key off those). Absent
+        // for the one publication whose native body is already English.
+        bodyEn: z.string().optional(),
         order: z.number().optional(),
         featured: z.boolean().default(false),
         relatedService: z.enum(serviceSlugs).optional(),
