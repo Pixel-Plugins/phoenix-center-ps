@@ -1,8 +1,49 @@
 ---
 title:
+  en: 'Israel and Its Palestinian Citizens After October 7'
   ar: 'إسرائيل ومواطنيها الفلسطينيين بعد السابع من أكتوبر'
 category: case-assessment
 date: 2024-05-28
 coverImage: ../../assets/publications/real/israel-and-its-palestinian-citizens-after-october-7.jpg
 pdf: http://phoenix-center.ps/wp-content/uploads/2024/05/إسرائيل-ومواطنيها-الفلسطينيين-بعد-السابع-مع-أكتوبر-02.pdf
+bodyEn: |
+  **"Security Constriction and Obscured Citizenship"**
+
+  Introduction:
+
+  There is another chapter in the devastating war that Israel is waging against the Palestinians, from the river to the sea — that is, another facet that has long suffered from obscurity and marginalization. We mean the exposure of Palestinian Arabs, citizens of the State of Israel, to an unprecedented state of persecution and repression carried out by "their state" in the context of this war. This is an open call to pay attention to this side of the conflict, and to work internationally, regionally, Palestinian-wise, and internally — that is, within Israel — to stop these persecutions and to respect the legal status (even if diminished) of Arab citizens, despite the attempt by the nationalist and religious right in Israel to marginalize or undermine it, as happened with the passage of the Nation-State Basic Law (2018).
+
+  Palestinian Arabs, citizens of Israel, constitute about 20% of Israel's overall citizens, and they obtained citizenship after the declaration of the establishment of Israel in 1948 — the year that saw a wide-ranging expulsion and ethnic cleansing against the majority of Palestinians (the "Nakba"), carried out by Jewish forces before the declaration of the state, and continued by the Israeli security establishment after its establishment. This is how the Palestinian refugee condition in neighboring Arab countries came about, while the West Bank remained under Jordanian rule and the Gaza Strip under Egyptian rule until the June 1967 war, when Israel occupied these areas.
+
+  Most Palestinians in Israel have held onto their citizenship and their Palestinian-Arab identity, and this adherence has formed an important axis in their aspirations and in their political and social struggles, and has in turn contributed to strengthening their steadfastness in their homeland, and to achieving unique accomplishments, such that they gradually became a community possessing educational, social, and economic attributes and advantages that relatively surpass any other Arab group in the world — we can say that, relatively speaking, and compared to their numbers, they are the strongest Arab and Palestinian civil community in the world. However, these important achievements have not enabled them to obtain equal, participatory citizenship with Jews. The Jewish state, in its essence, legislation, and policies, has persistently placed them in the category of second-class "citizens," and in many cases has made their status closer to apartheid than to a normal democratic state — even by the Israelis' own expressions, as some of them consider their state to be a state of racial segregation. In general, Netanyahu's governments since 2009 have entrenched the matter of Jewish "ethnic supremacy" through a series of laws and measures, most importantly of all the passage of the Jewish Nation-State Law, which negates the partnership of Arab citizens and makes the state the exclusive property of Jews, whether in Israel or around the world. This is in addition to executive measures affirming that the state is not neutral between its citizens, but rather applies a double standard and works to position Arabs in a secondary category and status that facilitates pouncing on them, and on the remnants of their battered and obscured citizenship.
+
+  Perhaps the most important evidence for our claim regarding the secondary and shaky status of Palestinian Arab citizens in Israel is the long list of Israeli violations, official and popular, that accompanied the declaration of a state of war in Israel following the attack by Hamas and Islamic Jihad on October 7, 2023, on the Gaza envelope. What further aggravated the situation of the Palestinians of '48 after the start of the Israeli military operations in response to the Hamas attack and its aftermath, is the horror of the Israeli assaults on civilians in Gaza and the atrocity of the crimes against humanity, which have pained the conscience of every person in the world — let alone when it comes to members of the same people, who are prevented even from expressing a state of human sympathy or understanding for the human suffering of this part of our people, namely the Palestinians of Gaza.
+
+  After declaring a state of war, official and popular Israel, in its majority, began dealing with Palestinian Arab citizens as a "fifth column" of enemies, and calls emerged for their deportation and for pouncing on them, collectively and individually, as being "disloyal to the state" and to its agenda against the Palestinian people and its rights, and their rights, in their homeland — including calls from official bodies, Knesset members, and Israeli ministers. Within a month of the declaration of war, Israel's internal security apparatus began a clear tracking of every word or attempt at expression by Arab citizens that could be understood as an expression of "understanding" or justification for what Hamas did, or a defense of it being a Palestinian national movement and not "ISIS," as Israeli propaganda claims, or any position linking the "attack on the Gaza envelope" to the suffering of the Palestinians in their large prison in Gaza before October 7. A large campaign of unprecedented persecution and repression against Palestinian citizens and their activists.
+
+  *Prepared by:*
+
+  *Prof. Dr. As'ad Ghanem*
+
+  *Mr. Basel Khalayleh*
 ---
+
+**“التضيق الأمني والمواطنة المحجوبة”**
+
+مقدمة:
+
+هنالك فصل آخر من الحرب المدمّرة الّتي تشنها إسرائيل على الفلسطينيين، من النهر إلى البحر، أي الى وجه آخر طالما عانى من التعتيم والتهميش. ونعني تعرُّض العرب الفلسطينيين مواطني دولة إسرائيل إلى حالة غير مسبوقةٍ من الملاحقة والتنكيل، والّذي تقوم به “دولتهم” في سياق تلك الحرب. إنّها دعوة مفتوحة للانتباه إلى هذا الجانب من الصراع والعمل دوليًا وإقليميًا وفلسطينيًا وداخليًا – أي إسرائيليًا – من أجل إيقاف هذه الملاحقات واحترام المكانة القانونيّة (حتى وإن كانت منقوصة) للمواطنين العرب، وذلك رغم محاولة اليمين القوميّ والدينيّ في إسرائيل تهميشها او تقويضها كما حصل في إقرار قانون أساس القوميّة (2018).
+
+يشكّل العرب الفلسطينيون، مواطنو إسرائيل، نحو 20% من عموم المواطنين في إسرائيل، وقد حصلوا على المواطنة بعد إعلان قيام إسرائيل عام 1948، العام الّذي تخلّل حالة طرد وتطهيرٍ عرقيّ واسعيْن ضد غالبية الفلسطينيين (“النكبة”)، والّذي قامت بهما القوات اليهوديّة قبل إعلان الدّولة، واستمرّت بها المؤسسات الأمنيّة الإسرائيليّة بعد قيامها، وبذلك تشكلت حالة اللجوء الفلسطينيّ في دول عربيّة مجاورة، بينما بقيت الضفة الغربية تحت الحكم الأردني وقطاع غزة تحت الحكم المصريّ حتى حرب يونيو 1967، عندما قامت إسرائيل باحتلال هذه المناطق.
+
+تمسَّكَ مُعظمُ الفلسطينيين في إسرائيل بمواطنتهم، وبهويتهم الفلسطينيّة-العربيّة، وشكّل هذا التّمسُّك محورًا مهمًّا في تطلعاتِهم وفي نضالاتِهم السياسيّة والاجتماعيّة، وساهمَ ذلك بدوره في تعزيز صمودهم في وطنهم، وفي تحقيق إنجازات فريدة، بحيث تحوّلوا تدريجيًا إلى جماعة تمتلك مقوّمات وميّزات تعليميّة واجتماعيّة واقتصاديّة، تفوق نسبيًا أيَّ مجموعةٍ عربيةٍ أخرى في العالم، ونستطيع القول بأنهم، نسبيًا، ومقارنةً بعددهم هم أقوى مجموعة عربيّة وفلسطينيّة مدنيّة في العالم. إلّا أنّ هذه الإنجازات الهامّة لم تمكّنهم من الحصول على مواطنة تشاركيّة متساويّة مع اليهود. فالدّولة اليهوديّة في جوهرها وتشريعاتها وسياساتها دأبت على وضعهم في خانة “المواطنين” من الدرجة الثانية، وفي كثير من الحالات جعلت من وضعهم أقرب إلى الأبارتهايد منه إلى الدّولة الدّيمقراطيّة الطّبيعيّة، وذلك حتّى وفق تعبيرات الإسرائيليين أنفسهم، فمنهم من يعتبرون دولتهم دولة فصل عنصريّ. وعمومًا، قد قامت حكومات نتنياهو منذ العام 2009 بتثبيت مسألة “التفوّق العرقيّ” لليهود من خلال سلسلة قوانين وإجراءات، أهمّها على الإطلاق كان إقرار قانون الدّولة القوميّة اليهوديّة، والّذي ينفي شراكة المواطنين العرب ويجعل الدّولة ملكًا حصريًا لليهود، سواء كانوا في إسرائيل أم في أنحاء العالم. هذا إضافةً الى إجراءات تنفيذيّة تؤكّد على أنّ الدّولة ليست محايدةً بين مواطنيها، بل تقوم بالكيل بمكيالين والعمل على موضعة العرب في خانة وفي مكانة ثانوية تُسهّل الانقضاض عليهم، وعلى بقايا مواطنتهم المضروبة والمحجوبة.
+
+لعلّ أهمّ ما يدل على ادعائنا بشأن المكانة الثانوية والمهزوزة لمكانة المواطنين العرب الفلسطينيين في إسرائيل، هي سلسلة وقائمة طويلة من الانتهاكات الإسرائيليّة، الرسميّة والشعبيّة، الّتي ترافقت مع إعلان حالة الحرب في إسرائيل في اعقاب هجوم حماس والجهاد الإسلاميّ في السّابع من أكتوبر 2023 على غلاف غزّة. وما زاد من تأزم وضع فلسطينيي 48 بعد بدء العمليات العسكريّة الإسرائيليّة ردًا على هجوم حماس ونتائجه، هو هول الاعتداءات الإسرائيليّة على المدنيين في غزّة وفظاعة الجرائم ضد الإنسانيّة، الّتي أوجعت ضمير كل إنسان في العالم، فما بالك عندما يصل الأمر بأبناء نفس الشعب، الممنوعين حتى من إبداء حالة تعاطف إنسانيّ أو تفهّم للمعاناة الإنسانيّة لهذا الجزء من شعبنا، أي فلسطينيي غزّة.
+
+بعد إعلانها حالة الحرب قامت إسرائيل الرسميّة والشعبيّة في غالبيتها، بالتعامل مع المواطنين العرب الفلسطينيين على أنّهم “طابور خامس” من الأعداء، وبرزت دعواتٌ لترحيلهم والانقضاض عليهم جماعيًا وفرديًا بصفتِهم “غير موالين للدّولة” ولأجندتها ضد الشعب الفلسطينيّ وحقوقه، وحقوقهم، في وطنهم، بما في ذلك من جهات رسميّة وأعضاء كنيست ووزراء إسرائيليين. وخلال شهر من إعلان الحرب قامت أجهزةُ الامن الداخليّة في إسرائيل بتعقب واضح لكلِ كلمةٍ او محاولة تعبير من قبل مواطنين عرب، يمكن ان يفهم منها أنّها تعبير عن “تفهّم” أو تبرير لما فعلته حماس، أو دفاعٌ عن كونها حركة وطنيّة فلسطينيّة، وليست “داعش”، كما ترمي لذلك الدعاية الإسرائيليّة، او أي موقف يربط بين “الهجوم على غلاف غزة” وبين معاناة الفلسطينيين في سجنهم الكبير في غزّة قبل السّابع من أكتوبر. حملة كبيرة من الملاحقة والتنكيل غير المسبوق بحق المواطنين الفلسطينيين ونشطائهم.
+
+*اعداد:*
+
+* أ.د أسعد غانم*
+
+*أ. باسل خلايلة*

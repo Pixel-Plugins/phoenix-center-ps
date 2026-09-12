@@ -13,19 +13,21 @@ const t = useTranslations(lang);
     <img class="brand__mark" src={brand.logoDark.src} alt={t('brand.name')} />
   </a>
 
-  <button class="nav-toggle" type="button" aria-label="Menu" aria-expanded="false" data-nav-toggle>
-    <span></span><span></span><span></span>
-  </button>
-
   <nav class="site-nav" data-site-nav>
     {navLinks.map((link) => (
       <a href={localizedPath(link.href, lang)}>{t(link.labelKey)}</a>
     ))}
   </nav>
 
-  <div class="header-actions">
-    <LanguageSwitcher />
-    <a class="btn btn--gold" href={localizedPath('/contact/', lang)}>{t('header.cta')}</a>
+  <div class="header-right">
+    <div class="header-actions">
+      <LanguageSwitcher />
+      <a class="btn btn--gold" href={localizedPath('/contact/', lang)}>{t('header.cta')}</a>
+    </div>
+
+    <button class="nav-toggle" type="button" aria-label="Menu" aria-expanded="false" data-nav-toggle>
+      <span></span><span></span><span></span>
+    </button>
   </div>
 </header>
 
@@ -50,6 +52,7 @@ const t = useTranslations(lang);
   .site-nav a { text-decoration: none; font-size: 15px; font-weight: 500; color: oklch(30% 0.02 75); }
   .site-nav a:hover { color: var(--eyebrow); }
 
+  .header-right { display: flex; align-items: center; gap: 14px; }
   .header-actions { display: flex; align-items: center; gap: 14px; }
 
   .btn {

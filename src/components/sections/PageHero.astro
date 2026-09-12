@@ -3,15 +3,20 @@ interface Props {
   eyebrow?: string;
   title: string;
   subtitle?: string;
+  /** Only needed when the title's own language can differ from the page's
+   *  (e.g. an Arabic publication title shown on the English site) — see
+   *  PublicationCard for the same per-node lang/dir pattern. */
+  titleLang?: string;
+  titleDir?: 'ltr' | 'rtl';
 }
 
-const { eyebrow, title, subtitle } = Astro.props;
+const { eyebrow, title, subtitle, titleLang, titleDir } = Astro.props;
 ---
 
 <section class="page-hero">
   <div class="page-hero__inner">
     {eyebrow && <p class="page-hero__eyebrow">{eyebrow}</p>}
-    <h1>{title}</h1>
+    <h1 lang={titleLang} dir={titleDir}>{title}</h1>
     {subtitle && <p class="page-hero__subtitle">{subtitle}</p>}
   </div>
 </section>
@@ -30,6 +35,8 @@ const { eyebrow, title, subtitle } = Astro.props;
     font-size: 42px; line-height: 1.15; font-weight: 700;
     color: oklch(99% 0.005 85); margin: 0 0 18px;
   }
+  .page-hero h1[dir='rtl'] { text-align: right; }
+  .page-hero h1[dir='ltr'] { text-align: left; }
   .page-hero__subtitle {
     font-size: 17px; line-height: 1.6; color: var(--ink-on-navy); margin: 0; max-width: 620px;
   }
