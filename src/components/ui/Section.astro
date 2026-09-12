@@ -43,9 +43,14 @@ const { id, eyebrow, title, subtitle, variant = 'default', headStyle = 'default'
     margin-bottom: 44px;
   }
   .section-head h2 { font-size: 34px; font-weight: 700; color: var(--color-text-strong); }
-  .section-head--stack { display: block; max-width: 680px; margin-bottom: 48px; }
+  /* Compound with .section-head to match the specificity of the
+     `.section--tint > *` / `.section--navy > *` rules above — Astro's
+     scoped-CSS attribute selector on both sides of that child combinator
+     gives it more specificity than a single class would, so a single-class
+     override here would silently lose regardless of source order. */
+  .section-head.section-head--stack { display: block; max-width: 680px; margin-inline: 0; margin-block: 0 48px; }
   .section-head--stack h2 { font-size: 36px; margin-bottom: 16px; }
-  .section-head--center { display: block; text-align: center; max-width: 640px; margin: 0 auto 48px; }
+  .section-head.section-head--center { display: block; text-align: center; max-width: 640px; margin-inline: auto; margin-block: 0 48px; }
   .section--navy .section-head h2 { color: oklch(97% 0.005 85); }
 
   .eyebrow {
