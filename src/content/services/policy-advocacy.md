@@ -47,7 +47,5 @@ processSteps:
     description:
       en: Advocacy relationships typically continue across successive policy cycles.
       ar: تستمر علاقات المناصرة عادةً عبر دورات سياسية متعاقبة.
-examplePublicationSlugs:
-  - future-of-gaza-ceasefire
-  - gaza-reconstruction-competition
+examplePublicationSlugs: []
 ---

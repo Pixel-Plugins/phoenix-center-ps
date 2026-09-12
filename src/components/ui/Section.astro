@@ -15,7 +15,7 @@ const { id, eyebrow, title, subtitle, variant = 'default', headStyle = 'default'
 <section id={id} class:list={['section', variant !== 'default' && `section--${variant}`]} data-reveal-group>
   {(eyebrow || title || subtitle) && (
     <header class:list={['section-head', headStyle !== 'default' && `section-head--${headStyle}`]}>
-      <div>
+      <div class="section-head__text">
         {eyebrow && <p class:list={['eyebrow', eyebrowVariant !== 'default' && `eyebrow--${eyebrowVariant}`]}>{eyebrow}</p>}
         {title && <h2>{title}</h2>}
         {subtitle && <p class="section-sub">{subtitle}</p>}
@@ -30,9 +30,17 @@ const { id, eyebrow, title, subtitle, variant = 'default', headStyle = 'default'
   .section { padding: 96px var(--gutter); max-width: var(--max); margin: 0 auto; }
   .section--tight { padding-top: 40px; }
   .section--tint { background: var(--color-surface-alt); max-width: none; }
-  .section--tint > * { max-width: var(--max); margin: 0 auto; }
   .section--navy { background: var(--color-surface-inverse); max-width: none; }
-  .section--navy > * { max-width: 1200px; margin: 0 auto; }
+  /* :global() on the child side is required here: this rule needs to
+     center BOTH the header (rendered by this component, carries its scope
+     attribute) AND whatever's passed via the default <slot/> (rendered by
+     the calling page, carries a DIFFERENT scope attribute). Without
+     :global, Astro's scoping silently restricts `>  *` to only ever match
+     this component's own header, leaving slotted content unconstrained —
+     which showed up as titles/cards inside tint or navy sections not
+     lining up with each other. */
+  .section--tint > :global(*) { max-width: var(--max); margin: 0 auto; }
+  .section--navy > :global(*) { max-width: 1200px; margin: 0 auto; }
 
   .section-head {
     display: flex;
@@ -43,13 +51,20 @@ const { id, eyebrow, title, subtitle, variant = 'default', headStyle = 'default'
     margin-bottom: 44px;
   }
   .section-head h2 { font-size: 34px; font-weight: 700; color: var(--color-text-strong); }
-  /* Compound with .section-head to match the specificity of the
-     `.section--tint > *` / `.section--navy > *` rules above — Astro's
-     scoped-CSS attribute selector on both sides of that child combinator
-     gives it more specificity than a single class would, so a single-class
-     override here would silently lose regardless of source order. */
-  .section-head.section-head--stack { display: block; max-width: 680px; margin-inline: 0; margin-block: 0 48px; }
+  /* Deliberately NOT constraining max-width/margin on the outer .section-head
+     here — it needs to keep whatever positioning `.section--tint > :global(*)`
+     / `.section--navy > :global(*)` (or the base .section, for default variant)
+     already gave it, so its LEFT EDGE matches the content grid below it. The
+     narrower "reading width" for headStyle="stack" is applied to the inner
+     .section-head__text div instead, so it's inset within that already-correct
+     position rather than being its own independently-positioned box. */
+  .section-head--stack { display: block; margin-bottom: 48px; }
+  .section-head--stack .section-head__text { max-width: 680px; }
   .section-head--stack h2 { font-size: 36px; margin-bottom: 16px; }
+  /* --center is intentionally its own centered block (e.g. a testimonials
+     intro), not meant to line up with a grid's left edge, so it keeps its
+     own independent max-width + centering rather than following the pattern
+     above. */
   .section-head.section-head--center { display: block; text-align: center; max-width: 640px; margin-inline: auto; margin-block: 0 48px; }
   .section--navy .section-head h2 { color: oklch(97% 0.005 85); }
 

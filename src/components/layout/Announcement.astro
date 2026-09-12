@@ -1,23 +1,28 @@
 ---
-import { getLangFromUrl, pickLocalized, localizedPath } from '../../i18n/utils';
-import { announcement } from '../../data/homepage';
+import { getCollection } from 'astro:content';
+import { getLangFromUrl, pickLocalized, localizedPath, useTranslations } from '../../i18n/utils';
 
 const lang = getLangFromUrl(Astro.url);
-const text = pickLocalized(announcement.text, lang);
-const href = announcement.href ? localizedPath(announcement.href, lang) : undefined;
+const t = useTranslations(lang);
+
+// Always the actual most recent publication — no manual upkeep. If a new
+// publication is added, this updates itself on the next build.
+const [latest] = (await getCollection('publications')).sort(
+  (a, b) => b.data.date.getTime() - a.data.date.getTime(),
+);
+const title = latest ? pickLocalized(latest.data.title, lang) : null;
 ---
 
-{text && (
-  href ? (
-    <a class="announce announce--link" href={href}>{text.value}</a>
-  ) : (
-    <div class="announce">{text.value}</div>
-  )
+{title && (
+  <a class="announce" href={localizedPath(`/publications/${latest.id}/`, lang)}>
+    <span class="announce__prefix">{t('announcement.new')}</span>
+    <span class="announce__title" lang={title.lang} dir={title.dir}>{title.value}</span>
+  </a>
 )}
 
 <style>
   .announce {
-    display: block;
+    display: flex; align-items: baseline; justify-content: center; gap: 8px;
     background: var(--color-surface-inverse);
     color: oklch(90% 0.02 155);
     font-size: 13px;
@@ -25,7 +30,17 @@ const href = announcement.href ? localizedPath(announcement.href, lang) : undefi
     text-align: center;
     padding: 9px 16px;
     letter-spacing: .01em;
+    text-decoration: none;
+    overflow: hidden;
   }
-  .announce--link { text-decoration: none; }
-  .announce--link:hover { color: var(--sage); }
+  .announce:hover { color: var(--sage); }
+  .announce__prefix { flex-shrink: 0; color: var(--sage); }
+  .announce__title {
+    overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+    max-width: 640px;
+  }
+
+  @media (max-width: 560px) {
+    .announce__title { max-width: 220px; }
+  }
 </style>

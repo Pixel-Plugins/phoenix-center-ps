@@ -1,16 +1,25 @@
 ---
-import { getLangFromUrl, pickLocalized } from '../../i18n/utils';
+import { getCollection } from 'astro:content';
+import { getLangFromUrl, pickLocalized, localizedPath, useTranslations } from '../../i18n/utils';
 import { pillars } from '../../data/homepage';
 import Section from '../ui/Section.astro';
 
 const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 const [feature, ...rest] = pillars.items;
+
+// Real, not invented: counted live from the actual publications collection
+// (category: research-field-studies) so it never drifts out of date as
+// more publications get added.
+const researchFieldStudiesCount = (await getCollection('publications')).filter(
+  (p) => p.data.category === 'research-field-studies',
+).length;
 
 const ICONS: Record<string, string> = {
   search:
     '<svg width="28" height="28" viewBox="0 0 26 26" fill="none"><circle cx="10" cy="10" r="7" stroke="#204630" stroke-width="2"/><line x1="18" y1="18" x2="24" y2="24" stroke="#204630" stroke-width="2" stroke-linecap="round"/></svg>',
-  bars:
-    '<svg width="24" height="24" viewBox="0 0 26 26" fill="none"><rect x="6" y="14" width="3" height="7" fill="oklch(35% 0.08 155)"/><rect x="11.5" y="9" width="3" height="12" fill="oklch(35% 0.08 155)"/><rect x="17" y="4" width="3" height="17" fill="oklch(35% 0.08 155)"/></svg>',
+  document:
+    '<svg width="24" height="24" viewBox="0 0 26 26" fill="none"><rect x="5" y="3" width="16" height="20" rx="2" stroke="oklch(35% 0.08 155)" stroke-width="2"/><line x1="9" y1="9" x2="17" y2="9" stroke="oklch(35% 0.08 155)" stroke-width="2" stroke-linecap="round"/><line x1="9" y1="13" x2="17" y2="13" stroke="oklch(35% 0.08 155)" stroke-width="2" stroke-linecap="round"/><line x1="9" y1="17" x2="14" y2="17" stroke="oklch(35% 0.08 155)" stroke-width="2" stroke-linecap="round"/></svg>',
   people:
     '<svg width="24" height="24" viewBox="0 0 26 26" fill="none"><circle cx="10" cy="9" r="4" stroke="oklch(35% 0.08 155)" stroke-width="2"/><path d="M3 22c0-5 4-8 7-8s7 3 7 8" stroke="oklch(35% 0.08 155)" stroke-width="2" fill="none"/></svg>',
 };
@@ -34,6 +43,11 @@ const ICONS: Record<string, string> = {
           {pickLocalized(feature.tags, lang)?.value.map((tag) => <span>{tag}</span>)}
         </div>
       )}
+      <div class="pillar__stat">
+        <strong>{researchFieldStudiesCount}+</strong>
+        <span>{t('pillars.publishedStudies')}</span>
+      </div>
+      <a class="pillar__link" href={localizedPath(feature.href, lang)}>{t('pillars.learnMore')}</a>
     </article>
 
     <div class="pillar__stack" data-reveal-stagger>
@@ -42,6 +56,7 @@ const ICONS: Record<string, string> = {
           <div class="pillar__icon pillar__icon--small" set:html={ICONS[p.icon]} />
           <h3>{pickLocalized(p.title, lang)?.value}</h3>
           <p>{pickLocalized(p.desc, lang)?.value}</p>
+          <a class="pillar__link" href={localizedPath(p.href, lang)}>{t('pillars.learnMore')}</a>
         </article>
       ))}
     </div>
@@ -52,21 +67,31 @@ const ICONS: Record<string, string> = {
   .services__grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 28px; }
   .pillar__stack { display: flex; flex-direction: column; gap: 28px; }
 
-  .pillar--feature {
-    background: var(--color-surface-inverse); border-radius: var(--r-xl); padding: 44px;
-    display: flex; flex-direction: column; gap: 20px; color: oklch(96% 0.01 85);
-  }
-  .pillar--feature h3 { font-size: 26px; font-weight: 700; }
-  .pillar--feature p { font-size: 16px; line-height: 1.65; color: var(--ink-on-navy); margin: 0; max-width: 460px; }
+  /* Feature card: same light card as the other two (kept via the shared
+     .pillar rule below) — just bigger padding/type and a solid sage icon
+     to read as "primary", instead of the separate navy treatment this
+     started as. Compound selector still matters for the padding override:
+     see the media-query note further down. */
+  .pillar.pillar--feature { padding: 44px; gap: 20px; }
+  .pillar.pillar--feature h3 { font-size: 26px; }
+  .pillar--feature p { max-width: 460px; }
   .pillar__icon {
     width: 56px; height: 56px; border-radius: var(--r-md); background: var(--sage);
     display: flex; align-items: center; justify-content: center; flex-shrink: 0;
   }
   .pillar__tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
   .pillar__tags span {
-    font-size: 12px; font-weight: 600; background: var(--navy-chip);
-    padding: 6px 13px; border-radius: 999px; color: oklch(92% 0.01 85);
+    font-size: 14px; font-weight: 600; background: var(--icon-tint);
+    padding: 8px 16px; border-radius: 999px; color: var(--sage-ink);
   }
+  .pillar__stat {
+    display: flex; align-items: baseline; gap: 10px; margin-top: 12px;
+    padding-top: 20px; border-top: 1px solid oklch(91% 0.01 80);
+  }
+  .pillar__stat strong {
+    font-family: var(--font-head); font-size: 32px; font-weight: 700; color: var(--sage-ink);
+  }
+  .pillar__stat span { font-size: 14px; color: var(--color-text-muted); }
 
   .pillar {
     background: var(--color-surface-alt); border: 1px solid oklch(91% 0.01 80);
@@ -77,10 +102,22 @@ const ICONS: Record<string, string> = {
   .pillar p { font-size: 14.5px; line-height: 1.6; color: var(--color-text-muted); margin: 0; }
   .pillar__icon--small { width: 46px; height: 46px; border-radius: 12px; background: var(--icon-tint); }
 
+  /* Anchored to the bottom of the flex column via margin-top: auto — this
+     is what fills the feature card's leftover height with a real link
+     instead of empty space, since the grid stretches it to match the
+     taller 2-card stack beside it. */
+  .pillar__link {
+    margin-top: auto; padding-top: 4px; align-self: flex-start;
+    display: inline-flex; align-items: center;
+    font-size: 14px; font-weight: 700; text-decoration: none;
+    color: var(--eyebrow); transition: color .15s ease, transform .15s ease;
+  }
+  .pillar__link:hover { color: var(--sage-ink); transform: translateY(-1px); }
+
   @media (max-width: 1100px) {
     .services__grid { grid-template-columns: 1fr; }
   }
   @media (max-width: 860px) {
-    .pillar--feature { padding: 32px; }
+    .pillar.pillar--feature { padding: 32px; }
   }
 </style>

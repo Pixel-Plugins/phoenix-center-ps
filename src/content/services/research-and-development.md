@@ -47,7 +47,5 @@ processSteps:
     description:
       en: Most engagements continue into follow-up studies and ongoing monitoring cycles.
       ar: تستمر معظم المشاركات إلى دراسات متابعة ودورات رصد مستمرة.
-examplePublicationSlugs:
-  - demographic-conflict-palestine
-  - creeping-annexation-west-bank
+examplePublicationSlugs: []
 ---

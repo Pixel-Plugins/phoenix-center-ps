@@ -2,17 +2,6 @@
    carried over from the Claude Design mockup — confirm with the client
    before launch, do not present as real. */
 
-export const announcement = {
-  verified: false,
-  text: {
-    en: 'New: 2026 State of Gaza Field Research Series — now available in Publications',
-    ar: 'جديد: سلسلة الأبحاث الميدانية لحالة غزة 2026 — متوفرة الآن في الإصدارات',
-  },
-  /** Set this to a real publication/category path (e.g. '/publications/some-slug/')
-   *  once this references something real — the bar renders as a link automatically. */
-  href: undefined as string | undefined,
-};
-
 export const hero = {
   eyebrow: {
     en: 'Independent Palestinian Non-Profit Institution for Research & Field Studies',
@@ -49,9 +38,13 @@ export const pillars = {
     en: 'From policy papers to on-ground surveys and institutional training, we turn evidence into impact.',
     ar: 'من أوراق السياسات إلى المسوحات الميدانية والتدريب المؤسسي، نحوّل الأدلة إلى أثر.',
   },
+  /* These three map 1:1 to the site's actual 3 services
+     (src/content/services/*.md) — kept in sync deliberately so the
+     homepage never describes a capability that isn't a real service page. */
   items: [
     {
       icon: 'search',
+      href: '/services/research-and-development/',
       title: { en: 'Research & Field Studies', ar: 'الأبحاث والدراسات الميدانية' },
       desc: {
         en: 'Rigorous policy papers, case assessments, and field research grounded in real community data — our core discipline for 14+ years.',
@@ -63,15 +56,17 @@ export const pillars = {
       },
     },
     {
-      icon: 'bars',
-      title: { en: 'Data Collection Services', ar: 'خدمات جمع البيانات' },
+      icon: 'document',
+      href: '/services/policy-advocacy/',
+      title: { en: 'Policy Advocacy', ar: 'مناصرة السياسات' },
       desc: {
-        en: 'On-ground enumerator teams delivering quantitative and qualitative data for local and international partners.',
-        ar: 'فرق ميدانية توفر بيانات كمية ونوعية للشركاء المحليين والدوليين.',
+        en: 'Evidence translated into policy briefs that decision-makers actually use.',
+        ar: 'أدلة تُترجم إلى أوراق سياسات يستخدمها صناع القرار فعلياً.',
       },
     },
     {
       icon: 'people',
+      href: '/services/training-and-capacity-building/',
       title: { en: 'Training & Capacity Building', ar: 'التدريب وبناء القدرات' },
       desc: {
         en: 'Tailored development programs delivered with international organizations to grow local institutional capacity.',
