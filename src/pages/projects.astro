@@ -1,40 +1,151 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import PageHero from '../components/sections/PageHero.astro';
-import Section from '../components/ui/Section.astro';
+import Button from '../components/ui/Button.astro';
 import ProjectCard from '../components/ui/ProjectCard.astro';
-import { getLangFromUrl } from '../i18n/utils';
+import { getLangFromUrl, localizedPath } from '../i18n/utils';
 
 const lang = getLangFromUrl(Astro.url);
 const projects = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order);
 
+const partnerCount = new Set(projects.filter((p) => p.data.logo).map((p) => p.data.partnerOrFunder.en)).size;
+
 const copy = {
   en: {
     title: 'Projects',
+    heroTitle: 'Projects Delivered With Partners',
     eyebrow: 'Our Work',
-    subtitle: 'Partnership-driven initiatives delivering research, civic engagement, and field data across Gaza and the West Bank.',
+    lede: 'Partnership-driven research collaborations, donor-funded capacity building, and field studies delivered across Gaza and the West Bank.',
+    statProjects: 'Projects delivered',
+    statPartners: 'Partner organizations',
+    ctaEyebrow: 'Commission a project',
+    ctaTitle: 'Need a research partner with a team already on the ground?',
+    ctaBody: 'Phoenix runs quantitative and qualitative data collection, monitoring and evaluation, and training programs for organizations and institutions working in Palestine.',
+    ctaPrimary: 'Start a conversation',
+    ctaSecondary: 'View our services',
   },
   ar: {
     title: 'المشاريع',
+    heroTitle: 'مشاريع منفَّذة بالشراكة',
     eyebrow: 'أعمالنا',
-    subtitle: 'مبادرات قائمة على الشراكة تقدم الأبحاث والمشاركة المدنية والبيانات الميدانية في غزة والضفة الغربية.',
+    lede: 'شراكات بحثية، وبرامج بناء قدرات بتمويل من جهات مانحة، ودراسات ميدانية منفَّذة في غزة والضفة الغربية.',
+    statProjects: 'مشاريع منفَّذة',
+    statPartners: 'مؤسسات شريكة',
+    ctaEyebrow: 'اطلب مشروعاً',
+    ctaTitle: 'تبحث عن شريك بحثي لديه فريق ميداني جاهز؟',
+    ctaBody: 'ينفِّذ فينيكس جمع البيانات الكمية والنوعية، والرصد والتقييم، وبرامج التدريب للمؤسسات والهيئات العاملة في فلسطين.',
+    ctaPrimary: 'ابدأ المحادثة',
+    ctaSecondary: 'عرض خدماتنا',
   },
 }[lang];
 ---
 
 <BaseLayout title={copy.title}>
-  <PageHero eyebrow={copy.eyebrow} title={copy.title} subtitle={copy.subtitle} />
+  <section class="proj-head">
+    <div class="proj-head__glow" aria-hidden="true"></div>
+    <div class="proj-head__inner">
+      <nav class="crumbs" aria-label="Breadcrumb">
+        <a href={localizedPath('/', lang)}>{lang === 'ar' ? 'الرئيسية' : 'Home'}</a>
+        <span aria-hidden="true">/</span>
+        <span class="crumbs__current">{copy.title}</span>
+      </nav>
 
-  <Section variant="tight">
-    <div class="projects-list">
-      {projects.map((project, i) => (
-        <ProjectCard project={project} reverse={i % 2 === 1} />
-      ))}
+      <div class="proj-head__grid">
+        <div class="proj-head__copy" data-reveal>
+          <p class="pill"><span class="pill__dot" aria-hidden="true"></span>{copy.eyebrow}</p>
+          <h1>{copy.heroTitle}</h1>
+          <p class="proj-lede">{copy.lede}</p>
+        </div>
+
+        <dl class="proj-stats" data-reveal-stagger>
+          <div class="proj-stats__item">
+            <dt>{projects.length}</dt>
+            <dd>{copy.statProjects}</dd>
+          </div>
+          <div class="proj-stats__item">
+            <dt>{partnerCount}</dt>
+            <dd>{copy.statPartners}</dd>
+          </div>
+        </dl>
+      </div>
     </div>
-  </Section>
+  </section>
+
+  <section class="proj-list">
+    {projects.map((project, i) => (
+      <ProjectCard project={project} num={i + 1} />
+    ))}
+  </section>
+
+  <section class="commission">
+    <div class="commission__inner">
+      <div>
+        <p class="eyebrow eyebrow--sage">{copy.ctaEyebrow}</p>
+        <h2>{copy.ctaTitle}</h2>
+        <p class="commission__body">{copy.ctaBody}</p>
+      </div>
+      <div class="commission__actions">
+        <Button href={localizedPath('/contact/', lang)} variant="sage">{copy.ctaPrimary}</Button>
+        <Button href={localizedPath('/services/', lang)} variant="ghost">{copy.ctaSecondary}</Button>
+      </div>
+    </div>
+  </section>
 </BaseLayout>
 
+
 <style>
-  .projects-list { display: flex; flex-direction: column; gap: 72px; }
+  .proj-head { position: relative; overflow: hidden; background: var(--color-surface-inverse); padding: 40px var(--gutter) 56px; }
+  .proj-head__glow {
+    position: absolute; top: -160px; inset-inline-end: -120px; width: 560px; height: 560px;
+    border-radius: 50%; background: radial-gradient(circle, oklch(70% 0.06 155 / .16) 0%, transparent 68%);
+    pointer-events: none;
+  }
+  .proj-head__inner { position: relative; max-width: 1180px; margin: 0 auto; }
+  .crumbs { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; font-size: 13px; color: var(--ink-on-navy); margin: 0 0 36px; }
+  .crumbs a { color: oklch(78% 0.02 250); text-decoration: none; }
+  .crumbs a:hover { color: var(--sage); }
+  .crumbs span[aria-hidden] { opacity: .5; }
+  .crumbs__current { color: oklch(62% 0.02 250); }
+
+  .proj-head__grid { display: grid; grid-template-columns: 1.25fr .75fr; gap: 56px; align-items: end; }
+  .pill { display: inline-flex; align-items: center; gap: 8px; margin: 0 0 20px; font-size: 12.5px; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; color: var(--sage); }
+  .pill__dot { width: 6px; height: 6px; border-radius: 50%; background: var(--sage); }
+  .proj-head__copy h1 { font-family: var(--font-head); font-size: 46px; line-height: 1.15; font-weight: 700; margin: 0 0 22px; color: oklch(99% 0.005 85); }
+  .proj-lede { font-size: 17px; line-height: 1.7; color: oklch(84% 0.02 250); margin: 0; max-width: 560px; }
+
+  .proj-stats { margin: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  .proj-stats__item { background: var(--navy-raised); border: 1px solid oklch(32% 0.04 250); border-radius: var(--r-md); padding: 20px; }
+  .proj-stats dt { margin: 0 0 8px; font-family: var(--font-head); font-size: 32px; font-weight: 700; line-height: 1; color: var(--sage); }
+  .proj-stats dd { margin: 0; font-size: 12.5px; line-height: 1.45; color: oklch(76% 0.02 250); }
+
+  .proj-list { max-width: 1180px; margin: 0 auto; padding: 64px var(--gutter) 88px; display: flex; flex-direction: column; gap: 28px; }
+
+  .commission { background: var(--color-surface-inverse); padding: 72px var(--gutter); }
+  .commission__inner { max-width: 1180px; margin: 0 auto; display: grid; grid-template-columns: 1fr .8fr; gap: 56px; align-items: center; }
+  .commission h2 { font-family: var(--font-head); font-size: 32px; line-height: 1.2; font-weight: 700; margin: 0 0 16px; color: oklch(99% 0.005 85); }
+  .commission__body { font-size: 16px; line-height: 1.75; color: oklch(82% 0.02 250); margin: 0; max-width: 520px; }
+  .commission__actions { display: flex; flex-direction: column; gap: 12px; align-items: flex-start; }
+  :global(.commission__actions .btn) { width: 100%; text-align: center; }
+
+  @media (max-width: 1100px) {
+    .proj-head__grid { grid-template-columns: 1fr; gap: 40px; align-items: start; }
+    .proj-head__copy h1 { font-size: 38px; }
+    .commission__inner { grid-template-columns: 1fr; gap: 32px; }
+  }
+
+  @media (max-width: 860px) {
+    .proj-head { padding-bottom: 48px; }
+    .proj-head__copy h1 { font-size: 32px; }
+    .proj-lede { font-size: 16px; }
+    .proj-list { padding-top: 44px; padding-bottom: 64px; }
+    .commission h2 { font-size: 26px; }
+  }
+
+  @media (max-width: 560px) {
+    .proj-head { padding: 20px var(--gutter) 36px; }
+    .crumbs { margin-bottom: 20px; }
+    .proj-head__copy h1 { font-size: 27px; }
+    .proj-stats { gap: 12px; }
+    .proj-stats dt { font-size: 26px; }
+  }
 </style>

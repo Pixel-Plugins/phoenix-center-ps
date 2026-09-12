@@ -38,3 +38,5 @@ export const publicationCategoryLabels: Record<string, { en: string; ar: string 
 };
 
 export const publicationsPageSize = 12;
+
+export const projectActivitiesHeading = { en: 'Activities', ar: 'الأنشطة' };
