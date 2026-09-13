@@ -25,8 +25,7 @@ export const siteConfig = {
     instagram: 'https://www.instagram.com/phoenix.center2022/',
     twitter: 'https://twitter.com/phoenixcenter01',
   },
-  /** TODO: create a Formspree account/form for phoenix-center.ps and replace this ID before launch. */
-  formspreeFormId: 'REPLACE_WITH_REAL_FORMSPREE_ID',
+  formspreeFormId: 'meaqbagn',
 } as const;
 
 export const publicationCategoryLabels: Record<string, { en: string; ar: string }> = {
