@@ -26,11 +26,14 @@ const { eyebrow, title, subtitle, titleLang, titleDir } = Astro.props;
     background: var(--color-surface-inverse);
     padding: 76px var(--gutter) 88px;
   }
-  .page-hero__inner { max-width: var(--max); margin: 0 auto; max-width: 760px; }
+  .page-hero__inner { max-width: 1180px; margin: 0 auto; }
   .page-hero__eyebrow {
-    font-size: 13px; font-weight: 700; letter-spacing: .08em;
-    text-transform: uppercase; color: var(--sage); margin: 0 0 16px;
+    display: flex; align-items: center; gap: 10px; margin: 0 0 18px;
+    font-size: 12.5px; font-weight: 700; letter-spacing: .1em;
+    text-transform: uppercase; color: var(--sage);
   }
+  .page-hero__eyebrow::after { content: ''; flex: 0 0 90px; width: 90px; height: 1px; background: linear-gradient(to right, var(--sage), transparent); }
+  :global([dir='rtl']) .page-hero__eyebrow::after { background: linear-gradient(to left, var(--sage), transparent); }
   .page-hero h1 {
     font-size: 42px; line-height: 1.15; font-weight: 700;
     color: oklch(99% 0.005 85); margin: 0 0 18px;

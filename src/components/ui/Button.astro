@@ -5,12 +5,13 @@ interface Props {
   href: string;
   variant?: Variant;
   class?: string;
+  target?: '_blank';
 }
 
-const { href, variant = 'sage', class: className } = Astro.props;
+const { href, variant = 'sage', class: className, target } = Astro.props;
 ---
 
-<a href={href} class:list={['btn', `btn--${variant}`, className]}>
+<a href={href} class:list={['btn', `btn--${variant}`, className]} target={target} rel={target === '_blank' ? 'noopener noreferrer' : undefined}>
   <slot />
 </a>
 
