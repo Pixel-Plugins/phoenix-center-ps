@@ -1,8 +1,10 @@
 ---
+import { Image } from 'astro:assets';
 import { getLangFromUrl, pickLocalized, localizedPath } from '../../i18n/utils';
 import { hero } from '../../data/homepage';
 import Button from '../ui/Button.astro';
 import StatStrip from './StatStrip.astro';
+import heroImage from '../../assets/homepage/hero-field-survey.jpg';
 
 const lang = getLangFromUrl(Astro.url);
 const eyebrow = pickLocalized(hero.eyebrow, lang)?.value;
@@ -14,15 +16,16 @@ const cta2 = pickLocalized(hero.cta2, lang)?.value;
 
 <section class="hero">
   <div class="hero__media">
-    <img
-      src="https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=1600&q=80"
-      alt="Phoenix Center field research team"
+    <Image
+      src={heroImage}
+      alt="Field researchers reviewing a survey form together"
+      width={1600}
       loading="eager"
     />
     <div class="hero__scrim"></div>
     <div class="hero__inner">
       <div class="hero__copy" data-reveal>
-        <p class="pill"><span class="pill__dot"></span><span>{eyebrow}</span></p>
+        <p class="hero__eyebrow">{eyebrow}</p>
         <h1>{title}</h1>
         <p class="hero__body">{body}</p>
         <div class="hero__cta">
@@ -58,13 +61,12 @@ const cta2 = pickLocalized(hero.cta2, lang)?.value;
   .hero__body { font-size: 17px; line-height: 1.6; color: oklch(90% 0.01 85); max-width: 540px; margin: 0 0 32px; }
   .hero__cta { display: flex; gap: 16px; flex-wrap: wrap; }
 
-  .pill {
-    display: inline-flex; align-items: center; gap: 8px; margin: 0 0 22px;
-    background: var(--sage); color: var(--sage-ink);
-    padding: 8px 16px; border-radius: 999px;
-    font-size: 13px; font-weight: 700; letter-spacing: .02em;
+  .hero__eyebrow {
+    margin: 0 0 18px;
+    font-size: 12.5px; font-weight: 700; letter-spacing: .1em;
+    text-transform: uppercase; color: var(--sage);
   }
-  .pill__dot { width: 7px; height: 7px; border-radius: 50%; background: var(--sage-ink); flex-shrink: 0; }
+  .hero__eyebrow::before { content: ''; display: block; width: 32px; height: 2px; background: var(--sage); margin-bottom: 10px; }
 
   .stats-wrap { position: relative; max-width: 1160px; margin: -60px auto 0; padding: 0 var(--gutter); }
 
@@ -76,7 +78,7 @@ const cta2 = pickLocalized(hero.cta2, lang)?.value;
   }
   @media (max-width: 560px) {
     .hero__copy h1 { font-size: 29px; }
-    .pill { font-size: 12px; }
+    .hero__eyebrow { font-size: 12px; }
     .stats-wrap { margin-top: -40px; }
   }
 </style>

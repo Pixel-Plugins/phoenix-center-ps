@@ -52,7 +52,7 @@ const copy = {
 
       <div class="proj-head__grid">
         <div class="proj-head__copy" data-reveal>
-          <p class="pill"><span class="pill__dot" aria-hidden="true"></span>{copy.eyebrow}</p>
+          <p class="proj-eyebrow">{copy.eyebrow}</p>
           <h1>{copy.heroTitle}</h1>
           <p class="proj-lede">{copy.lede}</p>
         </div>
@@ -108,8 +108,12 @@ const copy = {
   .crumbs__current { color: oklch(62% 0.02 250); }
 
   .proj-head__grid { display: grid; grid-template-columns: 1.25fr .75fr; gap: 56px; align-items: end; }
-  .pill { display: inline-flex; align-items: center; gap: 8px; margin: 0 0 20px; font-size: 12.5px; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; color: var(--sage); }
-  .pill__dot { width: 6px; height: 6px; border-radius: 50%; background: var(--sage); }
+  .proj-eyebrow {
+    display: flex; align-items: center; gap: 10px; margin: 0 0 20px;
+    font-size: 12.5px; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: var(--sage);
+  }
+  .proj-eyebrow::after { content: ''; flex: 0 0 90px; width: 90px; height: 1px; background: linear-gradient(to right, var(--sage), transparent); }
+  :global([dir='rtl']) .proj-eyebrow::after { background: linear-gradient(to left, var(--sage), transparent); }
   .proj-head__copy h1 { font-family: var(--font-head); font-size: 46px; line-height: 1.15; font-weight: 700; margin: 0 0 22px; color: oklch(99% 0.005 85); }
   .proj-lede { font-size: 17px; line-height: 1.7; color: oklch(84% 0.02 250); margin: 0; max-width: 560px; }
 
