@@ -6,8 +6,8 @@ export const servicesListing = {
   eyebrow: { en: 'What We Do', ar: 'ماذا نقدم' },
   title: { en: 'Services', ar: 'خدماتنا' },
   intro: {
-    en: 'Phoenix Center partners with UN agencies, INGOs, donors, and ministries to deliver rigorous research, effective policy advocacy, and lasting institutional capacity across Gaza and the West Bank.',
-    ar: 'يعمل مركز فينيكس مع وكالات أممية ومنظمات دولية وجهات مانحة ووزارات لتقديم أبحاث دقيقة، ومناصرة فعّالة للسياسات، وبناء قدرات مؤسسية مستدامة في غزة والضفة الغربية.',
+    en: 'At Phoenix Research Center, our commitment lies in driving meaningful transformation and progress within society. Rooted in a foundation of expertise, innovation, and collaboration, our comprehensive services pave the way for positive societal change. With a steadfast focus on Research and Development, Policy Advocacy, and Training and Capacity Building, we are dedicated to shaping a brighter future.',
+    ar: 'في مركز فينيكس للأبحاث، يكمن التزامنا في قيادة تحول حقيقي وتقدم داخل المجتمع. انطلاقاً من أساس راسخ من الخبرة والابتكار والتعاون، تمهد خدماتنا الشاملة الطريق نحو تغيير مجتمعي إيجابي. وبتركيز ثابت على البحث والتطوير، ومناصرة السياسات، والتدريب وبناء القدرات، نحن ملتزمون برسم ملامح مستقبل أكثر إشراقاً.',
   },
   whyChoose: {
     title: { en: 'Why Choose Phoenix', ar: 'لماذا تختار فينيكس' },
