@@ -50,44 +50,96 @@ const formConfigured = siteConfig.formspreeFormId && !siteConfig.formspreeFormId
         </div>
       </div>
 
-      <form
-        data-reveal
-        class="contact-form"
-        action={formConfigured ? `https://formspree.io/f/${siteConfig.formspreeFormId}` : undefined}
-        method="POST"
-        data-contact-form
-      >
-        {!formConfigured && (
-          <p class="contact-form__notice">
-            {lang === 'ar'
-              ? 'نموذج التواصل قيد الإعداد حالياً — يرجى المراسلة مباشرة عبر البريد الإلكتروني أدناه.'
-              : 'This form is not fully wired up yet — please email us directly below in the meantime.'}
+      <div class="contact-form-wrap">
+        <form
+          data-reveal
+          class="contact-form"
+          action={formConfigured ? `https://formspree.io/f/${siteConfig.formspreeFormId}` : undefined}
+          method="POST"
+          data-contact-form
+        >
+          {!formConfigured && (
+            <p class="contact-form__notice">
+              {lang === 'ar'
+                ? 'نموذج التواصل قيد الإعداد حالياً — يرجى المراسلة مباشرة عبر البريد الإلكتروني أدناه.'
+                : 'This form is not fully wired up yet — please email us directly below in the meantime.'}
+            </p>
+          )}
+          <p class="contact-form__notice" data-form-error hidden>{t('contact.errorMessage')}</p>
+          <label>
+            <span>{t('contact.formName')}</span>
+            <input type="text" name="name" required disabled={!formConfigured} />
+          </label>
+          <label>
+            <span>{t('contact.formEmail')}</span>
+            <input type="email" name="email" required disabled={!formConfigured} />
+          </label>
+          <label>
+            <span>{t('contact.formSubject')}</span>
+            <input type="text" name="subject" disabled={!formConfigured} />
+          </label>
+          <label>
+            <span>{t('contact.formMessage')}</span>
+            <textarea name="message" rows="5" required disabled={!formConfigured}></textarea>
+          </label>
+          <button type="submit" class="btn-submit" disabled={!formConfigured}>{t('contact.formSubmit')}</button>
+          <p class="contact-form__fallback">
+            {t('contact.emailFallback')} <a href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a>
           </p>
-        )}
-        <label>
-          <span>{t('contact.formName')}</span>
-          <input type="text" name="name" required disabled={!formConfigured} />
-        </label>
-        <label>
-          <span>{t('contact.formEmail')}</span>
-          <input type="email" name="email" required disabled={!formConfigured} />
-        </label>
-        <label>
-          <span>{t('contact.formSubject')}</span>
-          <input type="text" name="subject" disabled={!formConfigured} />
-        </label>
-        <label>
-          <span>{t('contact.formMessage')}</span>
-          <textarea name="message" rows="5" required disabled={!formConfigured}></textarea>
-        </label>
-        <button type="submit" class="btn-submit" disabled={!formConfigured}>{t('contact.formSubmit')}</button>
-        <p class="contact-form__fallback">
-          {t('contact.emailFallback')} <a href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a>
-        </p>
-      </form>
+        </form>
+
+        <div class="contact-form__success" data-form-success hidden>
+          <span class="contact-form__success-icon" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M5 13l5 5L19 7" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+          <h3>{t('contact.successTitle')}</h3>
+          <p>{t('contact.successBody')}</p>
+        </div>
+      </div>
     </div>
   </Section>
 </BaseLayout>
+
+<script>
+  function initContactForm() {
+    document.querySelectorAll<HTMLFormElement>('[data-contact-form]').forEach((form) => {
+      const action = form.getAttribute('action');
+      if (!action) return;
+
+      const wrap = form.closest('.contact-form-wrap');
+      const errorEl = form.querySelector<HTMLElement>('[data-form-error]');
+      const successEl = wrap?.querySelector<HTMLElement>('[data-form-success]');
+      const submitBtn = form.querySelector<HTMLButtonElement>('button[type="submit"]');
+
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        errorEl?.setAttribute('hidden', '');
+        if (submitBtn) submitBtn.disabled = true;
+
+        try {
+          const res = await fetch(action, {
+            method: 'POST',
+            body: new FormData(form),
+            headers: { Accept: 'application/json' },
+          });
+          if (!res.ok) throw new Error('Form submission failed');
+          // Not `form.hidden = true` — .contact-form's own `display: flex`
+          // (a class rule) beats the [hidden] UA-stylesheet default at
+          // equal specificity, so the form stays visible. Inline style
+          // always wins regardless of any class rule's specificity.
+          form.style.display = 'none';
+          successEl?.removeAttribute('hidden');
+        } catch {
+          errorEl?.removeAttribute('hidden');
+          if (submitBtn) submitBtn.disabled = false;
+        }
+      });
+    });
+  }
+
+  initContactForm();
+  document.addEventListener('astro:page-load', initContactForm);
+</script>
 
 <style>
   .contact-grid { display: grid; grid-template-columns: 0.8fr 1.2fr; gap: 56px; }
@@ -116,6 +168,18 @@ const formConfigured = siteConfig.formspreeFormId && !siteConfig.formspreeFormId
   }
   .contact-form__fallback { font-size: 13.5px; color: var(--color-text-muted); margin: 0; }
   .contact-form__fallback a { color: var(--eyebrow); }
+
+  .contact-form__success {
+    background: var(--color-surface-alt); border: 1px solid var(--sage);
+    border-radius: var(--r-md); padding: 40px 32px; text-align: center;
+  }
+  .contact-form__success-icon {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 48px; height: 48px; border-radius: 50%; margin-bottom: 18px;
+    background: var(--sage); color: var(--sage-ink);
+  }
+  .contact-form__success h3 { font-size: 21px; font-weight: 700; color: var(--color-text-strong); margin: 0 0 10px; }
+  .contact-form__success p { font-size: 14.5px; line-height: 1.65; color: var(--color-text-muted); margin: 0; max-width: 420px; margin-inline: auto; }
 
   @media (max-width: 860px) {
     .contact-grid { grid-template-columns: 1fr; }
