@@ -11,7 +11,7 @@ interface Props {
 
 const { project, num } = Astro.props;
 const lang = getLangFromUrl(Astro.url);
-const { title, partnerOrFunder, description, activities, pdf, ctaUrl, ctaLabel, logo, logoDark, plateTitle, plateSub } = project.data;
+const { title, partnerOrFunder, description, activities, pdf, ctaUrl, ctaLabel, logo, logoDark, photo, plateTitle, plateSub } = project.data;
 
 const partnerLabel = pickLocalized(partnerOrFunder, lang)?.value;
 const listHeading = pickLocalized(projectActivitiesHeading, lang)?.value;
@@ -27,6 +27,11 @@ const hasLongActivities = activities.some((a) => (pickLocalized(a, lang)?.value?
       <div class:list={['plate', 'plate--logo', logoDark && 'plate--logo-dark']}>
         <span class="plate__num" aria-hidden="true">{numLabel}</span>
         <Image class="plate__logo" src={logo} alt={partnerLabel ?? ''} width={280} />
+      </div>
+    ) : photo ? (
+      <div class="plate plate--photo">
+        <span class="plate__num plate__num--onphoto" aria-hidden="true">{numLabel}</span>
+        <Image class="plate__photo" src={photo} alt={pickLocalized(title, lang)?.value ?? ''} width={480} />
       </div>
     ) : (
       <div class="plate plate--type">
@@ -114,6 +119,18 @@ const hasLongActivities = activities.some((a) => (pickLocalized(a, lang)?.value?
   .plate--type .plate__num { color: oklch(32% 0.05 250); }
   .plate__title { margin: 0; font-family: var(--font-head); font-size: 20px; font-weight: 700; line-height: 1.25; color: oklch(97% 0.01 85); text-align: center; }
   .plate__sub { margin: 8px 0 0; font-size: 12.5px; color: var(--ink-on-navy); text-align: center; }
+
+  .plate--photo { background: var(--color-surface-alt); border: 1px solid var(--color-border); }
+  .plate--photo :global(.plate__photo) { width: 100%; height: 100%; object-fit: contain; }
+  /* A photo's own colors can't guarantee contrast for a plain numeral —
+     give it its own small badge instead of relying on the plate background. */
+  .plate__num--onphoto {
+    top: 12px; inset-inline-start: 12px; font-size: 20px;
+    background: oklch(20% 0.03 75 / 0.55); color: oklch(98% 0.01 85);
+    width: 34px; height: 34px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    backdrop-filter: blur(3px);
+  }
 
   .proj-meta { margin: 0; display: flex; flex-direction: column; gap: 10px; }
   .proj-meta__row { display: flex; justify-content: space-between; gap: 12px; font-size: 13px; padding-bottom: 10px; border-bottom: 1px solid var(--color-border); }

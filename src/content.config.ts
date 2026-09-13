@@ -73,22 +73,24 @@ const projects = defineCollection({
       // site path, run through `localizedPath` at render time.
       ctaUrl: z.string().optional(),
       ctaLabel: bilingual().optional(),
-      // No per-project photography exists (real constraint, not a gap to
-      // fill with stock photos) — a project's visual identity is its
-      // partner/funder logo. `logo` absent means "self-run, no external
-      // partner"; render the typographic plate from `plateTitle`/`plateSub`
-      // instead (both required together, enforced below).
+      // Most projects have no per-project photography — a project's visual
+      // identity is its partner/funder logo instead. `logo` absent means
+      // "self-run, no external partner": use a real project `photo` if the
+      // client has one for it, else fall back to a typographic plate built
+      // from `plateTitle`/`plateSub` (both required together, enforced
+      // below).
       logo: image().optional(),
       // Some real partner logos (e.g. Arab Center for Research & Policy
       // Studies) are light/white-on-transparent, made for a dark ground —
       // same `dark` flag convention as partners.yaml/PartnersGrid.astro.
       logoDark: z.boolean().default(false),
+      photo: image().optional(),
       plateTitle: bilingual().optional(),
       plateSub: bilingual().optional(),
       order: z.number().default(0),
     })
-    .refine((data) => data.logo || (data.plateTitle && data.plateSub), {
-      message: 'A project needs either a logo, or both plateTitle and plateSub for the typographic plate',
+    .refine((data) => data.logo || data.photo || (data.plateTitle && data.plateSub), {
+      message: 'A project needs a logo, a photo, or both plateTitle and plateSub for the typographic plate',
       path: ['logo'],
     }),
 });
