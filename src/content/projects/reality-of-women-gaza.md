@@ -14,11 +14,6 @@ activities:
   - en: Qualitative interviews and focus groups with women-led households
     ar: مقابلات نوعية ومجموعات نقاش مع الأسر التي تعيلها نساء
 pdf: http://phoenix-center.ps/wp-content/uploads/2025/01/احتياجات-النساء-في-قطاع-غزة-06.pdf
-plateTitle:
-  en: Needs of Women
-  ar: احتياجات النساء
-plateSub:
-  en: Gaza Strip · field study
-  ar: قطاع غزَّة · دراسة ميدانية
+photo: ../../assets/projects/women-needs-gaza.png
 order: 3
 ---

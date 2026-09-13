@@ -56,6 +56,9 @@ export const ui = {
     'contact.formMessage': 'Message',
     'contact.formSubmit': 'Send Message',
     'contact.emailFallback': 'Or email us directly at',
+    'contact.successTitle': 'Message sent',
+    'contact.successBody': "Thank you for reaching out — we've received your message and will get back to you soon.",
+    'contact.errorMessage': "Something went wrong sending your message — please try again, or email us directly below.",
   },
   ar: {
     'brand.name': 'مركز فينيكس',
@@ -109,6 +112,9 @@ export const ui = {
     'contact.formMessage': 'الرسالة',
     'contact.formSubmit': 'إرسال الرسالة',
     'contact.emailFallback': 'أو راسلنا مباشرة على',
+    'contact.successTitle': 'تم إرسال الرسالة',
+    'contact.successBody': 'شكراً لتواصلك معنا — لقد استلمنا رسالتك وسنرد عليك في أقرب وقت.',
+    'contact.errorMessage': 'حدث خطأ أثناء إرسال رسالتك — يرجى المحاولة مرة أخرى، أو مراسلتنا مباشرة أدناه.',
   },
 } as const;
 
