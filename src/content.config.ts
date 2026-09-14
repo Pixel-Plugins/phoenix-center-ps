@@ -101,6 +101,9 @@ const services = defineCollection({
     slug: z.enum(serviceSlugs),
     heroStatement: bilingualRequired(),
     intro: bilingualRequired(),
+    // Each real live service page structures its own content differently —
+    // R&D genuinely has an 8-step process, but Policy Advocacy has 7 prose
+    // sections and Training has 4 — so this can't be a fixed length.
     processSteps: z
       .array(
         z.object({
@@ -109,7 +112,7 @@ const services = defineCollection({
           description: bilingualRequired(),
         }),
       )
-      .length(8),
+      .min(1),
     examplePublicationSlugs: z.array(z.string()).max(2).default([]),
   }),
 });

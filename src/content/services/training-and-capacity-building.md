@@ -4,48 +4,28 @@ heroStatement:
   en: Tailored programs that grow lasting local institutional capacity.
   ar: برامج مصممة خصيصاً لبناء قدرات مؤسسية محلية مستدامة.
 intro:
-  en: Delivered with international organizations, our training programs build durable enumerator, M&E, and research capacity inside local institutions — not just one-off workshops.
-  ar: تُنفَّذ برامجنا التدريبية بالشراكة مع منظمات دولية لبناء قدرات مستدامة في مجالات الحصر والرصد والتقييم والبحث داخل المؤسسات المحلية — وليست ورش عمل لمرة واحدة.
+  en: Our Training and Capacity Building programs offer a comprehensive and tailored approach to enhancing the skills, knowledge, and capabilities of individuals and teams across various industries. With a focus on practicality, innovation, and results, our programs are designed to empower participants to excel in their roles, drive organizational growth, and embrace continuous learning.
+  ar: تقدم برامج التدريب وبناء القدرات لدينا نهجًا شاملاً ومصممًا خصيصًا لتعزيز مهارات ومعرفة وقدرات الأفراد والفرق في مختلف الصناعات. مع التركيز على التطبيق العملي والابتكار والنتائج، تم تصميم برامجنا لتمكين المشاركين من التفوق في أدوارهم، ودفع النمو التنظيمي، واحتضان التعلم المستمر.
 processSteps:
   - step: 1
-    title: { en: Needs Assessment, ar: تقييم الاحتياجات }
+    title: { en: Customized Workshops, ar: ورش عمل مخصصة }
     description:
-      en: We assess the partner institution's current capacity gaps before designing curriculum.
-      ar: نقيّم الفجوات الحالية في قدرات المؤسسة الشريكة قبل تصميم المنهج التدريبي.
+      en: We develop and deliver workshops tailored to your organization's unique needs and challenges. Topics include leadership development, communication skills, project management, team collaboration, and more. Interactive sessions encourage active participation and skill application.
+      ar: نقوم بتطوير وتقديم ورش عمل مصممة خصيصًا لتلبية الاحتياجات والتحديات الفريدة لمؤسستك. تشمل المواضيع تطوير القيادة ومهارات الاتصال وإدارة المشاريع والتعاون الجماعي والمزيد. تشجع الجلسات التفاعلية المشاركة النشطة وتطبيق المهارات.
   - step: 2
-    title: { en: Partner Identification, ar: تحديد الشركاء }
+    title: { en: Professional Development Programs, ar: برامج التطوير المهني }
     description:
-      en: We identify the specific teams and individuals who will carry the capacity forward.
-      ar: نحدد الفرق والأفراد المحددين الذين سيحملون هذه القدرة مستقبلاً.
+      en: Comprehensive training programs designed to upskill employees at all levels. Covering areas such as technical skills, soft skills, industry-specific knowledge, and compliance requirements. Flexible formats, including in-person, virtual, and blended learning approaches.
+      ar: برامج تدريبية شاملة مصممة لرفع مهارات الموظفين على جميع المستويات. تغطي مجالات مثل المهارات الفنية والمهارات الشخصية والمعرفة الخاصة بالصناعة ومتطلبات الامتثال. تنسيقات مرنة، بما في ذلك أساليب التعلم الشخصية والافتراضية والمختلطة.
   - step: 3
-    title: { en: Scope Definition, ar: تحديد النطاق }
+    title: { en: Leadership Training, ar: التدريب على القيادة }
     description:
-      en: Training scope is matched to real operational needs, not generic curricula.
-      ar: يتم مطابقة نطاق التدريب مع الاحتياجات التشغيلية الحقيقية، وليس مناهج عامة.
+      en: Empower your current and future leaders with targeted leadership development programs. Modules on effective decision-making, conflict resolution, strategic thinking, and fostering a positive work environment.
+      ar: قم بتمكين قادتك الحاليين والمستقبليين من خلال برامج تنمية المهارات القيادية المستهدفة. وحدات حول اتخاذ القرارات الفعالة، وحل النزاعات، والتفكير الاستراتيجي، وتعزيز بيئة عمل إيجابية.
   - step: 4
-    title: { en: Collaborative Research Plan, ar: خطة بحث تشاركية }
+    title: { en: Skill Assessments and Gap Analysis, ar: تقييمات المهارات وتحليل الفجوات }
     description:
-      en: Materials are co-developed with the international partner to fit local context.
-      ar: يتم تطوير المواد التدريبية بالتشارك مع الشريك الدولي لتناسب السياق المحلي.
-  - step: 5
-    title: { en: Solution Delivery, ar: تنفيذ الحلول }
-    description:
-      en: Hands-on workshops and field mentoring are delivered directly to enumerator and M&E teams.
-      ar: تُنفَّذ ورش عملية وإرشاد ميداني مباشر لفرق الحصر والرصد والتقييم.
-  - step: 6
-    title: { en: Impact Assessment, ar: تقييم الأثر }
-    description:
-      en: Trained teams are evaluated on independent field performance, not just attendance.
-      ar: تُقيَّم الفرق المدرَّبة بناءً على الأداء الميداني المستقل، وليس الحضور فقط.
-  - step: 7
-    title: { en: Knowledge Transfer, ar: نقل المعرفة }
-    description:
-      en: Training-of-trainers modules let the institution scale the program on its own.
-      ar: تتيح وحدات تدريب المدربين للمؤسسة توسيع البرنامج بمفردها.
-  - step: 8
-    title: { en: Long-term Collaboration, ar: تعاون طويل الأمد }
-    description:
-      en: Refresher cycles and ongoing technical support continue well past the initial program.
-      ar: تستمر دورات التنشيط والدعم الفني المستمر لما بعد البرنامج الأولي.
+      en: Evaluate the skills and competencies of your team to identify areas for improvement. Tailored gap analysis reports help design focused training initiatives. Practical, hands-on training to ensure seamless integration of new skills into daily tasks. Mentoring and coaching to enhance skill application and effectiveness.
+      ar: قم بتقييم مهارات وكفاءات فريقك لتحديد مجالات التحسين. تساعد تقارير تحليل الفجوات المخصصة في تصميم مبادرات تدريبية مركزة. تدريب عملي وعملي لضمان التكامل السلس للمهارات الجديدة في المهام اليومية. التوجيه والتدريب لتعزيز تطبيق المهارات والفعالية.
 examplePublicationSlugs: []
 ---
