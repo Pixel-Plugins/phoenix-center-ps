@@ -1,0 +1,121 @@
+---
+// Consent-first banner: nothing here loads any cookie itself — this only
+// records the visitor's choice (localStorage) so a future analytics script
+// (see .local/notes.md's SEO section — GA4/Plausible not installed yet) can
+// check window.getCookieConsent() before setting anything. Equal-weight
+// Accept/Decline buttons and a standing "Cookie Preferences" footer link
+// (Footer.astro, [data-cookie-preferences]) to withdraw consent just as
+// easily as it was given — both required by GDPR/ePrivacy-style consent
+// standards, not just a "click to dismiss" banner.
+import { getLangFromUrl, useTranslations, localizedPath } from '../../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<div class="cookie-banner" data-cookie-banner hidden>
+  <p class="cookie-banner__text">
+    {t('cookies.message')}
+    <a href={localizedPath('/privacy/', lang)}>{t('cookies.learnMore')}</a>
+  </p>
+  <div class="cookie-banner__actions">
+    <button type="button" class="cookie-banner__btn cookie-banner__btn--ghost" data-cookie-decline>{t('cookies.decline')}</button>
+    <button type="button" class="cookie-banner__btn cookie-banner__btn--gold" data-cookie-accept>{t('cookies.accept')}</button>
+  </div>
+</div>
+
+<style>
+  .cookie-banner {
+    position: fixed;
+    z-index: 80;
+    left: 50%;
+    bottom: 20px;
+    transform: translateX(-50%);
+    width: min(720px, calc(100% - 32px));
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 16px 24px;
+    justify-content: space-between;
+    background: var(--paper-card);
+    border: 1px solid var(--color-border);
+    border-radius: var(--r-sm);
+    box-shadow: 0 12px 32px rgb(10 42 74 / 0.18);
+    padding: 18px 22px;
+  }
+  .cookie-banner[hidden] { display: none; }
+  .cookie-banner__text { margin: 0; font-size: 13.5px; line-height: 1.6; color: var(--color-text); flex: 1 1 320px; }
+  .cookie-banner__text a { color: var(--eyebrow); font-weight: 600; text-decoration: underline; }
+  .cookie-banner__actions { display: flex; gap: 10px; flex-shrink: 0; }
+  .cookie-banner__btn {
+    font-family: inherit;
+    font-weight: 700;
+    font-size: 13.5px;
+    border-radius: var(--r-sm);
+    padding: 10px 18px;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+  .cookie-banner__btn--gold { background: var(--gold); color: oklch(20% 0.03 75); border: 1.5px solid transparent; }
+  .cookie-banner__btn--gold:hover { background: var(--gold-hover); }
+  .cookie-banner__btn--ghost { background: transparent; color: var(--color-text); border: 1.5px solid var(--color-border); }
+  .cookie-banner__btn--ghost:hover { border-color: var(--eyebrow); color: var(--eyebrow); }
+
+  @media (max-width: 560px) {
+    .cookie-banner { bottom: 0; width: 100%; border-radius: 0; border-inline: none; border-bottom: none; }
+    .cookie-banner__actions { width: 100%; }
+    .cookie-banner__btn { flex: 1; }
+  }
+</style>
+
+<script>
+  const STORAGE_KEY = 'pc-cookie-consent';
+
+  function getCookieConsent(): 'accepted' | 'rejected' | null {
+    try {
+      const value = localStorage.getItem(STORAGE_KEY);
+      return value === 'accepted' || value === 'rejected' ? value : null;
+    } catch {
+      return null;
+    }
+  }
+
+  function setCookieConsent(status: 'accepted' | 'rejected') {
+    try {
+      localStorage.setItem(STORAGE_KEY, status);
+    } catch {
+      // Private browsing / blocked storage — the banner still hides for this
+      // view; it just won't remember across visits.
+    }
+    window.dispatchEvent(new CustomEvent('pc:cookie-consent', { detail: { status } }));
+  }
+
+  // Exposed for a future analytics loader to gate on without importing anything.
+  (window as typeof window & { getCookieConsent: typeof getCookieConsent }).getCookieConsent = getCookieConsent;
+
+  function initCookieBanner() {
+    const banner = document.querySelector<HTMLElement>('[data-cookie-banner]');
+    if (!banner) return;
+
+    if (!getCookieConsent()) banner.hidden = false;
+
+    banner.querySelector('[data-cookie-accept]')?.addEventListener('click', () => {
+      setCookieConsent('accepted');
+      banner.hidden = true;
+    });
+    banner.querySelector('[data-cookie-decline]')?.addEventListener('click', () => {
+      setCookieConsent('rejected');
+      banner.hidden = true;
+    });
+
+    document.querySelectorAll<HTMLElement>('[data-cookie-preferences]').forEach((link) => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        banner.hidden = false;
+      });
+    });
+  }
+
+  initCookieBanner();
+  document.addEventListener('astro:page-load', initCookieBanner);
+</script>

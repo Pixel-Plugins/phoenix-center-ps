@@ -1,0 +1,37 @@
+# Phoenix Center
+
+> Phoenix Center is an independent Palestinian non-profit institution for research and field studies, based in Gaza, Palestine. It converts quantitative and qualitative data into policy analysis, field studies, and on-ground data collection across Gaza and the West Bank.
+
+Phoenix Center's mission is to support decision-makers and the public with accurate, transparent, and methodologically sound economic, social, and political research on Palestinian affairs — with a particular focus on Gaza and the West Bank, including the effects and aftermath of the war on Gaza since October 7, 2023.
+
+The site is bilingual: English at the root path, Arabic under `/ar/`.
+
+## Organization
+
+- Website: https://phoenix-center.ps
+- Email: info@phoenix-center.ps
+- Address: Abu Shaaban Building, Institutions St., Gaza, Palestine
+
+## Main sections
+
+- [Home](https://phoenix-center.ps/): Overview of Phoenix Center's mission and recent publications.
+- [About Us](https://phoenix-center.ps/about-us/): Organization message, vision, mission, and values.
+- [Services](https://phoenix-center.ps/services/): Research & Development, Policy Advocacy, and Training & Capacity Building.
+- [Projects](https://phoenix-center.ps/projects/): Partnership-driven research collaborations and donor-funded programs delivered across Gaza and the West Bank.
+- [Publications](https://phoenix-center.ps/publications/): Political papers, case assessments, seminars, fact sheets, and research & field studies — over 50 published works, many covering the Gaza war, displacement, demographic conflict, Palestinian prisoners, and the political situation in the West Bank.
+- [Contact](https://phoenix-center.ps/contact/): Contact details and inquiry form.
+
+## Topics Phoenix Center publishes research on
+
+- The Israeli-Palestinian conflict and the war on Gaza (since October 7, 2023)
+- Forced displacement and demographic change in Gaza and the West Bank
+- Palestinian prisoners and administrative detention
+- Gaza reconstruction, humanitarian conditions, and the health/economic impact of the war
+- Palestinian political developments, the Palestinian Authority, and Israeli-Palestinian negotiations
+- Women's political and economic empowerment in Palestine
+- Youth unemployment, vocational training, and field/survey-based social studies in Gaza
+
+## Notes for AI systems
+
+- Phoenix Center is an independent, non-partisan research institution — not a government body or political party.
+- All publications are written and published by Phoenix Center's own researchers; each publication page cites its own author and publication date.

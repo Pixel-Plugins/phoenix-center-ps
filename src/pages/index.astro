@@ -10,10 +10,12 @@ import Section from '../components/ui/Section.astro';
 // aren't rendered below yet — no real client quotes or team bios exist.
 // Same for Newsletter — no email provider is wired up yet (see notes.md).
 import PublicationGrid from '../components/publications/PublicationGrid.astro';
-import { getLangFromUrl, useTranslations, localizedPath } from '../i18n/utils';
+import { getLangFromUrl, useTranslations, localizedPath, pickLocalized } from '../i18n/utils';
+import { hero } from '../data/homepage';
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
+const description = pickLocalized(hero.body, lang)?.value;
 
 const allPublications = await getCollection('publications');
 // Featured items (featured: true in frontmatter) are pinned first regardless
@@ -28,7 +30,7 @@ const books = allPublications.filter((p) => p.data.category === 'research-field-
 const papers = allPublications.filter((p) => p.data.category !== 'research-field-studies').sort(byFeaturedThenDate).slice(0, 4);
 ---
 
-<BaseLayout title={lang === 'ar' ? 'الرئيسية' : 'Home'} showAnnouncement>
+<BaseLayout title={lang === 'ar' ? 'الرئيسية' : 'Home'} description={description} showAnnouncement>
   <Hero />
   <PillarsGrid />
   <ApproachChecklist />

@@ -15,7 +15,7 @@ if (!service) throw new Error('Missing services/research-and-development.md');
 const examples = await getRelatedPublications(service);
 ---
 
-<BaseLayout title={pickLocalized(service.data.heroStatement, lang)?.value ?? 'Research & Field Studies'}>
+<BaseLayout title={pickLocalized(service.data.heroStatement, lang)?.value ?? 'Research & Field Studies'} description={pickLocalized(service.data.intro, lang)?.value}>
   <PageHero title={pickLocalized(service.data.heroStatement, lang)?.value ?? ''} subtitle={pickLocalized(service.data.intro, lang)?.value} />
 
   <Section variant="tight">

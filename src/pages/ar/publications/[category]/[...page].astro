@@ -43,9 +43,14 @@ const heroSubtitle =
   category === 'all'
     ? undefined
     : publicationCategoryLabels[category as string]?.[lang];
+
+const categoryLabel = category === 'all' ? null : publicationCategoryLabels[category as string]?.[lang];
+const description = categoryLabel
+  ? { en: `${categoryLabel} published by Phoenix Center — an independent Palestinian research institution.`, ar: `${categoryLabel} صادرة عن مركز فينيق، مؤسسة بحثية فلسطينية مستقلة.` }[lang]
+  : { en: 'Research papers, policy papers, fact sheets, and field studies published by Phoenix Center.', ar: 'أوراق بحثية، وأوراق سياسات، وأوراق حقائق، ودراسات ميدانية صادرة عن مركز فينيق.' }[lang];
 ---
 
-<BaseLayout title={copy.title}>
+<BaseLayout title={copy.title} description={description}>
   <PageHero eyebrow={copy.eyebrow} title={copy.title} subtitle={heroSubtitle} />
 
   <Section variant="tight">

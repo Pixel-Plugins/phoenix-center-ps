@@ -35,7 +35,7 @@ const copy = {
       },
       {
         heading: 'Cookies',
-        body: 'This website may use minimal, non-intrusive cookies necessary for basic functionality. We do not use cookies for advertising or third-party tracking.',
+        body: 'This website may use minimal, non-intrusive cookies necessary for basic functionality. We do not use cookies for advertising or third-party tracking. You can accept or decline non-essential cookies at any time via the "Cookie Preferences" link in the footer.',
       },
       {
         heading: 'Changes to This Policy',
@@ -71,7 +71,7 @@ const copy = {
       },
       {
         heading: 'ملفات تعريف الارتباط',
-        body: 'قد يستخدم هذا الموقع ملفات تعريف ارتباط بسيطة وغير تطفلية ضرورية للوظائف الأساسية. لا نستخدم ملفات تعريف الارتباط لأغراض إعلانية أو للتتبع من أطراف ثالثة.',
+        body: 'قد يستخدم هذا الموقع ملفات تعريف ارتباط بسيطة وغير تطفلية ضرورية للوظائف الأساسية. لا نستخدم ملفات تعريف الارتباط لأغراض إعلانية أو للتتبع من أطراف ثالثة. يمكنك قبول أو رفض ملفات تعريف الارتباط غير الضرورية في أي وقت عبر رابط "إعدادات ملفات تعريف الارتباط" في تذييل الصفحة.',
       },
       {
         heading: 'التغييرات على هذه السياسة',
@@ -83,7 +83,7 @@ const copy = {
 }[lang];
 ---
 
-<BaseLayout title={copy.title}>
+<BaseLayout title={copy.title} description={copy.intro}>
   <PageHero eyebrow={copy.eyebrow} title={copy.title} subtitle={copy.intro} />
 
   <Section variant="tight">

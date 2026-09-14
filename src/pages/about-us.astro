@@ -10,7 +10,7 @@ import { about } from '../data/about';
 const lang = getLangFromUrl(Astro.url);
 ---
 
-<BaseLayout title={pickLocalized(about.title, lang)?.value ?? 'About Us'}>
+<BaseLayout title={pickLocalized(about.title, lang)?.value ?? 'About Us'} description={pickLocalized(about.intro, lang)?.value}>
   <PageHero
     eyebrow={pickLocalized(about.eyebrow, lang)?.value}
     title={pickLocalized(about.title, lang)?.value ?? ''}

@@ -1,0 +1,156 @@
+---
+// GitHub Pages serves this single file for ANY unmatched path on the whole
+// site, English or Arabic, with no server-side routing to pick a locale —
+// but the browser's address bar still shows the real requested path (GH
+// Pages does a "soft" 404, not a redirect). So both languages are rendered
+// in the HTML for resilience, and an inline head script reads the actual
+// URL to show only the right one — no language toggle, no flash.
+import '../styles/global.css';
+import { siteConfig, brand } from '../data/siteConfig';
+import { localizedPath } from '../i18n/utils';
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Page Not Found — {siteConfig.name}</title>
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <script is:inline>
+      // Runs before body paints, so there's no flash of the wrong language.
+      if (/\/ar(\/|$)/.test(location.pathname)) {
+        document.documentElement.classList.add('is-ar');
+        document.documentElement.lang = 'ar';
+        document.documentElement.dir = 'rtl';
+        document.title = 'الصفحة غير موجودة — مركز فينيق';
+      }
+    </script>
+  </head>
+  <body>
+    <main class="notfound">
+      <p class="notfound__figure" aria-hidden="true">404</p>
+
+      <div class="notfound__inner">
+        <img class="notfound__mark" src={brand.icon.src} alt="" width="40" height="32" />
+
+        <div class="notfound__copy notfound__copy--en" lang="en" dir="ltr">
+          <h1>PAGE NOT FOUND</h1>
+          <p>This page doesn't exist, or it's moved.</p>
+          <div class="notfound__actions">
+            <a class="notfound__btn notfound__btn--primary" href={localizedPath('/', 'en')}>Go to homepage</a>
+            <a class="notfound__btn notfound__btn--ghost" href={localizedPath('/publications/', 'en')}>Browse publications</a>
+          </div>
+        </div>
+
+        <div class="notfound__copy notfound__copy--ar" lang="ar" dir="rtl">
+          <h1>الصفحة غير موجودة</h1>
+          <p>هذه الصفحة غير موجودة، أو تم نقلها.</p>
+          <div class="notfound__actions">
+            <a class="notfound__btn notfound__btn--primary" href={localizedPath('/', 'ar')}>العودة إلى الرئيسية</a>
+            <a class="notfound__btn notfound__btn--ghost" href={localizedPath('/publications/', 'ar')}>تصفح الإصدارات</a>
+          </div>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>
+
+<style>
+  html, body { margin: 0; height: 100%; }
+
+  .notfound {
+    position: relative;
+    min-height: 100dvh;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    background: var(--navy);
+    padding: 0 var(--gutter);
+  }
+
+  .notfound__figure {
+    position: absolute;
+    inset-block-start: 50%;
+    inset-inline-start: -0.06em;
+    transform: translateY(-50%);
+    margin: 0;
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: min(56vw, 620px);
+    line-height: 1;
+    color: transparent;
+    -webkit-text-stroke: 1.5px var(--navy-rule);
+    user-select: none;
+    z-index: 0;
+  }
+
+  .notfound__inner {
+    position: relative;
+    z-index: 1;
+    max-width: var(--max);
+    margin: 0 auto;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 40px;
+  }
+
+  .notfound__mark { display: none; }
+
+  .notfound__copy--ar { display: none; }
+  html.is-ar .notfound__copy--en { display: none; }
+  html.is-ar .notfound__copy--ar { display: block; }
+
+  .notfound__copy h1 {
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: clamp(30px, 4.2vw, 46px);
+    letter-spacing: 0.02em;
+    color: oklch(99% 0.005 85);
+    margin: 0 0 16px;
+    max-width: 14ch;
+  }
+  html.is-ar .notfound__copy h1 { font-family: var(--font-ar); letter-spacing: 0; }
+
+  .notfound__copy p {
+    font-family: var(--font-body);
+    font-size: 17px;
+    line-height: 1.6;
+    color: var(--ink-on-navy);
+    margin: 0 0 32px;
+    max-width: 34ch;
+  }
+  html.is-ar .notfound__copy p { font-family: var(--font-ar); }
+
+  .notfound__actions { display: flex; flex-wrap: wrap; gap: 14px; }
+
+  .notfound__btn {
+    display: inline-block;
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 14px;
+    text-decoration: none;
+    border-radius: var(--r-sm);
+    padding: 13px 26px;
+    white-space: nowrap;
+  }
+  html.is-ar .notfound__btn { font-family: var(--font-ar); }
+  .notfound__btn--primary { background: var(--gold); color: oklch(20% 0.03 75); }
+  .notfound__btn--primary:hover { background: var(--gold-hover); }
+  .notfound__btn--ghost { color: var(--sage); border: 1.5px solid var(--navy-rule); }
+  .notfound__btn--ghost:hover { border-color: var(--sage); }
+
+  @media (min-width: 640px) {
+    .notfound__mark { display: block; height: 40px; width: auto; margin-bottom: 28px; }
+  }
+
+  @media (max-width: 640px) {
+    .notfound { padding: 0 24px; }
+    .notfound__figure { font-size: 70vw; inset-inline-start: 50%; transform: translate(-50%, -62%); }
+    .notfound__inner { justify-content: center; text-align: center; }
+    .notfound__copy p { margin-inline: auto; }
+    .notfound__actions { justify-content: center; }
+  }
+</style>
