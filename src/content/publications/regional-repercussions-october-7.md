@@ -5,7 +5,7 @@ title:
 category: case-assessment
 date: 2024-06-23
 coverImage: ../../assets/publications/real/regional-repercussions-october-7.jpg
-pdf: http://phoenix-center.ps/wp-content/uploads/2024/06/التداعيات-الإقليمية-للسابع-من-أكتوبر-02.pdf
+pdf: /publications/regional-repercussions-october-7.pdf
 bodyEn: |
   The October 7 operation — and the retaliatory war waged by the Israeli occupation state against Gaza afterward — constituted a dramatic, pivotal event in the present and future of the Palestinian cause, and consequently in the region at large, as current realities imposed a shift in the directions of regional policy. The general trend — the Arab trend in particular — had been moving at a feverish pace toward completing the formation of a regional security system led by Israel — under the sponsorship of the United States — as a defensive alliance against the Iranian threat to the security of the region's states, through the remaining Arab states catching up with the train of Arab-Israeli normalization that was launched decades ago, and which has in recent years witnessed active movement toward some states joining it, as the Kingdom of Saudi Arabia — one of the most weighty states in the region — stood on the threshold of signing an anticipated agreement to normalize relations with Israel through American mediation shortly before October 7.
 

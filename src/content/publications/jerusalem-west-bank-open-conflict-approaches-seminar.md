@@ -5,7 +5,7 @@ title:
 category: seminars
 date: 2024-04-23
 coverImage: ../../assets/publications/real/jerusalem-west-bank-open-conflict-approaches-seminar.jpg
-pdf: http://phoenix-center.ps/wp-content/uploads/2023/08/الإدارات-التكتيكية-والبناء-الإستراتيجي-للفصائل.pdf
+pdf: /publications/jerusalem-west-bank-open-conflict-approaches-seminar.pdf
 bodyEn: |
   Phoenix Center for Research and Field Studies – Gaza University – held a dialogue session within the "Issue and Dialogue" program titled:
 

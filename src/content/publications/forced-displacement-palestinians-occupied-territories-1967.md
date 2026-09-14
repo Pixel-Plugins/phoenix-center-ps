@@ -5,7 +5,7 @@ title:
 category: research-field-studies
 date: 2025-01-28
 coverImage: ../../assets/publications/real/forced-displacement-palestinians-occupied-territories-1967.jpg
-pdf: http://phoenix-center.ps/wp-content/uploads/2025/01/التَّهجِير-القَسري-الإسرائيلي-للفلسطينيِّين-14.pdf
+pdf: /publications/forced-displacement-palestinians-occupied-territories-1967.pdf
 bodyEn: |
   **Introduction:**
 

@@ -5,7 +5,7 @@ title:
 category: fact-sheets
 date: 2024-04-23
 coverImage: ../../assets/publications/real/israeli-administrative-detention-palestinians-fact-sheet.jpg
-pdf: http://phoenix-center.ps/wp-content/uploads/2023/08/الاعتقال-الإداري-الإسرائيلي-ضد-الفلسطينيين.pdf
+pdf: /publications/israeli-administrative-detention-palestinians-fact-sheet.pdf
 bodyEn: |
   Phoenix Center for Studies and Field Research issued — as part of the Youth Capacity Development Project funded by the European Endowment for Democracy (EED) — a fact sheet titled: Israeli Administrative Detention Against Palestinians, prepared by the lawyer and researcher Adham Khader Al-Majdalawi. This paper was presented as part of a training program titled "Skills for Writing Policy and Fact Sheets."
 

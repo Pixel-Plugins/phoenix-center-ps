@@ -5,7 +5,7 @@ title:
 category: fact-sheets
 date: 2024-04-23
 coverImage: ../../assets/publications/real/pesticides-misuse-public-health-gaza-fact-sheet.jpg
-pdf: http://phoenix-center.ps/wp-content/uploads/2023/08/المبيدات-الزراعيه…-سوء-الإستخدام-والأثر-على-الصحة-العامة-بقطاع-غزة.pdf
+pdf: /publications/pesticides-misuse-public-health-gaza-fact-sheet.pdf
 bodyEn: |
   Phoenix Center for Studies and Field Research issued a fact sheet titled Agricultural Pesticides… Misuse and Impact on Public Health in the Gaza Strip.
 

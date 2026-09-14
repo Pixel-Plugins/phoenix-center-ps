@@ -5,7 +5,7 @@ title:
 category: political-papers
 date: 2024-04-22
 coverImage: ../../assets/publications/real/us-movement-settlement-track-election-year.jpg
-pdf: http://phoenix-center.ps/wp-content/uploads/2024/04/طبيعة-التحرك-الامريكي-في-مسار-التسوية-خلال-عام-الانتخابات.pdf
+pdf: /publications/us-movement-settlement-track-election-year.pdf
 bodyEn: |
   The relationship between the United States and Israel differs from its relations with any other country, as Israel enjoys substantial financial and military support, and political backing in international forums for everything it commits in the occupied Palestinian territories, which constitutes a blatant violation of international laws and conventions. This American conduct has, over the decades, contributed to providing Israel cover to bypass all prohibitions, which Israel has exploited in acts of revenge unprecedented in their brutality against Gaza and its people, in retaliation for the October 7 attack.
 

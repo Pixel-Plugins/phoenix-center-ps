@@ -1,7 +1,9 @@
 ---
+import { Image } from 'astro:assets';
 import { getLangFromUrl, pickLocalized } from '../../i18n/utils';
 import { approach, enumeratorStat } from '../../data/homepage';
 import Section from '../ui/Section.astro';
+import approachPhoto from '../../assets/homepage/approach-enumerator.jpg';
 
 const lang = getLangFromUrl(Astro.url);
 
@@ -26,10 +28,7 @@ const TICK =
     </div>
     <div class="approach__media" data-reveal>
       <figure class="approach__photo">
-        <img
-          src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=800&q=80"
-          alt="Enumerator conducting a household survey"
-        />
+        <Image src={approachPhoto} alt="Enumerator conducting a household survey" width={800} loading="lazy" />
       </figure>
       <div class="approach__badge">
         <strong>{enumeratorStat.value}</strong>

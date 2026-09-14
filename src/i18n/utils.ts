@@ -13,7 +13,9 @@ export type { Locale };
  */
 const BASE = import.meta.env.BASE_URL;
 
-function withBase(path: string): string {
+/** For root-relative static assets (e.g. public/downloads/*.pdf) that
+ *  aren't localized and don't go through localizedPath(). */
+export function withBase(path: string): string {
   if (BASE === '/' || BASE === '') return path;
   return `${BASE.replace(/\/$/, '')}${path}`;
 }

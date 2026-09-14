@@ -5,7 +5,7 @@ title:
 category: political-papers
 date: 2024-04-24
 coverImage: ../../assets/publications/real/national-policy-price-inflation-gaza.webp
-pdf: http://phoenix-center.ps/wp-content/uploads/2023/08/Noor.pdf
+pdf: /publications/national-policy-price-inflation-gaza.pdf
 bodyEn: |
   **Introduction**
 

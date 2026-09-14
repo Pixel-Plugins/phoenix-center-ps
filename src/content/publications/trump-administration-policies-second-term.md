@@ -5,7 +5,7 @@ title:
 category: political-papers
 date: 2025-04-06
 coverImage: ../../assets/publications/real/trump-administration-policies-second-term.jpg
-pdf: http://phoenix-center.ps/wp-content/uploads/2025/04/سياسات-إدارة-ترامب-تجاه-الأراضي-الفلسطينيَّة-في-الولاية-الثَّانية-04.pdf
+pdf: /publications/trump-administration-policies-second-term.pdf
 bodyEn: |
   The 2024 American presidential election constituted a new phase in the American political scene, with the return of Donald Trump to the White House for a second term. This comes amid great international and local interest in the war raging in Gaza and Lebanon, within a highly complex and intertwined regional scene, as the Middle East is expected to top the priorities of the new American administration.
 
