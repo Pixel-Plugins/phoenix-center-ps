@@ -2,7 +2,9 @@
 // GitHub Pages serves this single file for ANY unmatched path on the whole
 // site — English or Arabic — since it has no server-side routing to pick a
 // locale-specific 404. So unlike every other page, this one shows both
-// languages at once rather than picking one via getLangFromUrl().
+// languages at once rather than picking one via getLangFromUrl(). Styling
+// mirrors PageHero.astro's navy hero treatment (the one visual signature
+// every other page opens with) so this still reads as a Phoenix Center page.
 import '../styles/global.css';
 import { siteConfig, brand } from '../data/siteConfig';
 import { localizedPath } from '../i18n/utils';
@@ -15,23 +17,26 @@ import { localizedPath } from '../i18n/utils';
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="robots" content="noindex, nofollow" />
     <title>Page Not Found / الصفحة غير موجودة — {siteConfig.name}</title>
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
   </head>
   <body>
     <main class="notfound">
-      <img class="notfound__logo" src={brand.icon.src} alt={siteConfig.name} width="72" height="58" />
+      <img class="notfound__mark" src={brand.icon.src} alt={siteConfig.name} width="88" height="71" />
+
       <div class="notfound__block" dir="ltr" lang="en">
-        <p class="notfound__code">404</p>
+        <p class="notfound__eyebrow">404</p>
         <h1>Page not found</h1>
-        <p>The page you're looking for doesn't exist or may have moved.</p>
-        <a class="notfound__link" href={localizedPath('/', 'en')}>Go to homepage</a>
+        <p class="notfound__body">The page you're looking for doesn't exist or may have moved.</p>
+        <a class="notfound__cta" href={localizedPath('/', 'en')}>Go to homepage</a>
       </div>
-      <hr class="notfound__rule" />
-      <div class="notfound__block" dir="rtl" lang="ar">
-        <p class="notfound__code">٤٠٤</p>
+
+      <div class="notfound__divider" aria-hidden="true"></div>
+
+      <div class="notfound__block notfound__block--ar" dir="rtl" lang="ar">
+        <p class="notfound__eyebrow">٤٠٤</p>
         <h1>الصفحة غير موجودة</h1>
-        <p>الصفحة التي تبحث عنها غير موجودة أو ربما تم نقلها.</p>
-        <a class="notfound__link" href={localizedPath('/', 'ar')}>العودة إلى الرئيسية</a>
+        <p class="notfound__body">الصفحة التي تبحث عنها غير موجودة أو ربما تم نقلها.</p>
+        <a class="notfound__cta" href={localizedPath('/', 'ar')}>العودة إلى الرئيسية</a>
       </div>
     </main>
   </body>
@@ -44,48 +49,66 @@ import { localizedPath } from '../i18n/utils';
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 1.5rem;
-    padding: 2rem 1.5rem;
+    gap: 40px;
+    padding: 64px var(--gutter);
     text-align: center;
-    background: var(--paper);
-    color: var(--navy);
+    background: var(--color-surface-inverse);
+    background-image: radial-gradient(circle at 50% 0%, var(--navy-raised), var(--navy) 70%);
   }
-  .notfound__logo {
-    height: 48px;
+  .notfound__mark {
+    height: 64px;
     width: auto;
+    filter: drop-shadow(0 6px 18px rgb(0 0 0 / 0.35));
   }
-  .notfound__block {
-    max-width: 32rem;
-  }
-  .notfound__code {
-    font-size: 0.9rem;
-    letter-spacing: 0.08em;
-    font-weight: 600;
-    color: var(--sage-ink);
-    margin: 0 0 0.5rem;
+  .notfound__block { max-width: 34rem; }
+  .notfound__block--ar { font-family: var(--font-ar); }
+  .notfound__eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0 0 14px;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: var(--sage);
   }
   .notfound__block h1 {
-    font-size: 1.5rem;
-    margin: 0 0 0.5rem;
+    font-family: var(--font-head);
+    font-size: 32px;
+    line-height: 1.2;
+    font-weight: 700;
+    color: oklch(99% 0.005 85);
+    margin: 0 0 14px;
   }
-  .notfound__block p {
-    margin: 0 0 1rem;
-    opacity: 0.85;
+  .notfound__block--ar h1 { font-family: var(--font-ar); }
+  .notfound__body {
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--ink-on-navy);
+    margin: 0 0 28px;
   }
-  .notfound__link {
+  .notfound__cta {
     display: inline-block;
-    padding: 0.6rem 1.4rem;
-    border-radius: 999px;
-    background: var(--navy);
-    color: var(--paper);
     text-decoration: none;
-    font-weight: 600;
+    font-weight: 700;
+    font-size: 14px;
+    color: oklch(20% 0.03 75);
+    background: var(--gold);
+    border-radius: var(--r-sm);
+    padding: 12px 28px;
+    transition: background 0.18s ease;
   }
-  .notfound__rule {
+  .notfound__cta:hover { background: var(--gold-hover); color: oklch(20% 0.03 75); }
+  .notfound__divider {
     width: 100%;
-    max-width: 20rem;
-    border: none;
-    border-top: 1px solid var(--navy-rule);
-    margin: 0;
+    max-width: 22rem;
+    height: 1px;
+    background: var(--navy-rule);
+  }
+
+  @media (max-width: 640px) {
+    .notfound { gap: 32px; padding: 48px var(--gutter); }
+    .notfound__mark { height: 48px; }
+    .notfound__block h1 { font-size: 26px; }
   }
 </style>
