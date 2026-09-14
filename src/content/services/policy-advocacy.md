@@ -42,5 +42,5 @@ processSteps:
     description:
       en: We continuously monitor policy developments, legislative changes, and government actions relevant to our mission. Regular evaluation helps assess the impact of advocacy efforts and informs strategic adjustments.
       ar: نحن نراقب باستمرار تطورات السياسات والتغييرات التشريعية والإجراءات الحكومية ذات الصلة بمهمتنا. يساعد التقييم المنتظم على تقييم تأثير جهود المناصرة وإرشاد التعديلات الاستراتيجية.
-examplePublicationSlugs: []
+examplePublicationSlugs: [youth-political-participation-empowerment, israeli-elections-results-government-gaza-seminar]
 ---
