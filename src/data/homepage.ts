@@ -13,7 +13,7 @@ export const hero = {
   },
   body: {
     en: 'Phoenix Center converts rigorous quantitative and qualitative data into real action — through field studies, policy analysis, and on-ground data collection across Gaza and the West Bank.',
-    ar: 'يحوّل مركز فينيكس البيانات الكمية والنوعية الدقيقة إلى عمل حقيقي — عبر الدراسات الميدانية وتحليل السياسات وجمع البيانات الميدانية في غزة والضفة الغربية.',
+    ar: 'يحوّل مركز فينيق البيانات الكمية والنوعية الدقيقة إلى عمل حقيقي — عبر الدراسات الميدانية وتحليل السياسات وجمع البيانات الميدانية في غزة والضفة الغربية.',
   },
   cta1: { en: 'Explore Our Research', ar: 'استكشف أبحاثنا' },
   cta2: { en: 'Partner With Us', ar: 'كن شريكاً لنا' },
@@ -104,7 +104,7 @@ export const testimonials = {
     {
       quote: {
         en: "Phoenix Center's field teams delivered high-quality household survey data across Gaza under extremely difficult conditions.",
-        ar: 'قدمت فرق مركز فينيكس الميدانية بيانات مسح أسري عالية الجودة في غزة في ظل ظروف بالغة الصعوبة.',
+        ar: 'قدمت فرق مركز فينيق الميدانية بيانات مسح أسري عالية الجودة في غزة في ظل ظروف بالغة الصعوبة.',
       },
       name: 'M&E Lead',
       org: { en: 'International NGO Partner', ar: 'شريك منظمة دولية' },
@@ -125,7 +125,7 @@ export const newsletter = {
   title: { en: 'Get Our Research in Your Inbox', ar: 'احصل على أبحاثنا في بريدك' },
   body: {
     en: 'Subscribe for new publications, field study releases, and policy briefs from Phoenix Center.',
-    ar: 'اشترك لتصلك الإصدارات الجديدة والدراسات الميدانية وأوراق السياسات من مركز فينيكس.',
+    ar: 'اشترك لتصلك الإصدارات الجديدة والدراسات الميدانية وأوراق السياسات من مركز فينيق.',
   },
   placeholder: { en: 'Your email address', ar: 'بريدك الإلكتروني' },
   button: { en: 'Subscribe', ar: 'اشترك' },

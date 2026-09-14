@@ -5,7 +5,7 @@ heroStatement:
   ar: أدلة تُترجم إلى أوراق سياسات يستخدمها صناع القرار فعلياً.
 intro:
   en: Phoenix Center works directly with ministries, donors, and international bodies to turn field evidence into actionable policy recommendations — bilingual, timely, and grounded in real data.
-  ar: يعمل مركز فينيكس مباشرة مع الوزارات والجهات المانحة والهيئات الدولية لتحويل الأدلة الميدانية إلى توصيات سياسية قابلة للتنفيذ — ثنائية اللغة، وفي الوقت المناسب، ومبنية على بيانات حقيقية.
+  ar: يعمل مركز فينيق مباشرة مع الوزارات والجهات المانحة والهيئات الدولية لتحويل الأدلة الميدانية إلى توصيات سياسية قابلة للتنفيذ — ثنائية اللغة، وفي الوقت المناسب، ومبنية على بيانات حقيقية.
 processSteps:
   - step: 1
     title: { en: Needs Assessment, ar: تقييم الاحتياجات }

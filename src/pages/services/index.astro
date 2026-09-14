@@ -3,6 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageHero from '../../components/sections/PageHero.astro';
 import Section from '../../components/ui/Section.astro';
 import ServiceCard from '../../components/ui/ServiceCard.astro';
+import Button from '../../components/ui/Button.astro';
 import { getLangFromUrl, pickLocalized, localizedPath } from '../../i18n/utils';
 import { servicesListing } from '../../data/services';
 import { serviceLinks } from '../../data/nav';
@@ -29,7 +30,19 @@ const lang = getLangFromUrl(Astro.url);
     </div>
   </Section>
 
-  <Section variant="tint" headStyle="stack" title={pickLocalized(servicesListing.whyChoose.title, lang)?.value}>
+  <section class="mission-cta" data-reveal>
+    <p class="mission-cta__quote">{pickLocalized(servicesListing.missionQuote, lang)?.value}</p>
+    <Button href={localizedPath('/contact/', lang)} variant="gold">
+      {pickLocalized(servicesListing.contactCta, lang)?.value}
+    </Button>
+  </section>
+
+  <Section
+    variant="tint"
+    headStyle="stack"
+    title={pickLocalized(servicesListing.whyChoose.title, lang)?.value}
+    subtitle={pickLocalized(servicesListing.whyChoose.intro, lang)?.value}
+  >
     <div class="why-grid" data-reveal-stagger>
       {servicesListing.whyChoose.items.map((item) => (
         <div class="why-card">
@@ -43,6 +56,14 @@ const lang = getLangFromUrl(Astro.url);
 
 <style>
   .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .mission-cta {
+    max-width: 720px; margin: 0 auto; padding: 0 var(--gutter) 96px;
+    text-align: center; display: flex; flex-direction: column; align-items: center; gap: 28px;
+  }
+  .mission-cta__quote {
+    font-family: var(--font-head); font-size: 22px; line-height: 1.5;
+    font-weight: 600; color: var(--color-text-strong); margin: 0;
+  }
   .why-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
   .why-card {
     background: var(--color-surface); border: 1px solid var(--color-border);
