@@ -47,5 +47,5 @@ processSteps:
     description:
       en: Successful partnerships may lead to long-term collaborations between the center and external partners. This fosters ongoing innovation, continuous improvement, and a sustained focus on addressing societal challenges.
       ar: قد تؤدي الشراكات الناجحة إلى تعاون طويل الأمد بين المركز والشركاء الخارجيين. وهذا يعزز الابتكار المستمر والتحسين المستمر والتركيز المستمر على معالجة التحديات المجتمعية.
-examplePublicationSlugs: []
+examplePublicationSlugs: [palestinian-women-political-economic-empowerment, strokes-health-study]
 ---
