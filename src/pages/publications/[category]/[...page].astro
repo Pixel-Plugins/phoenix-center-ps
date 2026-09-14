@@ -9,7 +9,7 @@ import PublicationGrid from '../../../components/publications/PublicationGrid.as
 import Pagination from '../../../components/publications/Pagination.astro';
 import { publicationCategories } from '../../../content.config';
 import { publicationCategoryLabels, publicationsPageSize } from '../../../data/siteConfig';
-import { getLangFromUrl } from '../../../i18n/utils';
+import { getLangFromUrl, localizedPath } from '../../../i18n/utils';
 
 export const getStaticPaths = (async ({ paginate }) => {
   const all = (await getCollection('publications')).sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
@@ -17,13 +17,22 @@ export const getStaticPaths = (async ({ paginate }) => {
 
   return categorySlugs.flatMap((category) => {
     const entries = category === 'all' ? all : all.filter((p) => p.data.category === category);
-    return paginate(entries, { pageSize: publicationsPageSize, params: { category } });
+    const pages = paginate(entries, { pageSize: publicationsPageSize, params: { category } });
+    // Page 1 of "all" is served by /publications/index.astro instead, to avoid
+    // duplicate content at two URLs.
+    return category === 'all' ? pages.filter((p) => p.props.page.currentPage !== 1) : pages;
   });
 }) satisfies GetStaticPaths;
 
 const { category } = Astro.params;
 const { page } = Astro.props;
 const lang = getLangFromUrl(Astro.url);
+
+// Page 2 of "all" would otherwise link "prev" back to the now-removed
+// /publications/all/ page 1 — send it to the real root index instead.
+if (category === 'all' && page.currentPage === 2) {
+  page.url.prev = localizedPath('/publications/', lang);
+}
 
 const copy = {
   en: { eyebrow: 'Publications', title: 'Publications' },
