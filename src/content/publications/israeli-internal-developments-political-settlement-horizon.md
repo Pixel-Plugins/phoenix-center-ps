@@ -5,7 +5,7 @@ title:
 category: political-papers
 date: 2024-05-26
 coverImage: ../../assets/publications/real/israeli-internal-developments-political-settlement-horizon.jpg
-pdf: http://phoenix-center.ps/wp-content/uploads/2024/05/التطورات-الداخلية-الإسرائيلية-وأفق-التسوية-السياسية-02.pdf
+pdf: /publications/israeli-internal-developments-political-settlement-horizon.pdf
 bodyEn: |
   **A Research Paper on the Internal Israeli Political Movement Between the Right Wing and the Generals**
 

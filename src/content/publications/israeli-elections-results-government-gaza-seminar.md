@@ -5,7 +5,7 @@ title:
 category: seminars
 date: 2024-04-23
 coverImage: ../../assets/publications/real/israeli-elections-results-government-gaza-seminar.jpg
-pdf: http://phoenix-center.ps/wp-content/uploads/2023/08/تداعيات-نتائح-الانتخابات-الاسرائيلية-على-قطاع-غزة.pdf
+pdf: /publications/israeli-elections-results-government-gaza-seminar.pdf
 bodyEn: |
   Phoenix Center for Research and Field Studies – Gaza University – held, as part of its weekly activities, a dialogue session within the "Issue and Dialogue" program titled: "The Repercussions of the Israeli Election Results and the Expected Government on the Gaza Strip."
 

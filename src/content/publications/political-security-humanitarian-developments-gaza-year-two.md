@@ -5,7 +5,7 @@ title:
 category: political-papers
 date: 2025-05-25
 coverImage: ../../assets/publications/real/political-security-humanitarian-developments-gaza-year-two.jpg
-pdf: http://phoenix-center.ps/wp-content/uploads/2025/05/التطورات-السياسية-والأمنية-في-الأراضي-الفلسطينية-02.pdf
+pdf: /publications/political-security-humanitarian-developments-gaza-year-two.pdf
 bodyEn: |
   **Introduction**
 

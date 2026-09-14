@@ -5,7 +5,7 @@ title:
 category: research-field-studies
 date: 2024-04-24
 coverImage: ../../assets/publications/real/strokes-health-study.jpg
-pdf: http://phoenix-center.ps/wp-content/uploads/2024/04/Stroke-in-Gaza-8_15_2023.pdf
+pdf: /publications/strokes-health-study.pdf
 bodyEn: |
   Phoenix Center for Research and Field Studies has launched its annual research project in the health field, and the topic of "strokes" was chosen as this year's annual research subject and title, as strokes in the Gaza Strip are one of the most prominent causes of death and disability, as a result of social and economic conditions as well as the siege imposed on the Gaza Strip.
 

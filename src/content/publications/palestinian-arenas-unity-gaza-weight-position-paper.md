@@ -5,7 +5,7 @@ title:
 category: political-papers
 date: 2024-04-23
 coverImage: ../../assets/publications/real/palestinian-arenas-unity-gaza-weight-position-paper.jpg
-pdf: http://phoenix-center.ps/wp-content/uploads/2023/08/في-وحدة-الساحات-الفلسطينية-والوزن-النوعي-لغزة-بين-المتغير-السياسي-والمتحول-التاريخي.pdf
+pdf: /publications/palestinian-arenas-unity-gaza-weight-position-paper.pdf
 bodyEn: |
   The geography of the Gaza Strip, with its demographic makeup and the limited scope of its geography and political borders since the Nakba of 1948, has determined its role as a political geography positioned either as the foremost player among the first ranks, or as the main locomotive of the national project. Gaza was the cradle in which political forces were born, and the first building blocks of the structure of the conflict were formed on Gaza's soil.
 

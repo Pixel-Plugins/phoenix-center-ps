@@ -5,7 +5,7 @@ title:
 category: political-papers
 date: 2024-08-25
 coverImage: ../../assets/publications/real/icj-advisory-opinion-legal-political-reading.jpg
-pdf: http://phoenix-center.ps/wp-content/uploads/2024/08/قراءات-إستراتيجيَّة-العدد-الأوَّل-09.pdf
+pdf: /publications/icj-advisory-opinion-legal-political-reading.pdf
 bodyEn: |
   **Introduction**
 

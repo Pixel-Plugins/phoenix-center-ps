@@ -5,7 +5,7 @@ title:
 category: political-papers
 date: 2024-04-15
 coverImage: ../../assets/publications/real/al-aqsa-flood-operation-goals-repercussions.jpg
-pdf: http://phoenix-center.ps/wp-content/uploads/2024/04/عملية-طوفان-الأقصى-06.pdf
+pdf: /publications/al-aqsa-flood-operation-goals-repercussions.pdf
 bodyEn: |
   The Al-Aqsa Flood operation intensified the security and political challenges facing Israeli policies toward the Gaza Strip. The Strip has always been present as a security challenge on the table of the Israeli decision-maker ever since the establishment of the State of Israel, and what particularly reinforced its security presence was its being considered an advanced Egyptian military pocket inside the State of Israel. In 1949, the Israeli government under Ben-Gurion held a discussion on the security threat of the Strip, and at the time Ben-Gurion called for occupying and annexing it. These challenges were further reinforced by the Strip's transformation, over the past years, into a persistent headache in the mind of the Israeli security and political establishment.
 

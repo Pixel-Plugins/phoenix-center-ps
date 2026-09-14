@@ -5,7 +5,7 @@ title:
 category: political-papers
 date: 2024-04-17
 coverImage: ../../assets/publications/real/gaza-gas-field.jpg
-pdf: http://phoenix-center.ps/wp-content/uploads/2023/08/الغاز-–-غاز-غزة.pdf
+pdf: /publications/gaza-gas-field.pdf
 bodyEn: |
   Gaza's gas derives its geostrategic value from bordering a politically complex territory, around and over which multi-level, multi-instrument conflicts revolve. Gaza's gas went unnoticed for nearly two decades: neither did the Palestinian political authority in Ramallah raise the issue of the Gaza Strip's fields, nor did Hamas — which inherited control over the Gaza Strip — place it on its agenda, whether in its conflict with the Authority, with Israel, or in its relationship with Egypt.
 

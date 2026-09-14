@@ -5,7 +5,7 @@ title:
 category: political-papers
 date: 2025-05-18
 coverImage: ../../assets/publications/real/israel-dilemma-day-after-war.jpg
-pdf: http://phoenix-center.ps/wp-content/uploads/2024/04/إسرائيل-ومعضلة-اليوم-التالي-للحرب.pdf
+pdf: /publications/israel-dilemma-day-after-war.pdf
 bodyEn: |
   Since Israel declared war on the Gaza Strip, it has set its goals as eliminating the military capabilities of the Palestinian factions and the governing capabilities of Hamas's rule in the Strip, and talk began about the dilemma of the day after the war, especially amid the emergence of fundamental points of disagreement between the Netanyahu government and the Biden administration over the strategy for the day after the war. Israel, which declared through Netanyahu that it would not allow the return of the Palestinian Authority to the Strip in order to ensure the continued separation of Palestinian political geography, with the aim of continuing to evade the foundations of a settlement and the two-state principle, has not yet put forward any workable vision or plan of action for the dilemma of the day after the war.
 

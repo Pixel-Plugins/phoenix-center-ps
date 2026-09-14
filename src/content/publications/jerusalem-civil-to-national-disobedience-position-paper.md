@@ -5,7 +5,7 @@ title:
 category: case-assessment
 date: 2024-04-24
 coverImage: ../../assets/publications/real/jerusalem-civil-to-national-disobedience-position-paper.webp
-pdf: http://phoenix-center.ps/wp-content/uploads/2023/08/القدس-من-العصيان-المدني-الى-العصيان-الوطني.pdf
+pdf: /publications/jerusalem-civil-to-national-disobedience-position-paper.pdf
 bodyEn: |
   The shifts in the policy of the Israeli right-wing government, led by Benjamin Netanyahu, along with extremist religious and nationalist party blocs, have led to the opening of new windows in the conflict between the Palestinian people and the Israeli occupation authorities. This opening has placed us on the threshold of a new era, one with characteristics and tools that enable a qualitative opening of a new phase of conflict onto renewed horizons, within the context of its own particular conditions and everything the current and future historical and political moment entails in terms of requirements and necessities — added to this is the accumulated experience of the Palestinian people's struggle, with both its setbacks and its achievements. This accumulated experience takes shape according to the will of the Palestinian people, who through their long experience have learned how to build and structure their struggle in line with their needs, and in a manner suited to confronting the administrations and tactics of the occupation authorities and its racist approach.
 

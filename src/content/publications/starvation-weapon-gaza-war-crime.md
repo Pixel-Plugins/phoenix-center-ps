@@ -5,7 +5,7 @@ title:
 category: political-papers
 date: 2025-05-26
 coverImage: ../../assets/publications/real/starvation-weapon-gaza-war-crime.jpg
-pdf: http://phoenix-center.ps/wp-content/uploads/2025/05/سلاحُ-التَّجويع-الإسرائيلي-فِي-قطاع-غزَّة-03.pdf
+pdf: /publications/starvation-weapon-gaza-war-crime.pdf
 bodyEn: |
   **Introduction**
 

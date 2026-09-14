@@ -1,7 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 import type { CollectionEntry } from 'astro:content';
-import { getLangFromUrl, pickLocalized, localizedPath } from '../../i18n/utils';
+import { getLangFromUrl, pickLocalized, localizedPath, withBase } from '../../i18n/utils';
 import { projectActivitiesHeading } from '../../data/siteConfig';
 
 interface Props {
@@ -74,7 +74,7 @@ const hasLongActivities = activities.some((a) => (pickLocalized(a, lang)?.value?
     {(pdf || ctaUrl) && (
       <div class="proj-card__actions">
         {pdf && (
-          <a class="btn-navy" href={pdf} target="_blank" rel="noopener noreferrer">
+          <a class="btn-navy" href={withBase(pdf)} target="_blank" rel="noopener noreferrer">
             <span>{lang === 'ar' ? 'تحميل التقرير' : 'Download report'}</span>
             <svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h9M8.5 4 12.5 8l-4 4" stroke="#a5c8b0" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </a>
