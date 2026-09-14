@@ -1,7 +1,7 @@
 /* Real content scraped from the live site's About Us page. */
 
 export const about = {
-  eyebrow: { en: 'About Phoenix', ar: 'عن فينيكس' },
+  eyebrow: { en: 'About Phoenix', ar: 'عن فينيق' },
   title: { en: 'About Us', ar: 'من نحن' },
   intro: {
     en: 'An independent Palestinian non-profit institution committed to fulfilling the political, economic, and social needs of Palestinian communities.',

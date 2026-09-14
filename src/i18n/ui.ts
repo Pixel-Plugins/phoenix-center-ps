@@ -61,7 +61,7 @@ export const ui = {
     'contact.errorMessage': "Something went wrong sending your message — please try again, or email us directly below.",
   },
   ar: {
-    'brand.name': 'مركز فينيكس',
+    'brand.name': 'مركز فينيق',
     'brand.tagline': 'أبحاث ودراسات ميدانية',
     'nav.services': 'خدماتنا',
     'nav.approach': 'منهجيتنا',
@@ -75,7 +75,7 @@ export const ui = {
     'footer.contact': 'تواصل معنا',
     'footer.addressLabel': 'مبنى أبو شعبان، شارع المؤسسات، غزة، فلسطين',
     'footer.about': 'مؤسسة فلسطينية غير ربحية مستقلة تُمكّن المجتمعات من خلال البحث والبيانات ومناصرة السياسات.',
-    'footer.rightsText': '© 2026 مركز فينيكس. جميع الحقوق محفوظة.',
+    'footer.rightsText': '© 2026 مركز فينيق. جميع الحقوق محفوظة.',
     'footer.privacy': 'سياسة الخصوصية',
     'footer.terms': 'شروط الخدمة',
     'partners.eyebrow': 'بالشراكة مع مؤسسات محلية ودولية',

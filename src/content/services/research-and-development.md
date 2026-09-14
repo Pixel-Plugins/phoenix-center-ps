@@ -5,7 +5,7 @@ heroStatement:
   ar: أبحاث ودراسات ميدانية دقيقة، مبنية على بيانات مجتمعية حقيقية.
 intro:
   en: For 14+ years, Phoenix Center has designed and delivered policy papers, case assessments, and field research across Gaza and the West Bank — converting quantitative and qualitative data into evidence organizations can act on.
-  ar: منذ أكثر من 14 عاماً، صمّم مركز فينيكس ونفّذ أوراق سياسات وتقييمات حالة وأبحاثاً ميدانية في غزة والضفة الغربية — محوّلاً البيانات الكمية والنوعية إلى أدلة يمكن للمؤسسات البناء عليها.
+  ar: منذ أكثر من 14 عاماً، صمّم مركز فينيق ونفّذ أوراق سياسات وتقييمات حالة وأبحاثاً ميدانية في غزة والضفة الغربية — محوّلاً البيانات الكمية والنوعية إلى أدلة يمكن للمؤسسات البناء عليها.
 processSteps:
   - step: 1
     title: { en: Needs Assessment, ar: تقييم الاحتياجات }

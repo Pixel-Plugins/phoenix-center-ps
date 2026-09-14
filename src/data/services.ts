@@ -7,37 +7,51 @@ export const servicesListing = {
   title: { en: 'Services', ar: 'خدماتنا' },
   intro: {
     en: 'At Phoenix Research Center, our commitment lies in driving meaningful transformation and progress within society. Rooted in a foundation of expertise, innovation, and collaboration, our comprehensive services pave the way for positive societal change. With a steadfast focus on Research and Development, Policy Advocacy, and Training and Capacity Building, we are dedicated to shaping a brighter future.',
-    ar: 'في مركز فينيكس للأبحاث، يكمن التزامنا في قيادة تحول حقيقي وتقدم داخل المجتمع. انطلاقاً من أساس راسخ من الخبرة والابتكار والتعاون، تمهد خدماتنا الشاملة الطريق نحو تغيير مجتمعي إيجابي. وبتركيز ثابت على البحث والتطوير، ومناصرة السياسات، والتدريب وبناء القدرات، نحن ملتزمون برسم ملامح مستقبل أكثر إشراقاً.',
+    ar: 'في مركز فينيق للأبحاث، يكمن التزامنا في قيادة تحول حقيقي وتقدم داخل المجتمع. انطلاقاً من أساس راسخ من الخبرة والابتكار والتعاون، تمهد خدماتنا الشاملة الطريق نحو تغيير مجتمعي إيجابي. وبتركيز ثابت على البحث والتطوير، ومناصرة السياسات، والتدريب وبناء القدرات، نحن ملتزمون برسم ملامح مستقبل أكثر إشراقاً.',
   },
+  /* Real quote from the live /services/ page (also appears, in a
+     differently-worded Arabic translation, as the About page's Vision
+     quote — the live site itself isn't consistent between pages here, so
+     this keeps the exact wording as it appears on THIS page). */
+  missionQuote: {
+    en: 'We strive to achieve political, economic and social resilience to empower Palestinian communities with human rights and dignity',
+    ar: 'نحن نسعى جاهدين لتحقيق المرونة السياسية والاقتصادية والاجتماعية لتمكين المجتمعات الفلسطينية وتمتعها بحقوق الإنسان والكرامة',
+  },
+  contactCta: { en: 'Contact us', ar: 'للتواصل' },
   whyChoose: {
-    title: { en: 'Why Choose Phoenix', ar: 'لماذا تختار فينيكس' },
+    /* Real text from the live /services/ page. */
+    title: { en: 'Why Choose Phoenix', ar: 'لماذا تختار فينيق' },
+    intro: {
+      en: 'Choose Phoenix and become a partner in shaping a brighter, more equitable future.',
+      ar: 'اختر فينيق وكن شريكًا في تشكيل مستقبل أكثر إشراقًا وإنصافًا.',
+    },
     items: [
       {
-        title: { en: 'Expertise in Innovation', ar: 'خبرة في الابتكار' },
+        title: { en: 'Expertise in Innovation', ar: 'الابتكار' },
         desc: {
-          en: 'Methodologies that adapt to hard-to-reach, fast-changing field conditions.',
-          ar: 'منهجيات تتكيف مع الظروف الميدانية صعبة الوصول والمتغيرة بسرعة.',
+          en: 'Our relentless pursuit of innovative solutions, backed by data and collaboration, sets us apart as change catalysts.',
+          ar: 'إن سعينا الدؤوب لإيجاد حلول مبتكرة، مدعومة بالبيانات والتعاون، يميزنا كمحفزين للتغيير.',
         },
       },
       {
-        title: { en: 'Impactful Advocacy', ar: 'مناصرة ذات أثر' },
+        title: { en: 'Impactful Advocacy', ar: 'المناصرة' },
         desc: {
-          en: 'Evidence translated into policy briefs decision-makers actually use.',
-          ar: 'أدلة تُترجم إلى أوراق سياسات يستخدمها صناع القرار فعلياً.',
+          en: 'We drive tangible change through strategic policy reforms, fueled by research, education, and effective collaboration.',
+          ar: 'نحن نقود التغيير الملموس من خلال إصلاحات السياسات الاستراتيجية، التي يغذيها البحث والتعليم والتعاون الفعال.',
         },
       },
       {
-        title: { en: 'Empowerment Through Learning', ar: 'التمكين من خلال التعلم' },
+        title: { en: 'Empowerment Through Learning', ar: 'التمكين' },
         desc: {
-          en: 'Training programs that build lasting local institutional capacity.',
-          ar: 'برامج تدريبية تبني قدرات مؤسسية محلية مستدامة.',
+          en: 'Our tailored training programs empower individuals and teams to excel, innovate, and lead with confidence.',
+          ar: 'تعمل برامجنا التدريبية المصممة خصيصًا على تمكين الأفراد والفرق من التفوق والابتكار والقيادة بثقة.',
         },
       },
       {
-        title: { en: 'Holistic Approach', ar: 'نهج شامل' },
+        title: { en: 'Holistic Approach', ar: 'نهج شمولي' },
         desc: {
-          en: 'Research, advocacy, and capacity building working together, not in isolation.',
-          ar: 'البحث والمناصرة وبناء القدرات تعمل معاً وليس بمعزل عن بعضها.',
+          en: 'Offering comprehensive services that span Research and Development, Policy Advocacy, and Training—providing a one-stop solution for societal progress.',
+          ar: 'تقديم خدمات شاملة من البحث والتطوير، دراسة السياسات، التدريب وبناء القدرات - مما يوفر حلاً شاملاً للتقدم المجتمعي.',
         },
       },
     ],

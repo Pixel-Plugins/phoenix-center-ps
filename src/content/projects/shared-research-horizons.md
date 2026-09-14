@@ -12,7 +12,7 @@ activities:
   - en: Publishing internal position assessments for Gaza, including analytical information, information unknown to the outside world, and points of view that reflect the vision of the center
     ar: نشر تقييمات الموقف الداخلي لغزة والتي تتضمن معلومات تحليلية ومعلومات غير معروفة للعالم الخارجي ووجهات نظر تعكس رؤية المركز
   - en: Phoenix Center publishes policy analysis and case evaluation papers
-    ar: ينشر مركز فينيكس تحليل السياسات وأوراق تقييم الحالة
+    ar: ينشر مركز فينيق تحليل السياسات وأوراق تقييم الحالة
   - en: Phoenix Center conducts an annual research project with a specific title, involving an in-depth study of a specific case or sector in Gaza, producing multiple outputs such as research papers, conferences, a detailed report announced at an academic symposium or press conference, and seminars on the subject
     ar: يقوم مركز فينيق بإجراء مشروع بحثي سنوي بعنوان محدد يتضمن دراسة حالة أو قطاع معين في غزة بشكل متعمق، ويقدم مخرجات متعددة مثل الأوراق البحثية، والمؤتمرات، والإعلان عن تقرير مفصل حول الموضوع في ندوة أكاديمية أو مؤتمر صحفي، وعقد ندوات حول الموضوع
 logo: ../../assets/projects/arab-center-acrps.png
