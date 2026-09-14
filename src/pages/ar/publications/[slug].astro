@@ -1,14 +1,15 @@
 ---
 import type { GetStaticPaths } from 'astro';
 import { getCollection, render } from 'astro:content';
-import { Image } from 'astro:assets';
+import { Image, getImage } from 'astro:assets';
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import Section from '../../../components/ui/Section.astro';
 import Button from '../../../components/ui/Button.astro';
 import PublicationGrid from '../../../components/publications/PublicationGrid.astro';
-import { getLangFromUrl, pickLocalized, localizedPath, useTranslations } from '../../../i18n/utils';
-import { publicationCategoryLabels } from '../../../data/siteConfig';
+import { getLangFromUrl, pickLocalized, localizedPath, useTranslations, toCanonicalPathname } from '../../../i18n/utils';
+import { publicationCategoryLabels, siteConfig } from '../../../data/siteConfig';
 import { extractByline } from '../../../lib/extractByline';
+import { excerptFromBody } from '../../../lib/excerptFromBody';
 
 export const getStaticPaths = (async () => {
   const entries = await getCollection('publications');
@@ -44,9 +45,32 @@ function neighborTitle(neighbor: typeof prev) {
   if (!neighbor) return null;
   return pickLocalized(neighbor.data.title, lang);
 }
+
+const description = excerpt?.value ?? excerptFromBody(entry.body) ?? undefined;
+const coverImage = await getImage({ src: entry.data.coverImage, width: 1200 });
+const coverImageHref = new URL(toCanonicalPathname(coverImage.src), siteConfig.url).toString();
+const publishedTime = entry.data.date.toISOString();
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'ScholarlyArticle',
+  headline: title?.value,
+  datePublished: publishedTime,
+  inLanguage: title?.lang,
+  image: coverImageHref,
+  description,
+  ...(byline ? { author: { '@type': 'Person', name: byline } } : { author: { '@type': 'Organization', name: siteConfig.name } }),
+  publisher: { '@type': 'Organization', name: siteConfig.name, url: siteConfig.url },
+};
 ---
 
-<BaseLayout title={title?.value ?? 'Publication'}>
+<BaseLayout
+  title={title?.value ?? 'Publication'}
+  description={description}
+  type="article"
+  publishedTime={publishedTime}
+  image={coverImageHref}
+  structuredData={articleSchema}
+>
   <article>
     <section class="pub-hero">
       <div class="pub-hero__glow" aria-hidden="true"></div>

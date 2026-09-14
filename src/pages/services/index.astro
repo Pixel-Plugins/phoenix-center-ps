@@ -11,7 +11,7 @@ import { serviceLinks } from '../../data/nav';
 const lang = getLangFromUrl(Astro.url);
 ---
 
-<BaseLayout title={pickLocalized(servicesListing.title, lang)?.value ?? 'Services'}>
+<BaseLayout title={pickLocalized(servicesListing.title, lang)?.value ?? 'Services'} description={pickLocalized(servicesListing.intro, lang)?.value}>
   <PageHero
     eyebrow={pickLocalized(servicesListing.eyebrow, lang)?.value}
     title={pickLocalized(servicesListing.title, lang)?.value ?? ''}

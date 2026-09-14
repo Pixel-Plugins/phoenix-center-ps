@@ -30,7 +30,7 @@ const copy = {
 const formConfigured = siteConfig.formspreeFormId && !siteConfig.formspreeFormId.startsWith('REPLACE_');
 ---
 
-<BaseLayout title={copy.title}>
+<BaseLayout title={copy.title} description={copy.subtitle}>
   <PageHero eyebrow={copy.eyebrow} title={copy.title} subtitle={copy.subtitle} />
 
   <Section variant="tight">

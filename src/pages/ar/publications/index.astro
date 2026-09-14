@@ -16,12 +16,20 @@ const firstPage = all.slice(0, publicationsPageSize);
 const hasMore = all.length > publicationsPageSize;
 
 const copy = {
-  en: { eyebrow: 'Publications', title: 'Publications' },
-  ar: { eyebrow: 'الإصدارات', title: 'الإصدارات' },
+  en: {
+    eyebrow: 'Publications',
+    title: 'Publications',
+    description: 'Research papers, policy papers, fact sheets, and field studies published by Phoenix Center.',
+  },
+  ar: {
+    eyebrow: 'الإصدارات',
+    title: 'الإصدارات',
+    description: 'أوراق بحثية، وأوراق سياسات، وأوراق حقائق، ودراسات ميدانية صادرة عن مركز فينيق.',
+  },
 }[lang];
 ---
 
-<BaseLayout title={copy.title}>
+<BaseLayout title={copy.title} description={copy.description}>
   <PageHero eyebrow={copy.eyebrow} title={copy.title} />
 
   <Section variant="tight">

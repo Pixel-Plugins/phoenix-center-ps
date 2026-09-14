@@ -15,7 +15,7 @@ if (!service) throw new Error('Missing services/training-and-capacity-building.m
 const examples = await getRelatedPublications(service);
 ---
 
-<BaseLayout title={pickLocalized(service.data.heroStatement, lang)?.value ?? 'Training & Capacity Building'}>
+<BaseLayout title={pickLocalized(service.data.heroStatement, lang)?.value ?? 'Training & Capacity Building'} description={pickLocalized(service.data.intro, lang)?.value}>
   <PageHero title={pickLocalized(service.data.heroStatement, lang)?.value ?? ''} subtitle={pickLocalized(service.data.intro, lang)?.value} />
 
   <Section variant="tight">

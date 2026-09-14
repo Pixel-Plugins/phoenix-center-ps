@@ -1,0 +1,91 @@
+---
+// GitHub Pages serves this single file for ANY unmatched path on the whole
+// site — English or Arabic — since it has no server-side routing to pick a
+// locale-specific 404. So unlike every other page, this one shows both
+// languages at once rather than picking one via getLangFromUrl().
+import '../styles/global.css';
+import { siteConfig, brand } from '../data/siteConfig';
+import { localizedPath } from '../i18n/utils';
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Page Not Found / الصفحة غير موجودة — {siteConfig.name}</title>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  </head>
+  <body>
+    <main class="notfound">
+      <img class="notfound__logo" src={brand.icon.src} alt={siteConfig.name} width="72" height="58" />
+      <div class="notfound__block" dir="ltr" lang="en">
+        <p class="notfound__code">404</p>
+        <h1>Page not found</h1>
+        <p>The page you're looking for doesn't exist or may have moved.</p>
+        <a class="notfound__link" href={localizedPath('/', 'en')}>Go to homepage</a>
+      </div>
+      <hr class="notfound__rule" />
+      <div class="notfound__block" dir="rtl" lang="ar">
+        <p class="notfound__code">٤٠٤</p>
+        <h1>الصفحة غير موجودة</h1>
+        <p>الصفحة التي تبحث عنها غير موجودة أو ربما تم نقلها.</p>
+        <a class="notfound__link" href={localizedPath('/', 'ar')}>العودة إلى الرئيسية</a>
+      </div>
+    </main>
+  </body>
+</html>
+
+<style>
+  .notfound {
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    padding: 2rem 1.5rem;
+    text-align: center;
+    background: var(--paper);
+    color: var(--navy);
+  }
+  .notfound__logo {
+    height: 48px;
+    width: auto;
+  }
+  .notfound__block {
+    max-width: 32rem;
+  }
+  .notfound__code {
+    font-size: 0.9rem;
+    letter-spacing: 0.08em;
+    font-weight: 600;
+    color: var(--sage-ink);
+    margin: 0 0 0.5rem;
+  }
+  .notfound__block h1 {
+    font-size: 1.5rem;
+    margin: 0 0 0.5rem;
+  }
+  .notfound__block p {
+    margin: 0 0 1rem;
+    opacity: 0.85;
+  }
+  .notfound__link {
+    display: inline-block;
+    padding: 0.6rem 1.4rem;
+    border-radius: 999px;
+    background: var(--navy);
+    color: var(--paper);
+    text-decoration: none;
+    font-weight: 600;
+  }
+  .notfound__rule {
+    width: 100%;
+    max-width: 20rem;
+    border: none;
+    border-top: 1px solid var(--navy-rule);
+    margin: 0;
+  }
+</style>
