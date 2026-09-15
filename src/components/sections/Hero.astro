@@ -4,7 +4,7 @@ import { getLangFromUrl, pickLocalized, localizedPath } from '../../i18n/utils';
 import { hero } from '../../data/homepage';
 import Button from '../ui/Button.astro';
 import StatStrip from './StatStrip.astro';
-import heroImage from '../../assets/homepage/hero-field-survey.jpg';
+import heroImage from '../../assets/homepage/hero-home.jpg';
 
 const lang = getLangFromUrl(Astro.url);
 const eyebrow = pickLocalized(hero.eyebrow, lang)?.value;
@@ -18,7 +18,7 @@ const cta2 = pickLocalized(hero.cta2, lang)?.value;
   <div class="hero__media">
     <Image
       src={heroImage}
-      alt="Field researchers reviewing a survey form together"
+      alt="A field researcher documenting conditions in a damaged neighborhood, with data and mapping overlays"
       width={1600}
       loading="eager"
       fetchpriority="high"

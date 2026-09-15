@@ -8,28 +8,26 @@ export const hero = {
     ar: 'مؤسسة فلسطينية مستقلة غير ربحية للأبحاث والدراسات الميدانية',
   },
   title: {
-    en: 'Empowering Positive Change Through Independent Research and Policy Advocacy',
-    ar: 'تمكين التغيير الإيجابي من خلال البحث المستقل ومناصرة السياسات',
+    en: 'We bridge research, data collection, and project implementation',
+    ar: 'ربط البحث الميداني بالبيانات والعمل التنموي',
   },
   body: {
-    en: 'Phoenix Center converts rigorous quantitative and qualitative data into real action — through field studies, policy analysis, and on-ground data collection across Gaza and the West Bank.',
-    ar: 'يحوّل مركز فينيق البيانات الكمية والنوعية الدقيقة إلى عمل حقيقي — عبر الدراسات الميدانية وتحليل السياسات وجمع البيانات الميدانية في غزة والضفة الغربية.',
+    en: 'Phoenix Center turns evidence from the field into actionable insights, informed decisions, and meaningful impact for communities.',
+    ar: 'لإنتاج أدلة موثوقة ودعم صنع القرار وتحويل المعرفة إلى أثر ملموس ومستدام.',
   },
   cta1: { en: 'Explore Our Research', ar: 'استكشف أبحاثنا' },
   cta2: { en: 'Partner With Us', ar: 'كن شريكاً لنا' },
 };
 
 export const stats = {
-  verified: false,
+  verified: true,
   items: [
-    { target: 14, suffix: '+', label: { en: 'Years of Impact', ar: 'سنوات من الأثر' } },
-    { target: 180, suffix: '+', label: { en: 'Studies & Assessments Published', ar: 'دراسة وتقييم منشور' } },
-    { target: 65000, suffix: '+', label: { en: 'Households & Individuals Surveyed', ar: 'أسرة وفرد شملهم المسح' } },
-    { target: 30, suffix: '+', label: { en: 'Local & International Partners', ar: 'شريك محلي ودولي' } },
+    { target: 6, suffix: '+', label: { en: 'Years of Impact', ar: 'سنوات من الأثر' } },
+    { target: 51, suffix: '+', label: { en: 'Studies & Assessments Published', ar: 'دراسة وتقييم منشور' } },
+    { target: 10000, suffix: '+', label: { en: 'Households & Individuals Surveyed', ar: 'أسرة وفرد شملهم المسح' } },
+    { target: 5, suffix: '+', label: { en: 'Local & International Partners', ar: 'شريك محلي ودولي' } },
   ],
 };
-
-export const enumeratorStat = { verified: false, value: '120+' };
 
 export const pillars = {
   eyebrow: { en: 'What We Do', ar: 'ماذا نقدم' },
@@ -79,14 +77,13 @@ export const pillars = {
 export const approach = {
   eyebrow: { en: 'Our Approach', ar: 'منهجيتنا' },
   title: {
-    en: 'Built for Organizations That Need Reliable Data on the Ground',
-    ar: 'مصمَّمون للمؤسسات التي تحتاج بيانات ميدانية موثوقة',
+    en: 'Evidence for Stronger Communities',
+    ar: 'أدلة لمجتمعات أقوى',
   },
   body: {
     en: 'We work with UN agencies, INGOs, donors, and ministries who need credible monitoring, evaluation, and research capacity in hard-to-reach communities.',
     ar: 'نعمل مع وكالات أممية ومنظمات دولية وجهات مانحة ووزارات تحتاج قدرات رصد وتقييم وبحث موثوقة في المجتمعات صعبة الوصول.',
   },
-  badgeLabel: { en: 'Trained field enumerators', ar: 'باحث ميداني مدرّب' },
   items: [
     { en: 'On-ground enumerator teams across Gaza & the West Bank', ar: 'فرق ميدانية منتشرة في غزة والضفة الغربية' },
     { en: 'Mixed-methods design: surveys, interviews & focus groups', ar: 'منهجية مختلطة: مسوحات ومقابلات ومجموعات نقاش' },
