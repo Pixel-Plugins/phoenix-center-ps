@@ -1,7 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 import { getLangFromUrl, pickLocalized } from '../../i18n/utils';
-import { approach, enumeratorStat } from '../../data/homepage';
+import { approach } from '../../data/homepage';
 import Section from '../ui/Section.astro';
 import approachPhoto from '../../assets/homepage/approach-enumerator.jpg';
 
@@ -30,10 +30,6 @@ const TICK =
       <figure class="approach__photo">
         <Image src={approachPhoto} alt="Enumerator conducting a household survey" width={800} loading="lazy" />
       </figure>
-      <div class="approach__badge">
-        <strong>{enumeratorStat.value}</strong>
-        <span>{pickLocalized(approach.badgeLabel, lang)?.value}</span>
-      </div>
     </div>
   </div>
 </Section>
@@ -51,20 +47,13 @@ const TICK =
     display: flex; align-items: center; justify-content: center; margin-top: 2px;
   }
 
-  .approach__media { position: relative; padding-top: 28px; padding-inline-end: 28px; }
+  .approach__media { position: relative; }
   .approach__photo { margin: 0; border-radius: var(--r-xl); overflow: hidden; aspect-ratio: 4/5; border: 1px solid oklch(84% 0.01 80); }
   .approach__photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
-  .approach__badge {
-    position: absolute; top: 0; inset-inline-end: 0; max-width: 200px;
-    background: var(--color-surface-inverse); color: oklch(96% 0.01 85);
-    border-radius: 16px; padding: 20px 24px; box-shadow: var(--shadow-badge);
-  }
-  .approach__badge strong { display: block; font-family: var(--font-head); font-size: 30px; font-weight: 700; color: var(--sage); }
-  .approach__badge span { font-size: 12.5px; color: var(--ink-on-navy); margin-top: 4px; display: block; }
 
   @media (max-width: 1100px) {
     .approach__grid { grid-template-columns: 1fr; }
-    .approach__media { padding-inline-end: 0; max-width: 460px; }
+    .approach__media { max-width: 460px; }
   }
   @media (max-width: 860px) {
     .approach__copy h2 { font-size: 27px; }

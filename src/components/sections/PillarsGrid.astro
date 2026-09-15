@@ -9,11 +9,8 @@ const t = useTranslations(lang);
 const [feature, ...rest] = pillars.items;
 
 // Real, not invented: counted live from the actual publications collection
-// (category: research-field-studies) so it never drifts out of date as
-// more publications get added.
-const researchFieldStudiesCount = (await getCollection('publications')).filter(
-  (p) => p.data.category === 'research-field-studies',
-).length;
+// so it never drifts out of date as more publications get added.
+const researchFieldStudiesCount = (await getCollection('publications')).length;
 
 const ICONS: Record<string, string> = {
   search:
