@@ -68,13 +68,20 @@ const { id, eyebrow, title, subtitle, variant = 'default', headStyle = 'default'
   .section-head.section-head--center { display: block; text-align: center; max-width: 640px; margin-inline: auto; margin-block: 0 48px; }
   .section--navy .section-head h2 { color: oklch(97% 0.005 85); }
 
-  .eyebrow {
+  /* :global() here for the same reason as `.section--tint > :global(*)`
+     above: several pages hand-type class="eyebrow"/"section-sub" on their
+     own <section> (not this component) expecting to reuse this styling.
+     Since those elements carry a different component's scope attribute,
+     an unscoped rule would silently never match them — confirmed missing
+     on projects.astro's "commission" CTA eyebrow and ApproachChecklist's
+     subtitle before this was added. */
+  :global(.eyebrow) {
     font-size: 13px; font-weight: 700; letter-spacing: .08em;
     text-transform: uppercase; color: var(--eyebrow); margin: 0 0 12px;
   }
-  .eyebrow--sage { color: var(--sage); }
-  .eyebrow--onsage { color: var(--sage-ink); }
-  .section-sub { font-size: 16px; color: var(--color-text-muted); line-height: 1.6; margin: 0; }
+  :global(.eyebrow--sage) { color: var(--sage); }
+  :global(.eyebrow--onsage) { color: var(--sage-ink); }
+  :global(.section-sub) { font-size: 16px; color: var(--color-text-muted); line-height: 1.6; margin: 0; }
 
   @media (max-width: 860px) {
     .section { padding: 64px var(--gutter); }
