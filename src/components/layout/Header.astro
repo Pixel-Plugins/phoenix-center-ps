@@ -89,6 +89,7 @@ const t = useTranslations(lang);
       background: transparent;
       cursor: pointer;
       padding: 0 10px;
+      touch-action: manipulation;
     }
     .nav-toggle span { display: block; height: 2px; background: var(--color-text); border-radius: 2px; }
     .site-header { flex-wrap: wrap; }
@@ -129,6 +130,8 @@ const t = useTranslations(lang);
     });
   }
 
-  initHeaderNav();
+  // astro:page-load fires on the initial load AND after every View
+  // Transitions navigation — covers both cases with one listener (calling
+  // initHeaderNav() directly here too double-binds the click handler).
   document.addEventListener('astro:page-load', initHeaderNav);
 </script>
