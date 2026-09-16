@@ -32,8 +32,16 @@ const partners = (await getCollection('partners')).sort((a, b) => a.data.order -
     text-transform: uppercase; color: var(--ink-soft); margin: 0 0 32px;
   }
   .partners__grid {
-    display: grid; grid-template-columns: repeat(5, 1fr); gap: 20px;
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 224px));
+    justify-content: center; gap: 20px;
     max-width: 1200px; margin: 0 auto;
+  }
+  /* auto-fit counts tracks using minmax()'s max when it's a fixed length
+     (not the min) — at narrow widths 224px is too big to fit 2 tracks, so
+     the row collapses to 1 oversized column. Shrinking the max here (not
+     the min) is what actually restores 2 columns on phones. */
+  @media (max-width: 640px) {
+    .partners__grid { grid-template-columns: repeat(auto-fit, minmax(100px, 129px)); }
   }
   .partner-tile {
     aspect-ratio: 3/2; border: 1px solid var(--border-soft); border-radius: 10px;
@@ -59,12 +67,5 @@ const partners = (await getCollection('partners')).sort((a, b) => a.data.order -
     position: absolute; inset: 18px;
     width: calc(100% - 36px); height: calc(100% - 36px);
     object-fit: contain;
-  }
-
-  @media (max-width: 1100px) {
-    .partners__grid { grid-template-columns: repeat(3, 1fr); }
-  }
-  @media (max-width: 560px) {
-    .partners__grid { grid-template-columns: repeat(2, 1fr); }
   }
 </style>
