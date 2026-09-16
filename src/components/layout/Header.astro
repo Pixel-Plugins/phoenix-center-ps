@@ -109,6 +109,12 @@ const t = useTranslations(lang);
 
   @media (max-width: 560px) {
     .header-actions .btn--gold { display: none; }
+    /* Below ~430px the brand mark + language switch + toggle no longer fit
+       on one row at the default 48px side padding / 24px gap / 40px-tall
+       logo, so the row wraps onto two lines. Tighten all three just for
+       small phones so it stays on one line down to 320px wide. */
+    .site-header { padding: 14px 16px; gap: 8px; }
+    .brand__mark { height: 30px; }
   }
 </style>
 
