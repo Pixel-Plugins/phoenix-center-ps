@@ -20,7 +20,13 @@ const partners = (await getCollection('partners')).sort((a, b) => a.data.order -
 </section>
 
 <style>
-  .partners { padding-top: 72px; padding-bottom: 72px; max-width: none; }
+  /* This is a plain <section>, not the <Section> component — "section
+     section--tint" in its class list doesn't actually get that
+     component's scoped padding/max-width (Astro scopes styles per
+     component; reusing class names doesn't cross that boundary). Same bug
+     as about-us.astro's .quotes section. Without this, the grid runs
+     flush against the viewport edges on mobile. */
+  .partners { padding: 72px var(--gutter); max-width: none; }
   .partners__label {
     text-align: center; font-size: 13px; font-weight: 700; letter-spacing: .08em;
     text-transform: uppercase; color: var(--ink-soft); margin: 0 0 32px;

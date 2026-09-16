@@ -125,6 +125,17 @@ const copy = {
   .proj-list { max-width: 1180px; margin: 0 auto; padding: 64px var(--gutter) 88px; display: flex; flex-direction: column; gap: 28px; }
 
   .commission { background: var(--color-surface-inverse); padding: 72px var(--gutter); }
+  /* .eyebrow/.eyebrow--sage below normally come from the <Section>
+     component's shared styles, but this page never imports <Section>, so
+     that stylesheet is never bundled here at all — Astro only ships a
+     component's CSS to pages that actually import it, regardless of class
+     names reused in markup. Defining it locally, same as Newsletter.astro
+     does for its own eyebrow. */
+  .commission .eyebrow {
+    font-size: 13px; font-weight: 700; letter-spacing: .08em;
+    text-transform: uppercase; margin: 0 0 12px;
+  }
+  .commission .eyebrow--sage { color: var(--sage); }
   .commission__inner { max-width: 1180px; margin: 0 auto; display: grid; grid-template-columns: 1fr .8fr; gap: 56px; align-items: center; }
   .commission h2 { font-family: var(--font-head); font-size: 32px; line-height: 1.2; font-weight: 700; margin: 0 0 16px; color: oklch(99% 0.005 85); }
   .commission__body { font-size: 16px; line-height: 1.75; color: oklch(82% 0.02 250); margin: 0; max-width: 520px; }
