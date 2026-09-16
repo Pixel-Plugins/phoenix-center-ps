@@ -26,6 +26,7 @@ export const siteConfig = {
     twitter: 'https://twitter.com/phoenixcenter01',
   },
   formspreeFormId: 'meaqbagn',
+  ga4MeasurementId: 'G-MLT2BMX78R',
 } as const;
 
 export const publicationCategoryLabels: Record<string, { en: string; ar: string }> = {

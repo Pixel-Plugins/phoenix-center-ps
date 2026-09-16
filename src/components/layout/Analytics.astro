@@ -1,0 +1,68 @@
+---
+// GA4, loaded only after the visitor accepts cookies via CookieConsent.astro
+// (window.getCookieConsent() / the 'pc:cookie-consent' event it dispatches).
+// Sends its own manual page_view on every astro:page-load (client-side
+// navigation via <ClientRouter />) since gtag.js's automatic page_view only
+// fires once, on initial script load — send_page_view is disabled in the
+// gtag('config', ...) call below so the manual event is the only one ever
+// sent, avoiding a duplicate first pageview.
+import { siteConfig } from '../../data/siteConfig';
+
+const { ga4MeasurementId } = siteConfig;
+---
+
+{
+  ga4MeasurementId && (
+    <script define:vars={{ measurementId: ga4MeasurementId }} is:inline>
+      (function () {
+        const STORAGE_KEY = 'pc-cookie-consent';
+        let gaLoaded = false;
+
+        function getConsent() {
+          try {
+            const value = localStorage.getItem(STORAGE_KEY);
+            return value === 'accepted' || value === 'rejected' ? value : null;
+          } catch {
+            return null;
+          }
+        }
+
+        function sendPageView() {
+          window.gtag('event', 'page_view', {
+            page_path: location.pathname + location.search,
+            page_location: location.href,
+            page_title: document.title,
+          });
+        }
+
+        function loadGA() {
+          if (gaLoaded) return;
+          gaLoaded = true;
+          const script = document.createElement('script');
+          script.async = true;
+          script.src = `https://www.googletagmanager.com/gtag/js?id=${measurementId}`;
+          document.head.appendChild(script);
+          window.dataLayer = window.dataLayer || [];
+          window.gtag = function gtag() {
+            window.dataLayer.push(arguments);
+          };
+          window.gtag('js', new Date());
+          window.gtag('config', measurementId, { send_page_view: false });
+        }
+
+        function maybeTrack() {
+          if (getConsent() === 'accepted') {
+            loadGA();
+            sendPageView();
+          }
+        }
+
+        maybeTrack();
+        document.addEventListener('astro:page-load', maybeTrack);
+        window.addEventListener('pc:cookie-consent', (e) => {
+          if (e.detail.status === 'accepted') maybeTrack();
+        });
+      })();
+    </script>
+  )
+}
