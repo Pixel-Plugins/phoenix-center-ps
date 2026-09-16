@@ -56,7 +56,11 @@ if (limit) members = members.slice(0, limit);
 
 <style>
   .team__grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
-  .person { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 14px; }
+  /* Grid items default to min-width: auto, so a 1fr track can be forced
+     wider than the container by a child's intrinsic size (here the 140px
+     Image) instead of shrinking — see PartnersGrid.astro for the same bug
+     caught live on WebKit. */
+  .person { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 14px; min-width: 0; }
   .person:nth-child(even) { margin-top: 24px; }
   .person__photo {
     width: 140px; height: 140px; border-radius: 50%; overflow: hidden;

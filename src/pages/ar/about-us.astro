@@ -52,7 +52,13 @@ const lang = getLangFromUrl(Astro.url);
 </BaseLayout>
 
 <style>
-  .quotes { padding-top: 80px; }
+  /* This is a plain <section>, not the <Section> component, so it doesn't
+     automatically get that component's scoped .section padding — reusing
+     the class name alone doesn't cross Astro's per-component style
+     scoping. Without this, the section gets 0 horizontal padding and the
+     quote cards (esp. the dark "raised" one) render flush against the
+     viewport edges on mobile. */
+  .quotes { padding-top: 80px; padding-left: var(--gutter); padding-right: var(--gutter); max-width: var(--max); margin: 0 auto; }
   .quotes__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
   .quote-block {
     background: var(--color-surface-alt); border: 1px solid var(--color-border);

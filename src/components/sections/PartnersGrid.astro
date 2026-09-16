@@ -33,6 +33,11 @@ const partners = (await getCollection('partners')).sort((a, b) => a.data.order -
     aspect-ratio: 3/2; border: 1px solid var(--border-soft); border-radius: 10px;
     display: flex; align-items: center; justify-content: center;
     background: var(--color-surface-card); padding: 18px;
+    /* Grid items default to min-width/min-height: auto, so WebKit lets the
+       logo's intrinsic size (the Image component's width=240 attribute)
+       force this 1fr track wider than the container instead of shrinking
+       it — blowing the grid out past the viewport on mobile Safari. */
+    min-width: 0; min-height: 0;
   }
   .partner-tile--dark { background: var(--navy-tile); }
   .partner-tile :global(img) { max-width: 100%; max-height: 100%; object-fit: contain; }
