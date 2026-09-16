@@ -25,6 +25,16 @@ jobs:
         uses: withastro/action@v6
         with:
           node-version: 22
+          # public/CNAME ships in every build for the eventual custom
+          # domain, but while the preview subpath is in use that file makes
+          # GitHub Pages 301 pixel-plugins.github.io/phoenix-center-ps/
+          # straight to phoenix-center.ps — which still points at the old
+          # WordPress host — defeating the preview entirely. Drop it here so
+          # the preview subpath actually serves this build; the `&&
+          # [ "$GH_PAGES_PREVIEW"...]` guard means this stops deleting it on
+          # its own once GH_PAGES_PREVIEW is removed below for the real
+          # custom-domain cutover, so this line needs no separate revert.
+          build-cmd: npm run build && { [ "$GH_PAGES_PREVIEW" = "true" ] && rm -f dist/CNAME || true; }
         env:
           # Remove this line once phoenix-center.ps DNS points at GitHub
           # Pages and the custom domain is set in the repo's Pages settings —
