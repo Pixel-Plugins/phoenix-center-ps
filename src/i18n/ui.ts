@@ -20,6 +20,7 @@ export const ui = {
     'footer.about':
       'An independent Palestinian non-profit institution empowering communities through research, data, and policy advocacy.',
     'footer.rightsText': '© 2026 Phoenix Center. All rights reserved.',
+    'footer.poweredBy': 'Powered by Pixel Plugins',
     'footer.privacy': 'Privacy Policy',
     'footer.terms': 'Terms of Service',
     'footer.cookiePreferences': 'Cookie Preferences',
@@ -82,6 +83,7 @@ export const ui = {
     'footer.addressLabel': 'مبنى أبو شعبان، شارع المؤسسات، غزة، فلسطين',
     'footer.about': 'مؤسسة فلسطينية غير ربحية مستقلة تُمكّن المجتمعات من خلال البحث والبيانات ودراسة السياسات.',
     'footer.rightsText': '© 2026 مركز فينيق. جميع الحقوق محفوظة.',
+    'footer.poweredBy': 'من تطوير Pixel Plugins',
     'footer.privacy': 'سياسة الخصوصية',
     'footer.terms': 'شروط الخدمة',
     'footer.cookiePreferences': 'إعدادات ملفات تعريف الارتباط',
