@@ -16,7 +16,7 @@ processSteps:
     title: { en: Research and Analysis, ar: البحث والتحليل }
     description:
       en: We conduct in-depth research and analysis to understand the complexities of policy issues by gathering data, evaluating trends, and generating evidence-based insights to support advocacy efforts.
-      ar: نحن نجري بحثًا وتحليلاً متعمقين لفهم تعقيدات قضايا السياسة من خلال جمع البيانات وتقييم الاتجاهات وتوليد رؤى قائمة على الأدلة لدعم جهود المناصرة.
+      ar: نحن نجري بحثًا وتحليلاً متعمقين لفهم تعقيدات قضايا السياسة من خلال جمع البيانات وتقييم الاتجاهات وتوليد رؤى قائمة على الأدلة لدعم جهود الدراسة.
   - step: 3
     title: { en: Education and Awareness, ar: التثقيف والتوعية }
     description:
@@ -41,6 +41,6 @@ processSteps:
     title: { en: Monitoring and Evaluation, ar: المراقبة والتقييم }
     description:
       en: We continuously monitor policy developments, legislative changes, and government actions relevant to our mission. Regular evaluation helps assess the impact of advocacy efforts and informs strategic adjustments.
-      ar: نحن نراقب باستمرار تطورات السياسات والتغييرات التشريعية والإجراءات الحكومية ذات الصلة بمهمتنا. يساعد التقييم المنتظم على تقييم تأثير جهود المناصرة وإرشاد التعديلات الاستراتيجية.
+      ar: نحن نراقب باستمرار تطورات السياسات والتغييرات التشريعية والإجراءات الحكومية ذات الصلة بمهمتنا. يساعد التقييم المنتظم على تقييم تأثير جهود الدراسة وإرشاد التعديلات الاستراتيجية.
 examplePublicationSlugs: [youth-political-participation-empowerment, israeli-elections-results-government-gaza-seminar]
 ---

@@ -17,7 +17,7 @@ export const serviceLinks = [
   },
   {
     href: '/services/policy-advocacy/',
-    title: { en: 'Policy Advocacy', ar: 'مناصرة السياسات' },
+    title: { en: 'Policy Advocacy', ar: 'دراسة السياسات' },
     blurb: {
       en: 'Evidence translated into policy briefs that decision-makers actually use.',
       ar: 'أدلة تُترجم إلى أوراق سياسات يستخدمها صناع القرار فعلياً.',

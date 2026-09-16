@@ -14,20 +14,6 @@
   logo: ../../assets/partners/partner-acw.webp
   dark: false
   order: 2
-- id: arab-center-doha
-  name:
-    en: Arab Center for Research & Policy Studies (Doha)
-    ar: المركز العربي للأبحاث ودراسة السياسات (الدوحة)
-  logo: ../../assets/partners/partner-doha.png
-  dark: true
-  order: 3
-- id: united-nations
-  name:
-    en: United Nations
-    ar: الأمم المتحدة
-  logo: ../../assets/partners/partner-un.svg
-  dark: false
-  order: 4
 - id: unrwa
   name:
     en: UNRWA

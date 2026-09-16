@@ -7,7 +7,7 @@ export const servicesListing = {
   title: { en: 'Services', ar: 'خدماتنا' },
   intro: {
     en: 'At Phoenix Research Center, our commitment lies in driving meaningful transformation and progress within society. Rooted in a foundation of expertise, innovation, and collaboration, our comprehensive services pave the way for positive societal change. With a steadfast focus on Research and Development, Policy Advocacy, and Training and Capacity Building, we are dedicated to shaping a brighter future.',
-    ar: 'في مركز فينيق للأبحاث، يكمن التزامنا في قيادة تحول حقيقي وتقدم داخل المجتمع. انطلاقاً من أساس راسخ من الخبرة والابتكار والتعاون، تمهد خدماتنا الشاملة الطريق نحو تغيير مجتمعي إيجابي. وبتركيز ثابت على البحث والتطوير، ومناصرة السياسات، والتدريب وبناء القدرات، نحن ملتزمون برسم ملامح مستقبل أكثر إشراقاً.',
+    ar: 'في مركز فينيق للأبحاث، يكمن التزامنا في قيادة تحول حقيقي وتقدم داخل المجتمع. انطلاقاً من أساس راسخ من الخبرة والابتكار والتعاون، تمهد خدماتنا الشاملة الطريق نحو تغيير مجتمعي إيجابي. وبتركيز ثابت على البحث والتطوير، ودراسة السياسات، والتدريب وبناء القدرات، نحن ملتزمون برسم ملامح مستقبل أكثر إشراقاً.',
   },
   /* Real quote from the live /services/ page (also appears, in a
      differently-worded Arabic translation, as the About page's Vision
@@ -34,7 +34,7 @@ export const servicesListing = {
         },
       },
       {
-        title: { en: 'Impactful Advocacy', ar: 'المناصرة' },
+        title: { en: 'Impactful Advocacy', ar: 'الدراسة' },
         desc: {
           en: 'We drive tangible change through strategic policy reforms, fueled by research, education, and effective collaboration.',
           ar: 'نحن نقود التغيير الملموس من خلال إصلاحات السياسات الاستراتيجية، التي يغذيها البحث والتعليم والتعاون الفعال.',
