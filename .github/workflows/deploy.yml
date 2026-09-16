@@ -35,11 +35,6 @@ jobs:
           # its own once GH_PAGES_PREVIEW is removed below for the real
           # custom-domain cutover, so this line needs no separate revert.
           build-cmd: npm run build && { [ "$GH_PAGES_PREVIEW" = "true" ] && rm -f dist/CNAME || true; }
-        env:
-          # Remove this line once phoenix-center.ps DNS points at GitHub
-          # Pages and the custom domain is set in the repo's Pages settings —
-          # see astro.config.mjs for what this controls.
-          GH_PAGES_PREVIEW: 'true'
 
   deploy:
     needs: build
