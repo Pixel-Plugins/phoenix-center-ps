@@ -4,18 +4,18 @@ title:
   ar: '“غزَّة بين ثلاثة مسَارات: صِرَاع الإرادات على “اليوم التَّالي للحَرْب'
 category: case-assessment
 date: 2026-08-06
-coverImage: ../../assets/publications/real/gaza-three-scenarios-day-after-war.jpg
-pdf: /publications/gaza-three-scenarios-day-after-war.pdf
+coverImage:
+  ar: ../../assets/publications/real/gaza-three-scenarios-day-after-war.jpg
+  en: ../../assets/publications/real/gaza-three-scenarios-day-after-war-en.png
+pdf:
+  ar: /publications/gaza-three-scenarios-day-after-war.pdf
+  en: /publications/gaza-three-scenarios-day-after-war-en.pdf
 bodyEn: |
-  **Paper Summary:**
+  This paper examines the struggle over the future of the Gaza Strip in the “day after the war” phase, treating it as a contest over reshaping the Strip’s political, security, and administrative reality, rather than merely a set of post-war arrangements. It reviews three main tracks: the Israeli track, which seeks to impose new security and geographic realities through field control and forced displacement; the American track, based on international and administrative arrangements under the banners of reconstruction and investment, operating under the umbrella of the Board of Peace; and the Palestinian track, which proposes reunifying Palestinian political geography through elections and renewing the legitimacy of national institutions.
 
-  This paper examines the conflict over the future of the Gaza Strip in the "day after the war" phase, considering it a struggle over reshaping the political, security, and administrative reality of the Strip, not merely post-war arrangements, and reviews three main tracks: the Israeli track, which seeks to impose new security and geographic facts through field control and forced displacement; the American track, based on international and administrative arrangements under the banners of reconstruction and investment under the umbrella of a "Peace Board"; and the Palestinian track, which proposes reunifying the political geography through elections and renewing the legitimacy of institutions.
+  The paper argues that, at the current stage, the Israeli track holds a field advantage owing to its instruments of power and its capacity to impose facts on the ground, while the American and Palestinian tracks face challenges related to a lack of vision and the capacity for implementation. Nevertheless, the Palestinian track remains the one most closely tied to preserving the unity of the national project, which requires national consensus and the translation of political legitimacy into effective capacity on the ground, in order to prevent Gaza from being reshaped outside its Palestinian national framework.
 
-  This paper indicates that the Israeli track currently holds a field advantage due to its tools of power and its ability to impose facts on the ground, while the American and Palestinian tracks face challenges related to the absence of a vision and the capacity for implementation. Nevertheless, the Palestinian track remains the one most closely tied to preserving the unity of the national project, which requires national consensus and the conversion of political legitimacy into actual capacity on the ground, in order to prevent the reshaping of Gaza outside its Palestinian national framework.
-
-  **Prepared:**
-
-  Dr. Mansour Abu Kareem
+  *Dr. Mansour Abu Kareim*
 ---
 
 **:ملخَّص الورقة**

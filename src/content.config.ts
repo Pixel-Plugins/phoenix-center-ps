@@ -28,8 +28,14 @@ const publications = defineCollection({
         title: bilingual(),
         category: z.enum(publicationCategories),
         date: z.coerce.date(),
-        coverImage: image(),
-        pdf: z.string().optional(),
+        // Either one shared asset for both languages (a plain value — every
+        // publication except one uses this), or a bilingual() object when
+        // the client supplied genuinely different per-language files (e.g.
+        // separate English/Arabic PDF scans with different covers). Resolve
+        // with resolveCoverImage()/resolvePdf() in src/lib/getPublications.ts
+        // rather than reading entry.data.coverImage/.pdf directly.
+        coverImage: z.union([image(), bilingual(image())]),
+        pdf: z.union([z.string(), bilingual(z.string())]).optional(),
         excerpt: bilingual().optional(),
         // AI-translated English body for a publication whose Markdown body
         // (the default/native content) is Arabic — same lightweight bold
