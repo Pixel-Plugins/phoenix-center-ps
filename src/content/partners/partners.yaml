@@ -7,17 +7,31 @@
   logo: ../../assets/partners/partner-insights.png
   dark: false
   order: 1
-- id: arab-center-washington
+- id: doha-institute
   name:
-    en: Arab Center Washington DC
-    ar: المركز العربي واشنطن
-  logo: ../../assets/partners/partner-acw.webp
-  dark: false
-  order: 2
-- id: unrwa
-  name:
-    en: UNRWA
-    ar: الأونروا
-  logo: ../../assets/partners/partner-unrwa.png
+    en: Doha Institute for Graduate Studies
+    ar: معهد الدوحة للدراسات العليا
+  logo: ../../assets/partners/partner-doha.png
   dark: true
+  order: 2
+- id: undp
+  name:
+    en: UNDP
+    ar: برنامج الأمم المتحدة الإنمائي
+  logo: ../../assets/partners/partner-undp.webp
+  dark: false
+  order: 3
+- id: unicef
+  name:
+    en: UNICEF
+    ar: اليونيسف
+  logo: ../../assets/partners/partner-unicef.png
+  dark: false
+  order: 4
+- id: eed
+  name:
+    en: European Endowment for Democracy (EED)
+    ar: المؤسسة الأوروبية للديمقراطية (EED)
+  logo: ../../assets/partners/partner-eed.png
+  dark: false
   order: 5
