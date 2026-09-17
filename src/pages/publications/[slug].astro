@@ -11,7 +11,7 @@ import { publicationCategoryLabels, siteConfig } from '../../data/siteConfig';
 import { renderTranslatedBody } from '../../lib/renderTranslatedBody';
 import { extractByline } from '../../lib/extractByline';
 import { excerptFromBody } from '../../lib/excerptFromBody';
-import { getPublicationsForLang } from '../../lib/getPublications';
+import { getPublicationsForLang, resolveCoverImage, resolvePdf } from '../../lib/getPublications';
 
 export const getStaticPaths = (async () => {
   // This file is the English tree — a publication set to languages: ['ar']
@@ -53,7 +53,9 @@ function neighborTitle(neighbor: typeof prev) {
 }
 
 const description = excerpt?.value ?? excerptFromBody(isDisplayingTranslation ? entry.data.bodyEn : entry.body) ?? undefined;
-const coverImage = await getImage({ src: entry.data.coverImage, width: 1200 });
+const resolvedCoverImage = resolveCoverImage(entry.data.coverImage, lang);
+const resolvedPdf = resolvePdf(entry.data.pdf, lang);
+const coverImage = await getImage({ src: resolvedCoverImage, width: 1200 });
 const coverImageHref = new URL(toCanonicalPathname(coverImage.src), siteConfig.url).toString();
 const publishedTime = entry.data.date.toISOString();
 const articleSchema = {
@@ -109,18 +111,18 @@ const breadcrumbSchema = {
         <div class="pub-hero__grid">
           <div class="pub-hero__cover-col" data-reveal>
             <figure class="pub-cover">
-              <Image class="pub-cover__backdrop" src={entry.data.coverImage} alt="" width={300} aria-hidden="true" />
+              <Image class="pub-cover__backdrop" src={resolvedCoverImage} alt="" width={300} aria-hidden="true" />
               <Image
               class="pub-cover__image"
-              src={entry.data.coverImage}
+              src={resolvedCoverImage}
               alt={title?.value ?? ''}
               widths={[320, 480, 640]}
               sizes="(max-width: 860px) 340px, (max-width: 1100px) 260px, 320px"
             />
               <span class="pub-cover__spine" aria-hidden="true"></span>
             </figure>
-            {entry.data.pdf && (
-              <Button href={withBase(entry.data.pdf)} variant="sage" class="pub-hero__dl" target="_blank">
+            {resolvedPdf && (
+              <Button href={withBase(resolvedPdf)} variant="sage" class="pub-hero__dl" target="_blank">
                 <svg width="18" height="18" viewBox="0 0 22 22" fill="none" aria-hidden="true"><path d="M11 3v11" stroke="#204630" stroke-width="2" stroke-linecap="round"/><path d="M6.5 10 11 14.5 15.5 10" stroke="#204630" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 18.2h14" stroke="#204630" stroke-width="2" stroke-linecap="round"/></svg>
                 <span>{t('publications.download')}</span>
               </Button>
