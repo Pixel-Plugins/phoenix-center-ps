@@ -62,7 +62,24 @@ const articleSchema = {
   image: coverImageHref,
   description,
   ...(byline ? { author: { '@type': 'Person', name: byline } } : { author: { '@type': 'Organization', name: siteConfig.name } }),
-  publisher: { '@type': 'Organization', name: siteConfig.name, url: siteConfig.url },
+  publisher: {
+    '@type': 'Organization',
+    name: siteConfig.name,
+    url: siteConfig.url,
+    logo: { '@type': 'ImageObject', url: new URL('/og-image.png', siteConfig.url).toString() },
+  },
+};
+// Mirrors the visible 3-level breadcrumb nav above (Home / Publications /
+// Category) — same real category archive route the audit found missing a
+// matching BreadcrumbList.
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: t('publications.breadcrumbHome'), item: new URL(toCanonicalPathname(localizedPath('/', lang)), siteConfig.url).toString() },
+    { '@type': 'ListItem', position: 2, name: t('publications.eyebrow'), item: new URL(toCanonicalPathname(localizedPath('/publications/', lang)), siteConfig.url).toString() },
+    { '@type': 'ListItem', position: 3, name: categoryLabel?.value, item: new URL(toCanonicalPathname(localizedPath(`/publications/${entry.data.category}/`, lang)), siteConfig.url).toString() },
+  ],
 };
 ---
 
@@ -72,7 +89,7 @@ const articleSchema = {
   type="article"
   publishedTime={publishedTime}
   image={coverImageHref}
-  structuredData={articleSchema}
+  structuredData={[articleSchema, breadcrumbSchema]}
 >
   <article>
     <section class="pub-hero">

@@ -1,4 +1,5 @@
 ---
+import { Image } from 'astro:assets';
 import LanguageSwitcher from './LanguageSwitcher.astro';
 import { getLangFromUrl, useTranslations, localizedPath } from '../../i18n/utils';
 import { navLinks } from '../../data/nav';
@@ -10,7 +11,7 @@ const t = useTranslations(lang);
 
 <header class="site-header">
   <a class="brand" href={localizedPath('/', lang)}>
-    <img class="brand__mark" src={brand.logoDark.src} alt={t('brand.name')} />
+    <Image class="brand__mark" src={brand.logoDark} alt={t('brand.name')} width={292} height={80} />
   </a>
 
   <nav class="site-nav" data-site-nav>

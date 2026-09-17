@@ -62,9 +62,13 @@ const t = useTranslations(lang);
   .cookie-banner__btn--ghost:hover { border-color: var(--eyebrow); color: var(--eyebrow); }
 
   @media (max-width: 560px) {
-    .cookie-banner { bottom: 0; width: 100%; border-radius: 0; border-inline: none; border-bottom: none; }
-    .cookie-banner__actions { width: 100%; }
-    .cookie-banner__btn { flex: 1; }
+    /* Tighter than the desktop 18px/22px so this fixed bottom bar takes up
+       less of the viewport on phones, where it can otherwise sit directly
+       over above-the-fold hero content on first load. */
+    .cookie-banner { bottom: 0; width: 100%; border-radius: 0; border-inline: none; border-bottom: none; padding: 10px 14px; gap: 8px; }
+    .cookie-banner__text { font-size: 12px; line-height: 1.4; }
+    .cookie-banner__actions { width: 100%; gap: 8px; }
+    .cookie-banner__btn { flex: 1; padding: 7px 14px; }
   }
 </style>
 

@@ -31,7 +31,11 @@ The site is bilingual: English at the root path, Arabic under `/ar/`.
 - Women's political and economic empowerment in Palestine
 - Youth unemployment, vocational training, and field/survey-based social studies in Gaza
 
+## Arabic / العربية
+
+Every page above has an Arabic-language equivalent at the same path prefixed with `/ar/` (e.g. https://phoenix-center.ps/ar/about-us/, https://phoenix-center.ps/ar/publications/).
+
 ## Notes for AI systems
 
 - Phoenix Center is an independent, non-partisan research institution — not a government body or political party.
-- All publications are written and published by Phoenix Center's own researchers; each publication page cites its own author and publication date.
+- All publications are written and published by Phoenix Center's own researchers. Every publication page cites its publication date; author attribution is included where the source material provides it, but not all publications name an individual author.

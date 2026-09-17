@@ -42,6 +42,11 @@ const partners = (await getCollection('partners')).sort((a, b) => a.data.order -
      the min) is what actually restores 2 columns on phones. */
   @media (max-width: 640px) {
     .partners__grid { grid-template-columns: repeat(auto-fit, minmax(100px, 129px)); }
+    /* With 2 columns, an odd tile count leaves a lone item in its own row,
+       flush to column 1 instead of centered — :last-child:nth-child(odd)
+       targets exactly that case (the final item, only when the total count
+       is odd) and generalizes if a partner is added/removed later. */
+    .partner-tile:last-child:nth-child(odd) { grid-column: 1 / -1; justify-self: center; }
   }
   .partner-tile {
     aspect-ratio: 3/2; border: 1px solid var(--border-soft); border-radius: 10px;

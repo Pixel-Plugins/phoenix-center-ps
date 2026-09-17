@@ -1,4 +1,5 @@
 ---
+import { Image } from 'astro:assets';
 import { getLangFromUrl, useTranslations, localizedPath } from '../../i18n/utils';
 import { navLinks, serviceLinks } from '../../data/nav';
 import { siteConfig, brand } from '../../data/siteConfig';
@@ -12,7 +13,7 @@ const year = new Date().getFullYear();
   <div class="footer__grid">
     <div class="footer__about">
       <div class="brand brand--footer">
-        <img class="brand__mark" src={brand.logoLight.src} alt={t('brand.name')} />
+        <Image class="brand__mark" src={brand.logoLight} alt={t('brand.name')} width={234} height={64} />
       </div>
       <p>{t('footer.about')}</p>
       <div class="social">
