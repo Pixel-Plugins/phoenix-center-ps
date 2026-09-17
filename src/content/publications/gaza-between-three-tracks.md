@@ -5,8 +5,10 @@ category: political-papers
 date: 2026-08-10
 coverImage: ../../assets/publications/real/gaza-between-three-tracks.png
 pdf: /publications/gaza-between-three-tracks.pdf
-excerpt:
-  en: 'This paper examines the competing visions for Gaza’s future in the "day after" phase, focusing on three tracks: the Israeli effort to reshape the security and territorial reality, the American approach based on international administrative and reconstruction arrangements, and the Palestinian path centered on elections and political renewal. The paper argues that Israel currently holds a field advantage due to its control and capacity to impose realities, while the other tracks face political and practical challenges. However, the Palestinian track remains the most aligned with preserving national unity, requiring internal consensus and the transformation of political legitimacy into effective capacity on the ground.'
+# No separate excerpt: the body IS the (trimmed) executive summary now, so a
+# manually-set excerpt duplicated it as a second lead paragraph on the page.
+# Meta description auto-derives from the body instead, same as every other
+# publication (none of the other 51 set excerpt either).
 # English-native, per Ahmad's explicit request this publication should only
 # appear on the English site.
 languages: [en]
