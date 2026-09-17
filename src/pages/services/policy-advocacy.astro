@@ -12,7 +12,7 @@ const lang = getLangFromUrl(Astro.url);
 const service = await getEntry('services', 'policy-advocacy');
 if (!service) throw new Error('Missing services/policy-advocacy.md');
 
-const examples = await getRelatedPublications(service);
+const examples = await getRelatedPublications(service, lang);
 ---
 
 <BaseLayout title={pickLocalized(service.data.heroStatement, lang)?.value ?? 'Policy Advocacy'} description={pickLocalized(service.data.intro, lang)?.value}>

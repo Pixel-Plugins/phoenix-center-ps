@@ -37,6 +37,15 @@ const publications = defineCollection({
         // pub-body styles in [slug].astro, which key off those). Absent
         // for the one publication whose native body is already English.
         bodyEn: z.string().optional(),
+        // Which locale(s) this publication should appear under — controls
+        // routing (getStaticPaths) AND listings (homepage, publications
+        // grid, related-publications) via getPublicationsForLang(), not
+        // just visibility on an already-built page. Defaults to both,
+        // matching every existing bilingual publication. Set to a single
+        // locale for a publication that's genuinely only written in one
+        // language, rather than letting it silently render under the
+        // "wrong" locale's <html lang>/dir with no real translation.
+        languages: z.array(z.enum(['en', 'ar'])).min(1).default(['en', 'ar']),
         order: z.number().optional(),
         featured: z.boolean().default(false),
         relatedService: z.enum(serviceSlugs).optional(),

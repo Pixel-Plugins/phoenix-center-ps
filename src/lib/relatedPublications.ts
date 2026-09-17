@@ -1,4 +1,6 @@
-import { getCollection, getEntries, type CollectionEntry } from 'astro:content';
+import { getEntries, type CollectionEntry } from 'astro:content';
+import { getPublicationsForLang } from './getPublications';
+import type { Locale } from '../i18n/utils';
 
 /**
  * Which real publication categories a given service is actually about.
@@ -23,13 +25,14 @@ const CATEGORIES_BY_SERVICE: Record<string, CollectionEntry<'publications'>['dat
  * optional manual override/pin for when the automatic category match
  * isn't the right call for a specific case — if it's set, it wins.
  */
-export async function getRelatedPublications(service: CollectionEntry<'services'>, limit = 2) {
+export async function getRelatedPublications(service: CollectionEntry<'services'>, lang: Locale, limit = 2) {
   if (service.data.examplePublicationSlugs.length) {
-    return getEntries(service.data.examplePublicationSlugs.map((id) => ({ collection: 'publications' as const, id })));
+    const pinned = await getEntries(service.data.examplePublicationSlugs.map((id) => ({ collection: 'publications' as const, id })));
+    return pinned.filter((p) => p.data.languages.includes(lang));
   }
 
   const categories = CATEGORIES_BY_SERVICE[service.data.slug] ?? [];
-  const all = await getCollection('publications');
+  const all = await getPublicationsForLang(lang);
 
   return all
     .filter((p) => categories.includes(p.data.category))

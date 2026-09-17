@@ -1,5 +1,4 @@
 ---
-import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Hero from '../../components/sections/Hero.astro';
 import PillarsGrid from '../../components/sections/PillarsGrid.astro';
@@ -11,13 +10,14 @@ import Section from '../../components/ui/Section.astro';
 // Same for Newsletter — no email provider is wired up yet (see notes.md).
 import PublicationGrid from '../../components/publications/PublicationGrid.astro';
 import { getLangFromUrl, useTranslations, localizedPath, pickLocalized } from '../../i18n/utils';
+import { getPublicationsForLang } from '../../lib/getPublications';
 import { hero } from '../../data/homepage';
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 const description = pickLocalized(hero.body, lang)?.value;
 
-const allPublications = await getCollection('publications');
+const allPublications = await getPublicationsForLang(lang);
 // Featured items (featured: true in frontmatter) are pinned first regardless
 // of date; everything else fills remaining slots by most recent. To swap
 // what shows here, just set `featured: true` on the publications you want —

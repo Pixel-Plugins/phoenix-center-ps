@@ -1,6 +1,6 @@
 ---
 import type { GetStaticPaths } from 'astro';
-import { getCollection, render } from 'astro:content';
+import { render } from 'astro:content';
 import { Image, getImage } from 'astro:assets';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Section from '../../components/ui/Section.astro';
@@ -11,9 +11,12 @@ import { publicationCategoryLabels, siteConfig } from '../../data/siteConfig';
 import { renderTranslatedBody } from '../../lib/renderTranslatedBody';
 import { extractByline } from '../../lib/extractByline';
 import { excerptFromBody } from '../../lib/excerptFromBody';
+import { getPublicationsForLang } from '../../lib/getPublications';
 
 export const getStaticPaths = (async () => {
-  const entries = await getCollection('publications');
+  // This file is the English tree — a publication set to languages: ['ar']
+  // only simply doesn't get a page built here at all.
+  const entries = await getPublicationsForLang('en');
   return entries.map((entry) => ({ params: { slug: entry.id }, props: { entry } }));
 }) satisfies GetStaticPaths;
 
@@ -31,7 +34,7 @@ const dateLabel = entry.data.date.toLocaleDateString(lang === 'ar' ? 'ar' : 'en-
   day: 'numeric',
 });
 
-const all = (await getCollection('publications')).sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+const all = (await getPublicationsForLang(lang)).sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
 const currentIndex = all.findIndex((p) => p.id === entry.id);
 const prev = currentIndex < all.length - 1 ? all[currentIndex + 1] : null;
 const next = currentIndex > 0 ? all[currentIndex - 1] : null;
