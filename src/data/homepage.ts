@@ -45,8 +45,8 @@ export const pillars = {
       href: '/services/research-and-development/',
       title: { en: 'Research & Field Studies', ar: 'الأبحاث والدراسات الميدانية' },
       desc: {
-        en: 'Rigorous policy papers, case assessments, and field research grounded in real community data — our core discipline for 14+ years.',
-        ar: 'أوراق سياسات وتقييمات حالة وأبحاث ميدانية دقيقة مبنية على بيانات مجتمعية حقيقية — تخصصنا الأساسي منذ أكثر من 14 عاماً.',
+        en: 'Rigorous policy papers, case assessments, and field research grounded in real community data — our core discipline for 6+ years.',
+        ar: 'أوراق سياسات وتقييمات حالة وأبحاث ميدانية دقيقة مبنية على بيانات مجتمعية حقيقية — تخصصنا الأساسي منذ أكثر من 6 أعوام.',
       },
       tags: {
         en: ['Policy Papers', 'Case Assessments', 'Political Analysis'],

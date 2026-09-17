@@ -78,8 +78,17 @@ const cta2 = pickLocalized(hero.cta2, lang)?.value;
     .hero__copy h1 { font-size: 34px; }
   }
   @media (max-width: 560px) {
-    .hero__copy h1 { font-size: 29px; }
-    .hero__eyebrow { font-size: 12px; }
+    .hero__copy h1 { font-size: 29px; margin-bottom: 16px; }
+    .hero__eyebrow { font-size: 12px; margin-bottom: 12px; }
+    .hero__body { margin-bottom: 22px; }
+    /* Tighter than the 860px breakpoint's 110px — on small phones the fixed
+       cookie-consent banner sits over the bottom of the viewport on first
+       load, and the secondary CTA button was landing fully behind it
+       (measured: banner top ~656px, button 678–727px at a 375×800
+       viewport). Pulling the CTA row up clears the banner regardless of
+       which language's hero copy is shorter/taller. */
+    .hero__media { min-height: 440px; }
+    .hero__inner { padding: 40px var(--gutter) 24px; min-height: 440px; }
     .stats-wrap { margin-top: -40px; }
   }
 </style>

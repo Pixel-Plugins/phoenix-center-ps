@@ -57,6 +57,11 @@ const organizationSchema = {
   '@context': 'https://schema.org',
   '@type': ['Organization', 'NGO'],
   name: siteConfig.name,
+  // Real full legal name, verified present verbatim in scraped publication
+  // bodies (e.g. fishing-sector-survey-study-gaza.md) in both languages —
+  // not invented. "Phoenix Center" alone collides with an unrelated US
+  // think tank of the same name in search/LLM disambiguation.
+  alternateName: ['Phoenix Center for Research and Field Studies', 'مركز فينيق للبحوث والدراسات الحقلية'],
   url: siteConfig.url,
   logo: new URL('/og-image.png', siteConfig.url).toString(),
   email: siteConfig.email,
@@ -74,7 +79,7 @@ const organizationSchema = {
     'Palestinian political studies',
     'Policy advocacy',
   ],
-  address: { '@type': 'PostalAddress', streetAddress: siteConfig.address.en, addressCountry: 'PS' },
+  address: { '@type': 'PostalAddress', streetAddress: siteConfig.address[lang], addressCountry: 'PS' },
   sameAs: Object.values(siteConfig.social),
 };
 const structuredDataBlocks = structuredData ? (Array.isArray(structuredData) ? structuredData : [structuredData]) : [];
