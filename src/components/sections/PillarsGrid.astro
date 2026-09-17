@@ -1,6 +1,6 @@
 ---
-import { getCollection } from 'astro:content';
 import { getLangFromUrl, pickLocalized, localizedPath, useTranslations } from '../../i18n/utils';
+import { getPublicationsForLang } from '../../lib/getPublications';
 import { pillars } from '../../data/homepage';
 import Section from '../ui/Section.astro';
 
@@ -9,8 +9,10 @@ const t = useTranslations(lang);
 const [feature, ...rest] = pillars.items;
 
 // Real, not invented: counted live from the actual publications collection
-// so it never drifts out of date as more publications get added.
-const researchFieldStudiesCount = (await getCollection('publications')).length;
+// so it never drifts out of date as more publications get added. Counts
+// only publications visible in this page's own language, so the number
+// shown never overclaims what a visitor on this locale can actually see.
+const researchFieldStudiesCount = (await getPublicationsForLang(lang)).length;
 
 const ICONS: Record<string, string> = {
   search:

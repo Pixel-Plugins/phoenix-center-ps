@@ -1,13 +1,15 @@
 ---
-import { getCollection } from 'astro:content';
 import { getLangFromUrl, pickLocalized, localizedPath, useTranslations } from '../../i18n/utils';
+import { getPublicationsForLang } from '../../lib/getPublications';
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
 // Always the actual most recent publication — no manual upkeep. If a new
-// publication is added, this updates itself on the next build.
-const [latest] = (await getCollection('publications')).sort(
+// publication is added, this updates itself on the next build. Filtered to
+// this page's language so a publication only available in the other
+// language never gets linked here (its page in this locale doesn't exist).
+const [latest] = (await getPublicationsForLang(lang)).sort(
   (a, b) => b.data.date.getTime() - a.data.date.getTime(),
 );
 const title = latest ? pickLocalized(latest.data.title, lang) : null;
